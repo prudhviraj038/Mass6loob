@@ -1,0 +1,695 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/app_bg_blue">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/scrollView2" >
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="30dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/imageView2"
+                        android:layout_alignTop="@+id/linearLayout"
+                        android:layout_alignLeft="@+id/linearLayout"
+                        android:layout_alignBottom="@+id/linearLayout"
+                        android:layout_alignRight="@+id/linearLayout"
+                        android:src="@drawable/cross_bg_full"
+                        android:adjustViewBounds="false"
+                        android:scaleType="fitXY" />
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/linearLayout"
+                        android:paddingTop="30dp"
+                        android:paddingBottom="20dp"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp"
+                        android:showDividers="middle"
+                        android:visibility="visible">
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:divider="@drawable/whitedivider"
+                            android:showDividers="middle">
+
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/rounded_corners"
+                                android:gravity="center_vertical">
+
+                                <ImageView
+                                    android:layout_width="18dp"
+                                    android:layout_height="18dp"
+                                    android:id="@+id/imageView3"
+                                    android:src="@drawable/ic_user"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginRight="10dp" />
+
+                                <LinearLayout
+                                    android:orientation="vertical"
+                                    android:layout_width="15dp"
+                                    android:layout_height="match_parent"></LinearLayout>
+
+                                <EditText
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/editText"
+                                    android:background="#00000000"
+                                    android:hint="Name"
+                                    android:textColorHint="@color/edit_text_hint_color"
+                                    android:textSize="16sp"
+                                    android:textColor="@color/edit_text_text_color" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/rounded_corners"
+                                android:gravity="center_vertical" >
+
+                                <ImageView
+                                    android:layout_width="18dp"
+                                    android:layout_height="18dp"
+                                    android:id="@+id/imageView4"
+                                    android:src="@drawable/ic_email"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginRight="10dp" />
+
+                                <LinearLayout
+                                    android:orientation="vertical"
+                                    android:layout_width="15dp"
+                                    android:layout_height="match_parent" />
+
+                                <EditText
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/editText2"
+                                    android:background="#00000000"
+                                    android:hint="Email"
+                                    android:textColorHint="@color/edit_text_hint_color"
+                                    android:textSize="16sp"
+                                    android:textColor="@color/edit_text_text_color" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/rounded_corners"
+                                android:gravity="center_vertical" >
+
+                                <ImageView
+                                    android:layout_width="18dp"
+                                    android:layout_height="18dp"
+                                    android:id="@+id/imageView5"
+                                    android:src="@drawable/ic_gender"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginRight="10dp" />
+
+                                <LinearLayout
+                                    android:orientation="vertical"
+                                    android:layout_width="15dp"
+                                    android:layout_height="match_parent" />
+
+                                <EditText
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/editText3"
+                                    android:background="#00000000"
+                                    android:hint="Gender"
+                                    android:textColorHint="@color/edit_text_hint_color"
+                                    android:textSize="16sp"
+                                    android:textColor="@color/edit_text_text_color" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/rounded_corners"
+                                android:gravity="center_vertical" >
+
+                                <ImageView
+                                    android:layout_width="18dp"
+                                    android:layout_height="18dp"
+                                    android:id="@+id/imageView6"
+                                    android:src="@drawable/ic_age"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginRight="10dp" />
+
+                                <LinearLayout
+                                    android:orientation="vertical"
+                                    android:layout_width="15dp"
+                                    android:layout_height="match_parent" />
+
+                                <EditText
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/editText4"
+                                    android:background="#00000000"
+                                    android:hint="Age"
+                                    android:textColorHint="@color/edit_text_hint_color"
+                                    android:textSize="16sp"
+                                    android:textColor="@color/edit_text_text_color" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/rounded_corners"
+                                android:gravity="center_vertical" >
+
+                                <ImageView
+                                    android:layout_width="18dp"
+                                    android:layout_height="18dp"
+                                    android:id="@+id/imageView7"
+                                    android:src="@drawable/ic_nationality"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginRight="10dp" />
+
+                                <LinearLayout
+                                    android:orientation="vertical"
+                                    android:layout_width="15dp"
+                                    android:layout_height="match_parent" />
+
+                                <EditText
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/editText5"
+                                    android:background="#00000000"
+                                    android:hint="Nationality"
+                                    android:textColorHint="@color/edit_text_hint_color"
+                                    android:textSize="16sp"
+                                    android:textColor="@color/edit_text_text_color" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/rounded_corners"
+                                android:gravity="center_vertical" >
+
+                                <ImageView
+                                    android:layout_width="18dp"
+                                    android:layout_height="18dp"
+                                    android:id="@+id/imageView8"
+                                    android:src="@drawable/ic_fields"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginRight="10dp" />
+
+                                <LinearLayout
+                                    android:orientation="vertical"
+                                    android:layout_width="15dp"
+                                    android:layout_height="match_parent" />
+
+                                <EditText
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/editText6"
+                                    android:background="#00000000"
+                                    android:hint="Fields"
+                                    android:textColorHint="@color/edit_text_hint_color"
+                                    android:textSize="16sp"
+                                    android:textColor="@color/edit_text_text_color" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/rounded_corners"
+                                android:gravity="center_vertical" >
+
+                                <ImageView
+                                    android:layout_width="18dp"
+                                    android:layout_height="18dp"
+                                    android:id="@+id/imageView14"
+                                    android:src="@drawable/ic_upload"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginRight="10dp" />
+
+                                <LinearLayout
+                                    android:orientation="vertical"
+                                    android:layout_width="15dp"
+                                    android:layout_height="match_parent" />
+
+                                <EditText
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/editText12"
+                                    android:background="#00000000"
+                                    android:hint="Upload Your Logo/ Profile Picture"
+                                    android:textColorHint="@color/edit_text_hint_color"
+                                    android:textSize="16sp"
+                                    android:textColor="@color/edit_text_text_color" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="top"
+                                android:background="@drawable/rounded_corners">
+
+                                <LinearLayout
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+                                    <ImageView
+                                        android:layout_width="18dp"
+                                        android:layout_height="18dp"
+                                        android:id="@+id/imageView9"
+                                        android:src="@drawable/ic_country"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_marginRight="10dp" />
+
+                                    <LinearLayout
+                                        android:orientation="vertical"
+                                        android:layout_width="15dp"
+                                        android:layout_height="match_parent" />
+
+                                    <EditText
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:id="@+id/editText7"
+                                        android:background="#00000000"
+                                        android:textColorHint="@color/edit_text_hint_color"
+                                        android:textSize="16sp"
+                                        android:textColor="@color/edit_text_text_color"
+                                        android:gravity="top"
+                                        android:hint="Upload Work Images" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:orientation="vertical"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="10dp">
+
+                                    <LinearLayout
+                                        android:orientation="horizontal"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+
+                                        <RelativeLayout
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:layout_weight="1"
+                                            android:layout_margin="5dp">
+
+                                            <view
+                                                class="com.mass6loob.app.mass6loob.SquareImageview"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:id="@+id/view2"
+                                                android:layout_gravity="center"
+                                                android:src="@drawable/app_bg_blue"
+                                                android:adjustViewBounds="true"
+                                                android:scaleType="centerCrop" />
+
+                                            <ImageView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:id="@+id/imageView16"
+                                                android:layout_alignTop="@+id/view2"
+                                                android:layout_alignLeft="@+id/view2"
+                                                android:layout_alignBottom="@+id/view2"
+                                                android:layout_alignRight="@+id/view2"
+                                                android:src="@drawable/image_rounded_corners_border" />
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:layout_weight="1"
+                                            android:layout_margin="5dp">
+
+                                            <view
+                                                class="com.mass6loob.app.mass6loob.SquareImageview"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:id="@+id/view3"
+                                                android:layout_gravity="center"
+                                                android:src="@drawable/ic_upload_image"
+                                                android:scaleType="center"
+                                                android:adjustViewBounds="false" />
+
+                                            <ImageView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:id="@+id/imageView17"
+                                                android:layout_alignTop="@+id/view3"
+                                                android:layout_alignLeft="@+id/view3"
+                                                android:layout_alignBottom="@+id/view3"
+                                                android:layout_alignRight="@+id/view3"
+                                                android:src="@drawable/image_rounded_corners_border" />
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:layout_weight="1"
+                                            android:layout_margin="5dp">
+
+                                            <view
+                                                class="com.mass6loob.app.mass6loob.SquareImageview"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:id="@+id/view4"
+                                                android:layout_gravity="center"
+                                                android:src="@drawable/ic_upload_image"
+                                                android:scaleType="center"
+                                                android:adjustViewBounds="false" />
+
+                                            <ImageView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:id="@+id/imageView18"
+                                                android:layout_alignTop="@+id/view4"
+                                                android:layout_alignLeft="@+id/view4"
+                                                android:layout_alignBottom="@+id/view4"
+                                                android:layout_alignRight="@+id/view4"
+                                                android:src="@drawable/image_rounded_corners_border" />
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:layout_weight="1"
+                                            android:layout_margin="5dp">
+
+                                            <view
+                                                class="com.mass6loob.app.mass6loob.SquareImageview"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:id="@+id/view5"
+                                                android:layout_gravity="center"
+                                                android:src="@drawable/ic_upload_image"
+                                                android:scaleType="center"
+                                                android:adjustViewBounds="false" />
+
+                                            <ImageView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:id="@+id/imageView19"
+                                                android:layout_alignTop="@+id/view5"
+                                                android:layout_alignLeft="@+id/view5"
+                                                android:layout_alignBottom="@+id/view5"
+                                                android:layout_alignRight="@+id/view5"
+                                                android:src="@drawable/image_rounded_corners_border" />
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:layout_weight="1"
+                                            android:layout_margin="5dp">
+
+                                            <view
+                                                class="com.mass6loob.app.mass6loob.SquareImageview"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:id="@+id/view6"
+                                                android:layout_gravity="center"
+                                                android:src="@drawable/ic_upload_image"
+                                                android:scaleType="center"
+                                                android:adjustViewBounds="false" />
+
+                                            <ImageView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:id="@+id/imageView20"
+                                                android:layout_alignTop="@+id/view6"
+                                                android:layout_alignLeft="@+id/view6"
+                                                android:layout_alignBottom="@+id/view6"
+                                                android:layout_alignRight="@+id/view6"
+                                                android:src="@drawable/image_rounded_corners_border" />
+                                        </RelativeLayout>
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:orientation="horizontal"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content" >
+
+                                        <RelativeLayout
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:layout_weight="1"
+                                            android:layout_margin="5dp" >
+
+                                            <view
+                                                class="com.mass6loob.app.mass6loob.SquareImageview"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:id="@+id/view7"
+                                                android:layout_gravity="center"
+                                                android:src="@drawable/ic_upload_image"
+                                                android:adjustViewBounds="true"
+                                                android:scaleType="center" />
+
+                                            <ImageView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:id="@+id/imageView21"
+                                                android:layout_alignTop="@+id/view7"
+                                                android:layout_alignLeft="@+id/view7"
+                                                android:layout_alignBottom="@+id/view7"
+                                                android:layout_alignRight="@+id/view7"
+                                                android:src="@drawable/image_rounded_corners_border" />
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:layout_weight="1"
+                                            android:layout_margin="5dp" >
+
+                                            <view
+                                                class="com.mass6loob.app.mass6loob.SquareImageview"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:id="@+id/view8"
+                                                android:layout_gravity="center"
+                                                android:src="@drawable/ic_upload_image"
+                                                android:scaleType="center"
+                                                android:adjustViewBounds="false" />
+
+                                            <ImageView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:id="@+id/imageView22"
+                                                android:layout_alignTop="@+id/view8"
+                                                android:layout_alignLeft="@+id/view8"
+                                                android:layout_alignBottom="@+id/view8"
+                                                android:layout_alignRight="@+id/view8"
+                                                android:src="@drawable/image_rounded_corners_border" />
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:layout_weight="1"
+                                            android:layout_margin="5dp" >
+
+                                            <view
+                                                class="com.mass6loob.app.mass6loob.SquareImageview"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:id="@+id/view9"
+                                                android:layout_gravity="center"
+                                                android:src="@drawable/ic_upload_image"
+                                                android:scaleType="center"
+                                                android:adjustViewBounds="false" />
+
+                                            <ImageView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:id="@+id/imageView23"
+                                                android:layout_alignTop="@+id/view9"
+                                                android:layout_alignLeft="@+id/view9"
+                                                android:layout_alignBottom="@+id/view9"
+                                                android:layout_alignRight="@+id/view9"
+                                                android:src="@drawable/image_rounded_corners_border" />
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:layout_weight="1"
+                                            android:layout_margin="5dp" >
+
+                                            <view
+                                                class="com.mass6loob.app.mass6loob.SquareImageview"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:id="@+id/view10"
+                                                android:layout_gravity="center"
+                                                android:src="@drawable/ic_upload_image"
+                                                android:scaleType="center"
+                                                android:adjustViewBounds="false" />
+
+                                            <ImageView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:id="@+id/imageView24"
+                                                android:layout_alignTop="@+id/view10"
+                                                android:layout_alignLeft="@+id/view10"
+                                                android:layout_alignBottom="@+id/view10"
+                                                android:layout_alignRight="@+id/view10"
+                                                android:src="@drawable/image_rounded_corners_border" />
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:layout_weight="1"
+                                            android:layout_margin="5dp" >
+
+                                            <view
+                                                class="com.mass6loob.app.mass6loob.SquareImageview"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:id="@+id/view11"
+                                                android:layout_gravity="center"
+                                                android:src="@drawable/ic_upload_image"
+                                                android:scaleType="center"
+                                                android:adjustViewBounds="false" />
+
+                                            <ImageView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:id="@+id/imageView25"
+                                                android:layout_alignTop="@+id/view11"
+                                                android:layout_alignLeft="@+id/view11"
+                                                android:layout_alignBottom="@+id/view11"
+                                                android:layout_alignRight="@+id/view11"
+                                                android:src="@drawable/image_rounded_corners_border" />
+                                        </RelativeLayout>
+                                    </LinearLayout>
+                                </LinearLayout>
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"></LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Forgot Your Password?"
+                            android:id="@+id/textView2"
+                            android:textColor="#FFFFFF" />
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#FFFFFF"></LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"></LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Login Here"
+                            android:id="@+id/textView3"
+                            android:textColor="#FFFFFF" />
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#FFFFFF" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:background="@drawable/signup_rounded_corners"
+                    android:layout_margin="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SIGN UP"
+                        android:id="@+id/textView4"
+                        android:textColor="#FFFFFF" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+</LinearLayout>
