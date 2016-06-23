@@ -20,6 +20,7 @@ public class Splash_Screen_Activity extends Activity {
         english.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Settings.set_user_language(Splash_Screen_Activity.this,"en");
                 Intent intent = new Intent(Splash_Screen_Activity.this,Home_Activity.class);
                 startActivity(intent);
             }
@@ -28,6 +29,7 @@ public class Splash_Screen_Activity extends Activity {
         arabic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Settings.set_user_language(Splash_Screen_Activity.this,"ar");
                 Intent intent = new Intent(Splash_Screen_Activity.this,Home_Activity.class);
                 startActivity(intent);
             }

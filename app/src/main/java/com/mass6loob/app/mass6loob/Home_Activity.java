@@ -16,6 +16,7 @@ public class Home_Activity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Settings.forceRTLIfSupported(this);
         setContentView(R.layout.home_page);
         recruit = (LinearLayout)findViewById(R.id.recruit_ll);
         recruit.setOnClickListener(new View.OnClickListener() {
