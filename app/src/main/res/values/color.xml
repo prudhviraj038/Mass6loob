@@ -2,11 +2,6 @@
 <resources>
     <color name="edit_text_hint_color">#4f5f6f</color>
     <color name="edit_text_text_color">#4f5f6f</color>
-
-
-
-
-
-
-
+    <color name="screen_top_background">#21a6e0</color>
+    <color name="field_color">#ff2045e0</color>
 </resources>

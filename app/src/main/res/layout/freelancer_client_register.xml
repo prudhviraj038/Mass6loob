@@ -89,7 +89,7 @@
                                     <EditText
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:id="@+id/editText"
+                                        android:id="@+id/client_name"
                                         android:background="#00000000"
                                         android:hint="Name"
                                         android:textColorHint="@color/edit_text_hint_color"
@@ -120,7 +120,7 @@
                                     <EditText
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:id="@+id/editText2"
+                                        android:id="@+id/client_email"
                                         android:background="#00000000"
                                         android:hint="Email"
                                         android:textColorHint="@color/edit_text_hint_color"
@@ -151,12 +151,13 @@
                                     <EditText
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:id="@+id/editText3"
+                                        android:id="@+id/client_phn"
                                         android:background="#00000000"
                                         android:hint="Phone Number"
                                         android:textColorHint="@color/edit_text_hint_color"
                                         android:textSize="16sp"
-                                        android:textColor="@color/edit_text_text_color" />
+                                        android:textColor="@color/edit_text_text_color"
+                                        android:inputType="phone" />
                                 </LinearLayout>
 
                             </LinearLayout>
@@ -174,7 +175,8 @@
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:id="@+id/client_forgot_ll">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -198,7 +200,8 @@
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:id="@+id/client_loginhere_ll">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -222,7 +225,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:background="@drawable/signup_rounded_corners"
-                    android:layout_margin="20dp">
+                    android:layout_margin="20dp"
+                    android:id="@+id/client_signup_ll">
 
                     <TextView
                         android:layout_width="wrap_content"

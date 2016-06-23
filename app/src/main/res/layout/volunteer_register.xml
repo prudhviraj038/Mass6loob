@@ -89,7 +89,7 @@
                                     <EditText
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:id="@+id/editText"
+                                        android:id="@+id/volunteer_name"
                                         android:background="#00000000"
                                         android:hint="Name"
                                         android:textColorHint="@color/edit_text_hint_color"
@@ -120,12 +120,13 @@
                                     <EditText
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:id="@+id/editText14"
+                                        android:id="@+id/volunteer_age"
                                         android:background="#00000000"
                                         android:hint="Age"
                                         android:textColorHint="@color/edit_text_hint_color"
                                         android:textSize="16sp"
-                                        android:textColor="@color/edit_text_text_color" />
+                                        android:textColor="@color/edit_text_text_color"
+                                        android:inputType="number" />
                                 </LinearLayout>
 
                                 <LinearLayout
@@ -151,7 +152,7 @@
                                     <EditText
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:id="@+id/editText2"
+                                        android:id="@+id/volunteer_email"
                                         android:background="#00000000"
                                         android:hint="Email"
                                         android:textColorHint="@color/edit_text_hint_color"
@@ -182,7 +183,7 @@
                                     <EditText
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:id="@+id/editText13"
+                                        android:id="@+id/volunteer_gender"
                                         android:background="#00000000"
                                         android:hint="Gender"
                                         android:textColorHint="@color/edit_text_hint_color"
@@ -253,7 +254,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:background="@drawable/signup_rounded_corners"
-                    android:layout_margin="20dp">
+                    android:layout_margin="20dp"
+                    android:id="@+id/volunteer_signup_ll">
 
                     <TextView
                         android:layout_width="wrap_content"

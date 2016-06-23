@@ -80,7 +80,7 @@
                                 <EditText
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:id="@+id/editText"
+                                    android:id="@+id/company_name"
                                     android:background="#00000000"
                                     android:hint="Company Name"
                                     android:textColorHint="@color/edit_text_hint_color"
@@ -111,12 +111,13 @@
                                 <EditText
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:id="@+id/editText2"
+                                    android:id="@+id/company_pwd"
                                     android:background="#00000000"
                                     android:hint="Password"
                                     android:textColorHint="@color/edit_text_hint_color"
                                     android:textSize="16sp"
-                                    android:textColor="@color/edit_text_text_color" />
+                                    android:textColor="@color/edit_text_text_color"
+                                    android:inputType="textPassword" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -142,7 +143,7 @@
                                 <EditText
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:id="@+id/editText3"
+                                    android:id="@+id/intrested_in"
                                     android:background="#00000000"
                                     android:hint="Intrested In"
                                     android:textColorHint="@color/edit_text_hint_color"
@@ -156,7 +157,7 @@
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/rounded_corners"
                                 android:gravity="center_vertical"
-                                android:id="@+id/">
+                                android:id="@+id/kkk">
 
                                 <ImageView
                                     android:layout_width="18dp"
@@ -174,7 +175,7 @@
                                 <EditText
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:id="@+id/editText4"
+                                    android:id="@+id/established_date"
                                     android:background="#00000000"
                                     android:hint="Established Date"
                                     android:textColorHint="@color/edit_text_hint_color"
@@ -205,7 +206,7 @@
                                 <EditText
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:id="@+id/editText5"
+                                    android:id="@+id/company_area"
                                     android:background="#00000000"
                                     android:hint="Area"
                                     android:textColorHint="@color/edit_text_hint_color"
@@ -237,7 +238,7 @@
                                 <EditText
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:id="@+id/editText12"
+                                    android:id="@+id/company_logo"
                                     android:background="#00000000"
                                     android:hint="Upload Company Logo"
                                     android:textColorHint="@color/edit_text_hint_color"
@@ -508,7 +509,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:background="@drawable/signup_rounded_corners"
-                    android:layout_margin="20dp">
+                    android:layout_margin="20dp"
+                    android:id="@+id/company_signup_ll">
 
                     <TextView
                         android:layout_width="wrap_content"

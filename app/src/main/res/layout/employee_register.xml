@@ -80,7 +80,7 @@
                                 <EditText
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:id="@+id/editText"
+                                    android:id="@+id/user_name"
                                     android:background="#00000000"
                                     android:hint="Username"
                                     android:textColorHint="@color/edit_text_hint_color"
@@ -111,7 +111,7 @@
                                 <EditText
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:id="@+id/editText2"
+                                    android:id="@+id/job_title"
                                     android:background="#00000000"
                                     android:hint="Job Title"
                                     android:textColorHint="@color/edit_text_hint_color"
@@ -142,12 +142,13 @@
                                 <EditText
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:id="@+id/editText3"
+                                    android:id="@+id/emp_experience"
                                     android:background="#00000000"
                                     android:hint="Experience"
                                     android:textColorHint="@color/edit_text_hint_color"
                                     android:textSize="16sp"
-                                    android:textColor="@color/edit_text_text_color" />
+                                    android:textColor="@color/edit_text_text_color"
+                                    android:inputType="number" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -155,7 +156,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/rounded_corners"
-                                android:gravity="center_vertical" >
+                                android:gravity="center_vertical"
+                                android:id="@+id/emp_nationality_ll">
 
                                 <ImageView
                                     android:layout_width="18dp"
@@ -173,7 +175,7 @@
                                 <EditText
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:id="@+id/editText4"
+                                    android:id="@+id/emp_nationality"
                                     android:background="#00000000"
                                     android:hint="Nationality"
                                     android:textColorHint="@color/edit_text_hint_color"
@@ -186,7 +188,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/rounded_corners"
-                                android:gravity="center_vertical" >
+                                android:gravity="center_vertical"
+                                android:id="@+id/emp_bachelors_ll">
 
                                 <ImageView
                                     android:layout_width="18dp"
@@ -204,7 +207,7 @@
                                 <EditText
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:id="@+id/editText5"
+                                    android:id="@+id/emp_edu_bachelors"
                                     android:background="#00000000"
                                     android:hint="Education (Bachelors)"
                                     android:textColorHint="@color/edit_text_hint_color"
@@ -217,7 +220,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/rounded_corners"
-                                android:gravity="center_vertical" >
+                                android:gravity="center_vertical"
+                                android:id="@+id/emp_masters_ll">
 
                                 <ImageView
                                     android:layout_width="18dp"
@@ -235,7 +239,7 @@
                                 <EditText
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:id="@+id/editText6"
+                                    android:id="@+id/emp_edu_masters"
                                     android:background="#00000000"
                                     android:hint="Education (Masters)"
                                     android:textColorHint="@color/edit_text_hint_color"
@@ -248,7 +252,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/rounded_corners"
-                                android:gravity="center_vertical" >
+                                android:gravity="center_vertical"
+                                android:id="@+id/emp_gender_ll">
 
                                 <ImageView
                                     android:layout_width="18dp"
@@ -266,7 +271,7 @@
                                 <EditText
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:id="@+id/editText8"
+                                    android:id="@+id/emp_gender"
                                     android:background="#00000000"
                                     android:hint="Gender"
                                     android:textColorHint="@color/edit_text_hint_color"
@@ -279,7 +284,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/rounded_corners"
-                                android:gravity="center_vertical" >
+                                android:gravity="center_vertical"
+                                android:id="@+id/emp_location_ll">
 
                                 <ImageView
                                     android:layout_width="18dp"
@@ -297,7 +303,7 @@
                                 <EditText
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:id="@+id/editText9"
+                                    android:id="@+id/emp_location"
                                     android:background="#00000000"
                                     android:hint="Location"
                                     android:textColorHint="@color/edit_text_hint_color"
@@ -310,7 +316,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/rounded_corners"
-                                android:gravity="center_vertical" >
+                                android:gravity="center_vertical"
+                                android:id="@+id/emp_uploadcv_ll">
 
                                 <ImageView
                                     android:layout_width="18dp"
@@ -328,7 +335,7 @@
                                 <EditText
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:id="@+id/editText10"
+                                    android:id="@+id/emp_cv"
                                     android:background="#00000000"
                                     android:hint="Upload a CV"
                                     android:textColorHint="@color/edit_text_hint_color"
@@ -341,7 +348,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/rounded_corners"
-                                android:gravity="center_vertical" >
+                                android:gravity="center_vertical"
+                                android:id="@+id/emp_uploadimg_ll">
 
                                 <ImageView
                                     android:layout_width="18dp"
@@ -359,7 +367,7 @@
                                 <EditText
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:id="@+id/editText11"
+                                    android:id="@+id/emp_img"
                                     android:background="#00000000"
                                     android:hint="Upload Your Image"
                                     android:textColorHint="@color/edit_text_hint_color"
@@ -387,7 +395,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="REVIEW YOUR CV"
-                        android:id="@+id/textView"
+                        android:id="@+id/emp_review_cv"
                         android:textColor="#FFFFFF" />
                 </LinearLayout>
 
@@ -399,13 +407,14 @@
                     android:background="@drawable/signup_rounded_corners"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:layout_marginBottom="20dp">
+                    android:layout_marginBottom="20dp"
+                    android:id="@+id/emp_submit_ll">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="SUBMIT"
-                        android:id="@+id/textView4"
+                        android:id="@+id/emp_submit"
                         android:textColor="#FFFFFF" />
                 </LinearLayout>
             </LinearLayout>

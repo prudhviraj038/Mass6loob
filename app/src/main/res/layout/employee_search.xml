@@ -80,7 +80,7 @@
                                 <EditText
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:id="@+id/editText2"
+                                    android:id="@+id/emp_search_title"
                                     android:background="#00000000"
                                     android:hint="Job Title"
                                     android:textColorHint="@color/edit_text_hint_color"
@@ -111,12 +111,13 @@
                                 <EditText
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:id="@+id/editText3"
+                                    android:id="@+id/emp_search_exp"
                                     android:background="#00000000"
                                     android:hint="Experience"
                                     android:textColorHint="@color/edit_text_hint_color"
                                     android:textSize="16sp"
-                                    android:textColor="@color/edit_text_text_color" />
+                                    android:textColor="@color/edit_text_text_color"
+                                    android:inputType="number" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -142,7 +143,7 @@
                                 <EditText
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:id="@+id/editText4"
+                                    android:id="@+id/emp_search_nationality"
                                     android:background="#00000000"
                                     android:hint="Nationality"
                                     android:textColorHint="@color/edit_text_hint_color"
@@ -173,7 +174,7 @@
                                 <EditText
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:id="@+id/editText5"
+                                    android:id="@+id/emp_search_edu"
                                     android:background="#00000000"
                                     android:hint="Education "
                                     android:textColorHint="@color/edit_text_hint_color"
@@ -186,7 +187,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:background="@drawable/submit_rounded_corners">
+                                android:background="@drawable/submit_rounded_corners"
+                                android:id="@+id/emp_search_ll">
 
                                 <TextView
                                     android:layout_width="wrap_content"
