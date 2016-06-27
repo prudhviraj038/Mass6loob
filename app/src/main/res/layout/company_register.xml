@@ -223,7 +223,7 @@
                                 <ImageView
                                     android:layout_width="18dp"
                                     android:layout_height="18dp"
-                                    android:id="@+id/imageView8"
+                                    android:id="@+id/ic_upload_logo"
                                     android:src="@drawable/ic_upload"
                                     android:layout_marginLeft="10dp"
                                     android:layout_marginRight="10dp" />
