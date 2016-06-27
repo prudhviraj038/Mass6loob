@@ -179,7 +179,8 @@
                                     android:hint="Age"
                                     android:textColorHint="@color/edit_text_hint_color"
                                     android:textSize="16sp"
-                                    android:textColor="@color/edit_text_text_color" />
+                                    android:textColor="@color/edit_text_text_color"
+                                    android:inputType="number" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -336,9 +337,9 @@
                                                 android:layout_height="match_parent"
                                                 android:id="@+id/view2"
                                                 android:layout_gravity="center"
-                                                android:src="@drawable/app_bg_blue"
-                                                android:adjustViewBounds="true"
-                                                android:scaleType="centerCrop" />
+                                                android:adjustViewBounds="false"
+                                                android:scaleType="center"
+                                                android:src="@drawable/ic_upload_image" />
 
                                             <ImageView
                                                 android:layout_width="wrap_content"
@@ -348,7 +349,8 @@
                                                 android:layout_alignLeft="@+id/view2"
                                                 android:layout_alignBottom="@+id/view2"
                                                 android:layout_alignRight="@+id/view2"
-                                                android:src="@drawable/image_rounded_corners_border" />
+                                                android:src="@drawable/image_rounded_corners_border"
+                                                android:adjustViewBounds="false" />
                                         </RelativeLayout>
 
                                         <RelativeLayout

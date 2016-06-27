@@ -18,6 +18,7 @@ public class Volunteer_Register_Activity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Settings.forceRTLIfSupported(this);
         setContentView(R.layout.volunteer_register);
         name = (EditText)findViewById(R.id.volunteer_name);
         email = (EditText)findViewById(R.id.volunteer_email);

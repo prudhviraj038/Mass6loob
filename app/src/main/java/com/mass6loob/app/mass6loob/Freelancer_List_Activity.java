@@ -18,7 +18,10 @@ public class Freelancer_List_Activity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Settings.forceRTLIfSupported(this);
+
         setContentView(R.layout.freelancer_list);
+
         users_list = (ListView)findViewById(R.id.lancer_list_view);
         users_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

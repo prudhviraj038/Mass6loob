@@ -18,13 +18,23 @@ public class Volunteer_Company_Register_Activity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Settings.forceRTLIfSupported(this);
+
         setContentView(R.layout.volunteer_company_register);
+        final int RESULT_LOAD_IMAGE = 1;
         companyname = (EditText)findViewById(R.id.company_name);
         password = (EditText)findViewById(R.id.company_pwd);
         intrestedin = (EditText)findViewById(R.id.intrested_in);
         establisheddate= (EditText)findViewById(R.id.established_date);
         area= (EditText)findViewById(R.id.company_area);
         companylogo= (EditText)findViewById(R.id.company_logo);
+        companylogo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(i, RESULT_LOAD_IMAGE);
+            }
+        });
         companysingup= (LinearLayout)findViewById(R.id.company_signup_ll);
         companysingup.setOnClickListener(new View.OnClickListener() {
             @Override

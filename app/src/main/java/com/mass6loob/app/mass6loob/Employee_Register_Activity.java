@@ -22,7 +22,11 @@ public class Employee_Register_Activity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Settings.forceRTLIfSupported(this);
+
         setContentView(R.layout.employee_register);
+        final int RESULT_LOAD_IMAGE = 1;
+
         username = (EditText)findViewById(R.id.user_name);
         jobtitle = (EditText)findViewById(R.id.job_title);
         experience = (EditText)findViewById(R.id.emp_experience);
@@ -34,6 +38,14 @@ public class Employee_Register_Activity extends Activity {
         uploadcv = (EditText)findViewById(R.id.emp_cv);
         reviewcv = (TextView)findViewById(R.id.emp_review_cv);
         uploadimage = (EditText)findViewById(R.id.emp_img);
+        uploadimage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(i, RESULT_LOAD_IMAGE);
+            }
+        });
+
         submit = (LinearLayout)findViewById(R.id.emp_submit_ll);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,4 +97,64 @@ public class Employee_Register_Activity extends Activity {
             }
         });
     }
+//public  void company_register(){
+    // final ProgressDialog progressDialog = new ProgressDialog(this);
+    //  progressDialog.setMessage("please wait.. we are processing");
+    // progressDialog.show();
+    // progressDialog.setCancelable(false);
+    // String url = Settings.SERVER_URL+"missed-customer.php?";
+
+    // StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {
+    //   @Override
+    // public void onResponse(String response) {
+    //   if(progressDialog!=null)
+    //       progressDialog.dismiss();
+    // try {
+    //  JSONObject jsonObject=new JSONObject(response);
+    //     String reply=jsonObject.getString("status");
+    //     if(reply.equals("Success")) {
+    //       String msg = jsonObject.getString("message");
+    //         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+    //          finish();
+    //     }
+    //    else {
+    //      String msg=jsonObject.getString("message");
+    //       Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+    //  }
+
+    // } catch (JSONException e) {
+    //     e.printStackTrace();
+    // }
+    // }
+    // },
+    //   new Response.ErrorListener() {
+    //    @Override
+    //    public void onErrorResponse(VolleyError error) {
+
+    //  if(progressDialog!=null)
+    //      progressDialog.dismiss();
+    //  Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+    //   }
+    // }){
+    //  @Override
+    //  protected Map<String,String> getParams(){
+    //  Map<String,String> params = new HashMap<String, String>();
+    //  params.put("usernamename", user_str);
+    //  params.put("jobtitle",job_str );
+    //  params.put("experience", exp_str);
+    //  params.put("nationality",  nationality_str);
+    //  params.put("masters", edumasters_str);
+    //  params.put("bachelors", edubachelors_str);
+    //  params.put("location",location_str);
+    //  params.put("gender",gender_str);
+     // params.put("uploadcv",uploadcv_str);
+    //  params.put("uploadimage",uploadimage_str);
+
+
+
+    //   return params;
+    //  }
+    // };
+    // AppController.getInstance().addToRequestQueue(stringRequest);
+    //  }
 }

@@ -93,7 +93,8 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/id_num_ll"
                         android:paddingRight="5dp"
-                        android:paddingLeft="5dp" />
+                        android:paddingLeft="5dp"
+                        android:text="101" />
 
                     <LinearLayout
                         android:orientation="horizontal"
@@ -122,11 +123,13 @@
                     android:layout_height="wrap_content" >
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/job_title_ll"
                         android:paddingRight="5dp"
-                        android:paddingLeft="5dp" />
+                        android:paddingLeft="5dp"
+                        android:text="mobile developer"
+                        android:singleLine="true" />
 
                     <LinearLayout
                         android:orientation="horizontal"
@@ -159,7 +162,8 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/experience_ll"
                         android:paddingRight="5dp"
-                        android:paddingLeft="5dp" />
+                        android:paddingLeft="5dp"
+                        android:text="2" />
 
                     <LinearLayout
                         android:orientation="horizontal"
@@ -192,7 +196,8 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/educatiom_ll"
                         android:paddingRight="5dp"
-                        android:paddingLeft="5dp" />
+                        android:paddingLeft="5dp"
+                        android:text="B.Tech" />
 
                     <LinearLayout
                         android:orientation="horizontal"
@@ -225,7 +230,8 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/nationality_ll"
                         android:paddingRight="5dp"
-                        android:paddingLeft="5dp" />
+                        android:paddingLeft="5dp"
+                        android:text="indian" />
 
                     <LinearLayout
                         android:orientation="horizontal"
@@ -258,7 +264,8 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/location_ll"
                         android:paddingRight="5dp"
-                        android:paddingLeft="5dp" />
+                        android:paddingLeft="5dp"
+                        android:text="vijayawada" />
 
                     <LinearLayout
                         android:orientation="horizontal"
@@ -291,7 +298,8 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/gender_ll"
                         android:paddingRight="5dp"
-                        android:paddingLeft="5dp" />
+                        android:paddingLeft="5dp"
+                        android:text="male" />
 
                     <LinearLayout
                         android:orientation="horizontal"
@@ -305,7 +313,8 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
                 <TextView
                     android:layout_width="@dimen/field_width"
@@ -316,15 +325,18 @@
 
                 <LinearLayout
                     android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp" >
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="50dp"
                         android:id="@+id/description_ll"
                         android:paddingRight="5dp"
-                        android:paddingLeft="5dp" />
+                        android:paddingLeft="5dp"
+                        android:text="worked as a mobile developer for 2 years "
+                        android:layout_weight="1" />
 
                 </LinearLayout>
             </LinearLayout>

@@ -18,6 +18,8 @@ public class Volunteer_List_Activity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Settings.forceRTLIfSupported(this);
+
         setContentView(R.layout.volunteer_list);
         volunteerlist = (ListView)findViewById(R.id.volunteer_list);
         volunteerlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {

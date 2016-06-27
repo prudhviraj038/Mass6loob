@@ -180,7 +180,8 @@
                                     android:hint="Established Date"
                                     android:textColorHint="@color/edit_text_hint_color"
                                     android:textSize="16sp"
-                                    android:textColor="@color/edit_text_text_color" />
+                                    android:textColor="@color/edit_text_text_color"
+                                    android:inputType="date" />
                             </LinearLayout>
 
                             <LinearLayout

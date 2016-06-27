@@ -18,6 +18,7 @@ public class Employee_Search_Activity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Settings.forceRTLIfSupported(this);
         setContentView(R.layout.employee_search);
         jobtitle = (EditText)findViewById(R.id.emp_search_title);
         experience = (EditText)findViewById(R.id.emp_search_exp);
@@ -50,5 +51,56 @@ public class Employee_Search_Activity extends Activity {
             }
         });
     }
+   //public  void Freelancer_client_register(){
+    // final ProgressDialog progressDialog = new ProgressDialog(this);
+     //  progressDialog.setMessage("please wait.. we are processing");
+    // progressDialog.show();
+    // progressDialog.setCancelable(false);
+    // String url = Settings.SERVER_URL+"employee_search.php?";
 
+    // StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {
+    //   @Override
+    //public void onResponse(String response) {
+    //   if(progressDialog!=null)
+    //       progressDialog.dismiss();
+    // try {
+    //  JSONObject jsonObject=new JSONObject(response);
+    //     String reply=jsonObject.getString("status");
+    //     if(reply.equals("Success")) {
+    //       String msg = jsonObject.getString("message");
+    //         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+    //          finish();
+    //     }
+    //    else {
+    //      String msg=jsonObject.getString("message");
+    //       Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+    //  }
+
+    // } catch (JSONException e) {
+    //     e.printStackTrace();
+    // }
+    // }
+    // },
+    //   new Response.ErrorListener() {
+    //    @Override
+    //    public void onErrorResponse(VolleyError error) {
+
+    //  if(progressDialog!=null)
+    //      progressDialog.dismiss();
+    //  Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+    //   }
+    // }){
+    //  @Override
+    //  protected Map<String,String> getParams(){
+    //    Map<String,String> params = new HashMap<String, String>();
+    //  params.put("jobtitle", title_str);
+    //  params.put("experience", expe_str);
+    //  params.put("nationality",nation_str);
+    // params.put("education",edu_str);
+//
+    //   return params;
+    //  }
+    // };
+    // AppController.getInstance().addToRequestQueue(stringRequest);
+    //  }
 }

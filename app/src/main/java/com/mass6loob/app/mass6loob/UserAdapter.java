@@ -67,11 +67,16 @@ public class UserAdapter extends BaseAdapter{
         holder.location=(TextView) rowView.findViewById(R.id.location_ll);
         holder.description=(TextView) rowView.findViewById(R.id.description_ll);
 
-      //   Picasso.with(context).load(users.get(position).image).into(holder.userimage);
-       //  holder.name.setText(users.get(position).name);
-        // holder.field.setText(users.get(position).field);
-        // holder.experience.setText(users.get(position).experience);
-        // holder.name.setText(users.get(position).name);
+         Picasso.with(context).load(users.get(position).userimage).into(holder.userimage);
+         holder.userid.setText(users.get(position).userid);
+         holder.jobtitle.setText(users.get(position).jobtitle);
+         holder.experience.setText(users.get(position).experience);
+         holder.education.setText(users.get(position).education);
+         holder.nationality.setText(users.get(position).nationality);
+         holder.gender.setText(users.get(position).gender);
+         holder.location.setText(users.get(position).location);
+         holder.description.setText(users.get(position).description);
+
 
         return rowView;
     }
