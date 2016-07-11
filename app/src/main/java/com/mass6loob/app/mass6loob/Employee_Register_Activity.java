@@ -1,14 +1,25 @@
 package com.mass6loob.app.mass6loob;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.File;
+import java.net.URI;
 
 /**
  * Created by sriven on 6/21/2016.
@@ -25,7 +36,6 @@ public class Employee_Register_Activity extends Activity {
         Settings.forceRTLIfSupported(this);
 
         setContentView(R.layout.employee_register);
-        final int RESULT_LOAD_IMAGE = 1;
 
         username = (EditText)findViewById(R.id.user_name);
         jobtitle = (EditText)findViewById(R.id.job_title);
@@ -35,9 +45,16 @@ public class Employee_Register_Activity extends Activity {
         educatuionmasters = (EditText)findViewById(R.id.emp_edu_masters);
         location = (EditText)findViewById(R.id.emp_location);
         gender = (EditText)findViewById(R.id.emp_gender);
-        uploadcv = (EditText)findViewById(R.id.emp_cv);
+        uploadcv = (EditText)findViewById(R.id.emp_cv_l);
+        uploadcv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+            }
+        });
         reviewcv = (TextView)findViewById(R.id.emp_review_cv);
-        uploadimage = (EditText)findViewById(R.id.emp_img);
+        uploadimage = (EditText)findViewById(R.id.emp_img_l);
         uploadimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,64 +114,46 @@ public class Employee_Register_Activity extends Activity {
             }
         });
     }
-//public  void company_register(){
-    // final ProgressDialog progressDialog = new ProgressDialog(this);
-    //  progressDialog.setMessage("please wait.. we are processing");
-    // progressDialog.show();
-    // progressDialog.setCancelable(false);
-    // String url = Settings.SERVER_URL+"missed-customer.php?";
 
-    // StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {
-    //   @Override
-    // public void onResponse(String response) {
-    //   if(progressDialog!=null)
-    //       progressDialog.dismiss();
-    // try {
-    //  JSONObject jsonObject=new JSONObject(response);
-    //     String reply=jsonObject.getString("status");
-    //     if(reply.equals("Success")) {
-    //       String msg = jsonObject.getString("message");
-    //         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
-    //          finish();
-    //     }
-    //    else {
-    //      String msg=jsonObject.getString("message");
-    //       Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
-    //  }
+    final int RESULT_LOAD_IMAGE = 1;
+    String imgDecodableString;
 
-    // } catch (JSONException e) {
-    //     e.printStackTrace();
-    // }
-    // }
-    // },
-    //   new Response.ErrorListener() {
-    //    @Override
-    //    public void onErrorResponse(VolleyError error) {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-    //  if(progressDialog!=null)
-    //      progressDialog.dismiss();
-    //  Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
-    //   }
-    // }){
-    //  @Override
-    //  protected Map<String,String> getParams(){
-    //  Map<String,String> params = new HashMap<String, String>();
-    //  params.put("usernamename", user_str);
-    //  params.put("jobtitle",job_str );
-    //  params.put("experience", exp_str);
-    //  params.put("nationality",  nationality_str);
-    //  params.put("masters", edumasters_str);
-    //  params.put("bachelors", edubachelors_str);
-    //  params.put("location",location_str);
-    //  params.put("gender",gender_str);
-     // params.put("uploadcv",uploadcv_str);
-    //  params.put("uploadimage",uploadimage_str);
+        try {
+            // When an Image is picked
+            if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK
+                    && null != data) {
+                // Get the Image from data
 
+                Uri selectedImage = data.getData();
+                String[] filePathColumn = { MediaStore.Images.Media.DATA };
 
+                // Get the cursor
+                Cursor cursor = getContentResolver().query(selectedImage,
+                        filePathColumn, null, null, null);
+                // Move to first row
+                cursor.moveToFirst();
 
-    //   return params;
-    //  }
-    // };
-    // AppController.getInstance().addToRequestQueue(stringRequest);
-    //  }
+                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                imgDecodableString = cursor.getString(columnIndex);
+                cursor.close();
+                ImageView imgView = (ImageView) findViewById(R.id.emp_img);
+                // Set the Image in ImageView after decoding the String
+                imgView.setImageBitmap(BitmapFactory
+                        .decodeFile(imgDecodableString));
+
+            } else {
+                Toast.makeText(this, "You haven't picked Image",
+                        Toast.LENGTH_LONG).show();
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG)
+                    .show();
+        }
+
+    }
+
 }

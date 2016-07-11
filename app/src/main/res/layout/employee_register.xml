@@ -322,7 +322,7 @@
                                 <ImageView
                                     android:layout_width="18dp"
                                     android:layout_height="18dp"
-                                    android:id="@+id/imageView12"
+                                    android:id="@+id/emp_cv"
                                     android:src="@drawable/ic_upload"
                                     android:layout_marginLeft="10dp"
                                     android:layout_marginRight="10dp" />
@@ -335,7 +335,7 @@
                                 <EditText
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:id="@+id/emp_cv"
+                                    android:id="@+id/emp_cv_l"
                                     android:background="#00000000"
                                     android:hint="Upload a CV"
                                     android:textColorHint="@color/edit_text_hint_color"
@@ -354,7 +354,7 @@
                                 <ImageView
                                     android:layout_width="18dp"
                                     android:layout_height="18dp"
-                                    android:id="@+id/imageView13"
+                                    android:id="@+id/emp_img"
                                     android:src="@drawable/ic_upload_image"
                                     android:layout_marginLeft="10dp"
                                     android:layout_marginRight="10dp" />
@@ -367,7 +367,7 @@
                                 <EditText
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:id="@+id/emp_img"
+                                    android:id="@+id/emp_img_l"
                                     android:background="#00000000"
                                     android:hint="Upload Your Image"
                                     android:textColorHint="@color/edit_text_hint_color"

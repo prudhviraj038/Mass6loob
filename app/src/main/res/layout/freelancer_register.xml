@@ -255,7 +255,7 @@
                                 <ImageView
                                     android:layout_width="18dp"
                                     android:layout_height="18dp"
-                                    android:id="@+id/imageView14"
+                                    android:id="@+id/free_logo_ll"
                                     android:src="@drawable/ic_upload"
                                     android:layout_marginLeft="10dp"
                                     android:layout_marginRight="10dp" />
@@ -329,7 +329,8 @@
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="center"
                                             android:layout_weight="1"
-                                            android:layout_margin="5dp">
+                                            android:layout_margin="5dp"
+                                            android:id="@+id/rl_image1">
 
                                             <view
                                                 class="com.mass6loob.app.mass6loob.SquareImageview"
@@ -344,7 +345,7 @@
                                             <ImageView
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:id="@+id/imageView16"
+                                                android:id="@+id/image1_ll"
                                                 android:layout_alignTop="@+id/view2"
                                                 android:layout_alignLeft="@+id/view2"
                                                 android:layout_alignBottom="@+id/view2"
@@ -358,7 +359,8 @@
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="center"
                                             android:layout_weight="1"
-                                            android:layout_margin="5dp">
+                                            android:layout_margin="5dp"
+                                            android:id="@+id/rl_image2">
 
                                             <view
                                                 class="com.mass6loob.app.mass6loob.SquareImageview"
@@ -373,7 +375,7 @@
                                             <ImageView
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:id="@+id/imageView17"
+                                                android:id="@+id/image2_ll"
                                                 android:layout_alignTop="@+id/view3"
                                                 android:layout_alignLeft="@+id/view3"
                                                 android:layout_alignBottom="@+id/view3"
@@ -386,7 +388,8 @@
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="center"
                                             android:layout_weight="1"
-                                            android:layout_margin="5dp">
+                                            android:layout_margin="5dp"
+                                            android:id="@+id/rl_image3">
 
                                             <view
                                                 class="com.mass6loob.app.mass6loob.SquareImageview"
@@ -401,7 +404,7 @@
                                             <ImageView
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:id="@+id/imageView18"
+                                                android:id="@+id/image3_ll"
                                                 android:layout_alignTop="@+id/view4"
                                                 android:layout_alignLeft="@+id/view4"
                                                 android:layout_alignBottom="@+id/view4"
@@ -414,7 +417,8 @@
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="center"
                                             android:layout_weight="1"
-                                            android:layout_margin="5dp">
+                                            android:layout_margin="5dp"
+                                            android:id="@+id/rl_image4">
 
                                             <view
                                                 class="com.mass6loob.app.mass6loob.SquareImageview"
@@ -429,7 +433,7 @@
                                             <ImageView
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:id="@+id/imageView19"
+                                                android:id="@+id/image4_ll"
                                                 android:layout_alignTop="@+id/view5"
                                                 android:layout_alignLeft="@+id/view5"
                                                 android:layout_alignBottom="@+id/view5"
@@ -442,7 +446,8 @@
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="center"
                                             android:layout_weight="1"
-                                            android:layout_margin="5dp">
+                                            android:layout_margin="5dp"
+                                            android:id="@+id/rl_image5">
 
                                             <view
                                                 class="com.mass6loob.app.mass6loob.SquareImageview"
@@ -457,7 +462,7 @@
                                             <ImageView
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:id="@+id/imageView20"
+                                                android:id="@+id/image5_ll"
                                                 android:layout_alignTop="@+id/view6"
                                                 android:layout_alignLeft="@+id/view6"
                                                 android:layout_alignBottom="@+id/view6"
@@ -476,7 +481,8 @@
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="center"
                                             android:layout_weight="1"
-                                            android:layout_margin="5dp" >
+                                            android:layout_margin="5dp"
+                                            android:id="@+id/rl_image6">
 
                                             <view
                                                 class="com.mass6loob.app.mass6loob.SquareImageview"
@@ -491,7 +497,7 @@
                                             <ImageView
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:id="@+id/imageView21"
+                                                android:id="@+id/image6_ll"
                                                 android:layout_alignTop="@+id/view7"
                                                 android:layout_alignLeft="@+id/view7"
                                                 android:layout_alignBottom="@+id/view7"
@@ -504,7 +510,8 @@
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="center"
                                             android:layout_weight="1"
-                                            android:layout_margin="5dp" >
+                                            android:layout_margin="5dp"
+                                            android:id="@+id/rl_image7">
 
                                             <view
                                                 class="com.mass6loob.app.mass6loob.SquareImageview"
@@ -519,12 +526,13 @@
                                             <ImageView
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:id="@+id/imageView22"
+                                                android:id="@+id/image7_ll"
                                                 android:layout_alignTop="@+id/view8"
                                                 android:layout_alignLeft="@+id/view8"
                                                 android:layout_alignBottom="@+id/view8"
                                                 android:layout_alignRight="@+id/view8"
-                                                android:src="@drawable/image_rounded_corners_border" />
+                                                android:src="@drawable/image_rounded_corners_border"
+                                                android:focusableInTouchMode="false" />
                                         </RelativeLayout>
 
                                         <RelativeLayout
@@ -532,7 +540,8 @@
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="center"
                                             android:layout_weight="1"
-                                            android:layout_margin="5dp" >
+                                            android:layout_margin="5dp"
+                                            android:id="@+id/rl_image8">
 
                                             <view
                                                 class="com.mass6loob.app.mass6loob.SquareImageview"
@@ -547,7 +556,7 @@
                                             <ImageView
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:id="@+id/imageView23"
+                                                android:id="@+id/image8_ll"
                                                 android:layout_alignTop="@+id/view9"
                                                 android:layout_alignLeft="@+id/view9"
                                                 android:layout_alignBottom="@+id/view9"
@@ -560,7 +569,8 @@
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="center"
                                             android:layout_weight="1"
-                                            android:layout_margin="5dp" >
+                                            android:layout_margin="5dp"
+                                            android:id="@+id/rl_image9">
 
                                             <view
                                                 class="com.mass6loob.app.mass6loob.SquareImageview"
@@ -575,7 +585,7 @@
                                             <ImageView
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:id="@+id/imageView24"
+                                                android:id="@+id/image9_ll"
                                                 android:layout_alignTop="@+id/view10"
                                                 android:layout_alignLeft="@+id/view10"
                                                 android:layout_alignBottom="@+id/view10"
@@ -588,7 +598,8 @@
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="center"
                                             android:layout_weight="1"
-                                            android:layout_margin="5dp" >
+                                            android:layout_margin="5dp"
+                                            android:id="@+id/rl_image10">
 
                                             <view
                                                 class="com.mass6loob.app.mass6loob.SquareImageview"
@@ -603,7 +614,7 @@
                                             <ImageView
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:id="@+id/imageView25"
+                                                android:id="@+id/image10_ll"
                                                 android:layout_alignTop="@+id/view11"
                                                 android:layout_alignLeft="@+id/view11"
                                                 android:layout_alignBottom="@+id/view11"
