@@ -92,67 +92,15 @@ public class Company_Register_Activity extends Activity {
         });
 
     }
-    // public  void company_register(){
-    // final ProgressDialog progressDialog = new ProgressDialog(this);
-    //  progressDialog.setMessage("please wait.. we are processing");
-    // progressDialog.show();
-    // progressDialog.setCancelable(false);
-    // String url = Settings.SERVER_URL+"missed-customer.php?";
 
-    // StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {
-    //   @Override
-    // public void onResponse(String response) {
-    //   if(progressDialog!=null)
-    //       progressDialog.dismiss();
-    // try {
-    //  JSONObject jsonObject=new JSONObject(response);
-    //     String reply=jsonObject.getString("status");
-    //     if(reply.equals("Success")) {
-    //       String msg = jsonObject.getString("message");
-    //         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
-    //          finish();
-    //     }
-    //    else {
-    //      String msg=jsonObject.getString("message");
-    //       Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
-    //  }
-
-    // } catch (JSONException e) {
-    //     e.printStackTrace();
-    // }
-    // }
-    // },
-    //   new Response.ErrorListener() {
-    //    @Override
-    //    public void onErrorResponse(VolleyError error) {
-
-    //  if(progressDialog!=null)
-    //      progressDialog.dismiss();
-    //  Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
-    //   }
-    // }){
-    //  @Override
-    //  protected Map<String,String> getParams(){
-    //  Map<String,String> params = new HashMap<String, String>();
-    //  params.put("name",uname_str);
-    //  params.put("password",pwd_str);
-    //  params.put("company name",cname_str);
-    //  params.put("country",country_str);
-    //  params.put("area",area_str);
-    //  params.put("company logo",companylogo_str);
-    //  params.put("about",about_str);
-    //   return params;
-    //  }
-    // };
-    // AppController.getInstance().addToRequestQueue(stringRequest);
-    //  }
     final int RESULT_LOAD_IMAGE = 1;
     String imgDecodableString;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+        Toast.makeText(this, "image selected", Toast.LENGTH_LONG)
+                .show();
         try {
             // When an Image is picked
             if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK

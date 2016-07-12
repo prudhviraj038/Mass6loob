@@ -3,72 +3,246 @@ package com.mass6loob.app.mass6loob;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+
+import java.util.ArrayList;
 
 /**
  * Created by sriven on 6/21/2016.
  */
 public class Home_Activity extends Activity {
-    LinearLayout recruit,postmycv;
-    LinearLayout register,postmycv1;
-    LinearLayout volunterregister,volunteercompanyregister;
+    LinearLayout recruit, postmycv;
+    LinearLayout register, postmycv1;
+    LinearLayout volunterregister, volunteercompanyregister;
+    RelativeLayout slidingpanel;
+    LinearLayout jobs_view,free_view,vol_view;
+    DisplayMetrics metrics = new DisplayMetrics();
+    ArrayList<LinearLayout> views;
+    ArrayList<Float> positions;
+    int pos=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Settings.forceRTLIfSupported(this);
         setContentView(R.layout.home_page);
-        recruit = (LinearLayout)findViewById(R.id.recruit_ll);
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        Log.d("ApplicationTagName", "Display width in px is " + metrics.widthPixels);
+        slidingpanel = (RelativeLayout) findViewById(R.id.sliding_layer);
+        jobs_view = (LinearLayout) findViewById(R.id.jobs_view);
+        free_view = (LinearLayout) findViewById(R.id.free_view);
+        vol_view = (LinearLayout) findViewById(R.id.volunteers_view);
+
+        recruit = (LinearLayout) findViewById(R.id.recruit_ll);
         recruit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Home_Activity.this,Company_Register_Activity.class);
+                Intent intent = new Intent(Home_Activity.this, Company_Register_Activity.class);
                 startActivity(intent);
 
             }
         });
-        postmycv = (LinearLayout)findViewById(R.id.post_my_cv_ll);
+        postmycv = (LinearLayout) findViewById(R.id.post_my_cv_ll);
         postmycv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Home_Activity.this,Employee_Register_Activity.class);
+                Intent intent = new Intent(Home_Activity.this, Employee_Register_Activity.class);
                 startActivity(intent);
 
             }
         });
-        register = (LinearLayout)findViewById(R.id.lancer_register);
+        register = (LinearLayout) findViewById(R.id.lancer_register);
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Home_Activity.this,Freelancer_Register_Activity.class);
+                Intent intent = new Intent(Home_Activity.this, Freelancer_Register_Activity.class);
                 startActivity(intent);
             }
         });
-        postmycv1=(LinearLayout)findViewById(R.id.post_my_cv);
+        postmycv1 = (LinearLayout) findViewById(R.id.post_my_cv);
         postmycv1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Home_Activity.this,Freelancer_Client_Register_Activity.class);
+                Intent intent = new Intent(Home_Activity.this, Freelancer_Client_Register_Activity.class);
                 startActivity(intent);
             }
         });
-        volunterregister = (LinearLayout)findViewById(R.id.volunteer_register);
+        volunterregister = (LinearLayout) findViewById(R.id.volunteer_register);
         volunterregister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Home_Activity.this,Volunteer_Register_Activity.class);
+                Intent intent = new Intent(Home_Activity.this, Volunteer_Register_Activity.class);
                 startActivity(intent);
             }
         });
-        volunteercompanyregister=(LinearLayout)findViewById(R.id.volunteer_postcv);
+        volunteercompanyregister = (LinearLayout) findViewById(R.id.volunteer_postcv);
         volunteercompanyregister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Home_Activity.this,Volunteer_Company_Register_Activity.class);
+                Intent intent = new Intent(Home_Activity.this, Volunteer_Company_Register_Activity.class);
                 startActivity(intent);
             }
         });
 
+        setonTounch(slidingpanel);
+            jobX=jobs_view.getX();
+            jobY=jobs_view.getY();
+        Log.e("jobx",String.valueOf(jobs_view.getX()));
+        Log.e("joby",String.valueOf(jobs_view.getY()));
 
     }
-}
+
+    public float baseX, baseY;
+    public float jobX, jobY;
+
+    float dX, dY;
+    private void setonTounch(final View dragger ) {
+
+        View.OnTouchListener listener = new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+
+                    case MotionEvent.ACTION_DOWN:
+
+                        baseX =  event.getRawX();
+                        baseY =  event.getRawY();
+                        break;
+
+                    case MotionEvent.ACTION_MOVE:
+                       /* dX = baseX-event.getRawX();
+                        Log.e("dis_swiped",String.valueOf(dX));
+                        if(jobs_view.getX() > -250 && jobs_view.getX() < metrics.widthPixels-250) {
+                            jobs_view.animate()
+                                    .x(jobs_view.getX()-dX/2)
+                                    .y(jobs_view.getY())
+                                    .setDuration(0)
+                                    .start();
+                        }
+                        else{
+
+                        }
+                        */
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        if(Math.abs(baseX-event.getRawX())>20) {
+
+                            if (baseX > event.getRawX()) {
+                                if (pos == 0) {
+                                    jobs_view.animate()
+                                            .x(0 - 100)
+                                            .y(jobs_view.getY())
+                                            .scaleX(0.5f)
+                                            .scaleY(0.5f)
+                                            .setDuration(100)
+                                            .start();
+                                    free_view.animate()
+                                            .x(metrics.xdpi + 100)
+                                            .y(free_view.getY())
+                                            .scaleX(0.5f)
+                                            .scaleY(0.5f)
+                                            .setDuration(100)
+                                            .start();
+                                    vol_view.animate()
+                                            .x(metrics.xdpi / 2)
+                                            .y(vol_view.getY())
+                                            .scaleX(1f)
+                                            .scaleY(1f)
+                                            .setDuration(100)
+                                            .start();
+                                    vol_view.bringToFront();
+                                    pos = -1;
+                                } else if (pos == 1) {
+                                    jobs_view.animate()
+                                            .x(metrics.xdpi / 2)
+                                            .y(jobs_view.getY())
+                                            .scaleX(1f)
+                                            .scaleY(1f)
+                                            .setDuration(100)
+                                            .start();
+                                    jobs_view.bringToFront();
+                                    free_view.animate()
+                                            .x(0 - 100)
+                                            .y(free_view.getY())
+                                            .scaleX(0.5f)
+                                            .scaleY(0.5f)
+                                            .setDuration(100)
+                                            .start();
+                                    vol_view.animate()
+                                            .x(metrics.xdpi + 100)
+                                            .y(vol_view.getY())
+                                            .scaleX(0.5f)
+                                            .scaleY(0.5f)
+                                            .setDuration(100)
+                                            .start();
+
+
+                                    pos = 0;
+
+                                }else if(pos==-1){
+                                    vol_view.animate()
+                                            .x(0 - 100)
+                                            .y(vol_view.getY())
+                                            .scaleX(0.5f)
+                                            .scaleY(0.5f)
+                                            .setDuration(100)
+                                            .start();
+                                    jobs_view.animate()
+                                            .x(metrics.xdpi + 100)
+                                            .y(jobs_view.getY())
+                                            .scaleX(0.5f)
+                                            .scaleY(0.5f)
+                                            .setDuration(100)
+                                            .start();
+                                    free_view.animate()
+                                            .x(metrics.xdpi / 2)
+                                            .y(free_view.getY())
+                                            .scaleX(1f)
+                                            .scaleY(1f)
+                                            .setDuration(100)
+                                            .start();
+                                    free_view.bringToFront();
+                                            pos=1;
+
+                                }
+                            } else {
+                                if (pos == 0) {
+                                    jobs_view.animate()
+                                            .x(metrics.xdpi)
+                                            .y(jobs_view.getY())
+                                            .scaleX(0.5f)
+                                            .scaleY(0.5f)
+                                            .setDuration(100)
+                                            .start();
+                                    pos = 1;
+
+                                } else if (pos == -1) {
+                                    jobs_view.animate()
+                                            .x(metrics.xdpi / 2)
+                                            .y(jobs_view.getY())
+                                            .scaleX(1f)
+                                            .scaleY(1f)
+                                            .setDuration(100)
+                                            .start();
+                                    pos = 0;
+
+                                }
+
+                            }
+                        }
+                            break;
+
+                    default:
+                        return false;
+                }
+                return true;
+            }
+        };
+
+    dragger.setOnTouchListener(listener);
+    }
+
+    }

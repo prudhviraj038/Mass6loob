@@ -26,318 +26,321 @@
         android:textColor="#FFFFFF"
         android:textSize="26dp" />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/sliding_layer">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="250dp"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
+            android:visibility="visible"
+            android:layout_marginTop="10dp"
+            android:layout_centerInParent="true"
+            android:id="@+id/jobs_view">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="250dp"
+                android:layout_height="0dp"
+                android:background="#FFFFFF"
+                android:gravity="center_horizontal|bottom"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:showDividers="beginning|middle|end"
+                android:layout_weight="1" >
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:id="@+id/imageView40"
+                    android:src="@drawable/find_jobs" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Find Jobs"
+                    android:id="@+id/textView18"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:layout_marginTop="20dp" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:background="@drawable/homea_rounded_corners"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:id="@+id/recruit_ll" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="RECRUIT"
+                        android:id="@+id/textView19"
+                        android:textColor="#FFFFFF" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:background="@drawable/homeb_rounded_corners"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/post_my_cv_ll" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="POST YOUR CV"
+                        android:id="@+id/textView20"
+                        android:textColor="#FFFFFF" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content" >
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView41"
+                    android:src="@drawable/shadow_drop"
+                    android:adjustViewBounds="true" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="250dp"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:visibility="visible"
+            android:layout_centerInParent="true"
+            android:id="@+id/free_view">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="250dp"
+                android:layout_height="0dp"
+                android:background="#FFFFFF"
+                android:gravity="center_horizontal|bottom"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:showDividers="beginning|middle|end"
+                android:layout_weight="1" >
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:id="@+id/imageView42"
+                    android:src="@drawable/find_jobs" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Free Lancer"
+                    android:id="@+id/textView21"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:layout_marginTop="20dp" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:background="@drawable/homea_rounded_corners"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:id="@+id/lancer_register" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="REGISTER"
+                        android:id="@+id/textView22"
+                        android:textColor="#FFFFFF" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:background="@drawable/homeb_rounded_corners"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/post_my_cv" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="POST MY CV"
+                        android:id="@+id/textView23"
+                        android:textColor="#FFFFFF" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content" >
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView43"
+                    android:src="@drawable/shadow_drop"
+                    android:adjustViewBounds="true" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="250dp"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:visibility="visible"
+            android:layout_centerInParent="true"
+            android:id="@+id/volunteers_view">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="250dp"
+                android:layout_height="0dp"
+                android:background="#FFFFFF"
+                android:gravity="center_horizontal|bottom"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:showDividers="beginning|middle|end"
+                android:layout_weight="1" >
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:id="@+id/imageView38"
+                    android:src="@drawable/find_jobs" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Volunteers"
+                    android:id="@+id/textView15"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:layout_marginTop="20dp" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:background="@drawable/homea_rounded_corners"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:id="@+id/volunteer_register" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="REGISTER"
+                        android:id="@+id/textView16"
+                        android:textColor="#FFFFFF" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:background="@drawable/homeb_rounded_corners"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/volunteer_postcv" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="POST YOUR CV"
+                        android:id="@+id/textView17"
+                        android:textColor="#FFFFFF" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content" >
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView39"
+                    android:src="@drawable/shadow_drop"
+                    android:adjustViewBounds="true" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:id="@+id/horizontalScrollView"
-        android:layout_weight="1" >
+        android:layout_weight="1"
+        android:visibility="gone">
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_horizontal"
-                android:layout_marginTop="40dp"
-                android:layout_marginBottom="10dp"
-                android:visibility="visible"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp">
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="250dp"
-                    android:layout_height="0dp"
-                    android:background="#FFFFFF"
-                    android:gravity="center_horizontal|bottom"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:showDividers="beginning|middle|end"
-                    android:layout_weight="1" >
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
-
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:id="@+id/imageView42"
-                        android:src="@drawable/find_jobs" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Free Lancer"
-                        android:id="@+id/textView21"
-                        android:textColor="#000000"
-                        android:textSize="20sp"
-                        android:layout_marginTop="20dp" />
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:background="@drawable/homea_rounded_corners"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:id="@+id/lancer_register" >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="REGISTER"
-                            android:id="@+id/textView22"
-                            android:textColor="#FFFFFF" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:background="@drawable/homeb_rounded_corners"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginTop="5dp"
-                        android:id="@+id/post_my_cv" >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="POST MY CV"
-                            android:id="@+id/textView23"
-                            android:textColor="#FFFFFF" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="250dp"
-                    android:layout_height="wrap_content" >
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/imageView43"
-                        android:src="@drawable/shadow_drop"
-                        android:adjustViewBounds="true" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_horizontal"
-                android:layout_marginTop="40dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:visibility="visible">
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="250dp"
-                    android:layout_height="0dp"
-                    android:background="#FFFFFF"
-                    android:gravity="center_horizontal|bottom"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:showDividers="beginning|middle|end"
-                    android:layout_weight="1" >
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
-
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:id="@+id/imageView40"
-                        android:src="@drawable/find_jobs" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Find Jobs"
-                        android:id="@+id/textView18"
-                        android:textColor="#000000"
-                        android:textSize="20sp"
-                        android:layout_marginTop="20dp" />
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:background="@drawable/homea_rounded_corners"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:id="@+id/recruit_ll" >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="RECRUIT"
-                            android:id="@+id/textView19"
-                            android:textColor="#FFFFFF" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:background="@drawable/homeb_rounded_corners"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginTop="5dp"
-                        android:id="@+id/post_my_cv_ll" >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="POST YOUR CV"
-                            android:id="@+id/textView20"
-                            android:textColor="#FFFFFF" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="250dp"
-                    android:layout_height="wrap_content" >
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/imageView41"
-                        android:src="@drawable/shadow_drop"
-                        android:adjustViewBounds="true" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_horizontal"
-                android:layout_marginTop="40dp"
-                android:layout_marginBottom="10dp"
-                android:visibility="visible"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp" >
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="250dp"
-                    android:layout_height="0dp"
-                    android:background="#FFFFFF"
-                    android:gravity="center_horizontal|bottom"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:showDividers="beginning|middle|end"
-                    android:layout_weight="1" >
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
-
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:id="@+id/imageView38"
-                        android:src="@drawable/find_jobs" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Volunteers"
-                        android:id="@+id/textView15"
-                        android:textColor="#000000"
-                        android:textSize="20sp"
-                        android:layout_marginTop="20dp" />
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:background="@drawable/homea_rounded_corners"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:id="@+id/volunteer_register" >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="REGISTER"
-                            android:id="@+id/textView16"
-                            android:textColor="#FFFFFF" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:background="@drawable/homeb_rounded_corners"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginTop="5dp"
-                        android:id="@+id/volunteer_postcv" >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="POST YOUR CV"
-                            android:id="@+id/textView17"
-                            android:textColor="#FFFFFF" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="250dp"
-                    android:layout_height="wrap_content" >
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/imageView39"
-                        android:src="@drawable/shadow_drop"
-                        android:adjustViewBounds="true" />
-                </LinearLayout>
-            </LinearLayout>
-
-        </LinearLayout>
     </HorizontalScrollView>
 
     <LinearLayout
