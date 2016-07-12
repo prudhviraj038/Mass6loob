@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -25,6 +26,22 @@ public class Home_Activity extends Activity {
     ArrayList<LinearLayout> views;
     ArrayList<Float> positions;
     int pos=0;
+    TextView heading,sub_heading;
+
+    private void set_heading(){
+        if(pos==0) {
+            heading.setText("Searching for Job?");
+            sub_heading.setText("We Made it Simple!");
+        }else if(pos == -1){
+            heading.setText("Searching for Volunters?");
+            sub_heading.setText("We Made it Simple!");
+
+        }else if(pos ==1){
+            heading.setText("Searching for Freelancers?");
+            sub_heading.setText("We Made it Simple!");
+
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +53,8 @@ public class Home_Activity extends Activity {
         jobs_view = (LinearLayout) findViewById(R.id.jobs_view);
         free_view = (LinearLayout) findViewById(R.id.free_view);
         vol_view = (LinearLayout) findViewById(R.id.volunteers_view);
-
+        heading = (TextView) findViewById(R.id.heading);
+        sub_heading = (TextView) findViewById(R.id.sub_heading);
         recruit = (LinearLayout) findViewById(R.id.recruit_ll);
         recruit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,7 +110,34 @@ public class Home_Activity extends Activity {
             jobX=jobs_view.getX();
             jobY=jobs_view.getY();
         Log.e("jobx",String.valueOf(jobs_view.getX()));
-        Log.e("joby",String.valueOf(jobs_view.getY()));
+        Log.e("joby", String.valueOf(jobs_view.getY()));
+
+        jobs_view.animate()
+                .x(metrics.xdpi / 2)
+                .y(jobs_view.getY())
+                .scaleX(1f)
+                .scaleY(1f)
+                .setDuration(500)
+                .start();
+        jobs_view.bringToFront();
+        free_view.animate()
+                .x(0 - 100)
+                .y(free_view.getY())
+                .scaleX(0.5f)
+                .scaleY(0.5f)
+                .setDuration(500)
+                .start();
+        vol_view.animate()
+                .x(metrics.xdpi + 100)
+                .y(vol_view.getY())
+                .scaleX(0.5f)
+                .scaleY(0.5f)
+                .setDuration(500)
+                .start();
+
+
+        pos = 0;
+            set_heading();
 
     }
 
@@ -137,31 +182,33 @@ public class Home_Activity extends Activity {
                                             .y(jobs_view.getY())
                                             .scaleX(0.5f)
                                             .scaleY(0.5f)
-                                            .setDuration(100)
+                                            .setDuration(500)
                                             .start();
                                     free_view.animate()
                                             .x(metrics.xdpi + 100)
                                             .y(free_view.getY())
                                             .scaleX(0.5f)
                                             .scaleY(0.5f)
-                                            .setDuration(100)
+                                            .setDuration(500)
                                             .start();
                                     vol_view.animate()
                                             .x(metrics.xdpi / 2)
                                             .y(vol_view.getY())
                                             .scaleX(1f)
                                             .scaleY(1f)
-                                            .setDuration(100)
+                                            .setDuration(500)
                                             .start();
                                     vol_view.bringToFront();
                                     pos = -1;
+                                    set_heading();
+
                                 } else if (pos == 1) {
                                     jobs_view.animate()
                                             .x(metrics.xdpi / 2)
                                             .y(jobs_view.getY())
                                             .scaleX(1f)
                                             .scaleY(1f)
-                                            .setDuration(100)
+                                            .setDuration(500)
                                             .start();
                                     jobs_view.bringToFront();
                                     free_view.animate()
@@ -169,18 +216,19 @@ public class Home_Activity extends Activity {
                                             .y(free_view.getY())
                                             .scaleX(0.5f)
                                             .scaleY(0.5f)
-                                            .setDuration(100)
+                                            .setDuration(500)
                                             .start();
                                     vol_view.animate()
                                             .x(metrics.xdpi + 100)
                                             .y(vol_view.getY())
                                             .scaleX(0.5f)
                                             .scaleY(0.5f)
-                                            .setDuration(100)
+                                            .setDuration(500)
                                             .start();
 
 
                                     pos = 0;
+                                    set_heading();
 
                                 }else if(pos==-1){
                                     vol_view.animate()
@@ -188,46 +236,108 @@ public class Home_Activity extends Activity {
                                             .y(vol_view.getY())
                                             .scaleX(0.5f)
                                             .scaleY(0.5f)
-                                            .setDuration(100)
+                                            .setDuration(500)
                                             .start();
                                     jobs_view.animate()
                                             .x(metrics.xdpi + 100)
                                             .y(jobs_view.getY())
                                             .scaleX(0.5f)
                                             .scaleY(0.5f)
-                                            .setDuration(100)
+                                            .setDuration(500)
                                             .start();
                                     free_view.animate()
                                             .x(metrics.xdpi / 2)
                                             .y(free_view.getY())
                                             .scaleX(1f)
                                             .scaleY(1f)
-                                            .setDuration(100)
+                                            .setDuration(500)
                                             .start();
                                     free_view.bringToFront();
                                             pos=1;
+                                    set_heading();
 
                                 }
                             } else {
+
                                 if (pos == 0) {
-                                    jobs_view.animate()
-                                            .x(metrics.xdpi)
+                                    vol_view.animate()
+                                            .x(0 - 100)
                                             .y(jobs_view.getY())
                                             .scaleX(0.5f)
                                             .scaleY(0.5f)
-                                            .setDuration(100)
+                                            .setDuration(500)
                                             .start();
-                                    pos = 1;
-
-                                } else if (pos == -1) {
                                     jobs_view.animate()
+                                            .x(metrics.xdpi + 100)
+                                            .y(free_view.getY())
+                                            .scaleX(0.5f)
+                                            .scaleY(0.5f)
+                                            .setDuration(500)
+                                            .start();
+                                    free_view.animate()
+                                            .x(metrics.xdpi / 2)
+                                            .y(vol_view.getY())
+                                            .scaleX(1f)
+                                            .scaleY(1f)
+                                            .setDuration(500)
+                                            .start();
+                                    free_view.bringToFront();
+                                    pos = 1;
+                                    set_heading();
+
+                                } else if (pos == 1) {
+                                    vol_view.animate()
                                             .x(metrics.xdpi / 2)
                                             .y(jobs_view.getY())
                                             .scaleX(1f)
                                             .scaleY(1f)
-                                            .setDuration(100)
+                                            .setDuration(500)
                                             .start();
-                                    pos = 0;
+                                    vol_view.bringToFront();
+                                    jobs_view.animate()
+                                            .x(0 - 100)
+                                            .y(free_view.getY())
+                                            .scaleX(0.5f)
+                                            .scaleY(0.5f)
+                                            .setDuration(500)
+                                            .start();
+                                    free_view.animate()
+                                            .x(metrics.xdpi + 100)
+                                            .y(vol_view.getY())
+                                            .scaleX(0.5f)
+                                            .scaleY(0.5f)
+                                            .setDuration(500)
+                                            .start();
+
+
+                                    pos = -1;
+                                    set_heading();
+
+                                }else if(pos==-1){
+                                    free_view.animate()
+                                            .x(0 - 100)
+                                            .y(vol_view.getY())
+                                            .scaleX(0.5f)
+                                            .scaleY(0.5f)
+                                            .setDuration(500)
+                                            .start();
+                                    vol_view.animate()
+                                            .x(metrics.xdpi + 100)
+                                            .y(jobs_view.getY())
+                                            .scaleX(0.5f)
+                                            .scaleY(0.5f)
+                                            .setDuration(500)
+                                            .start();
+                                    jobs_view.animate()
+                                            .x(metrics.xdpi / 2)
+                                            .y(free_view.getY())
+                                            .scaleX(1f)
+                                            .scaleY(1f)
+                                            .setDuration(500)
+                                            .start();
+                                    jobs_view.bringToFront();
+                                    pos=0;
+                                    set_heading();
 
                                 }
 

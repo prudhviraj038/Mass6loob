@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Searching for Job?"
-        android:id="@+id/textView13"
+        android:id="@+id/heading"
         android:layout_gravity="center_horizontal"
         android:textColor="#FFFFFF"
         android:textSize="26sp"
@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="We Made it Simple!"
-        android:id="@+id/textView13g"
+        android:id="@+id/sub_heading"
         android:layout_gravity="center_horizontal"
         android:textColor="#FFFFFF"
         android:textSize="26dp" />
