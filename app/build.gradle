@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.mass6loob.app.mass6loob"
-        minSdkVersion 14
+        minSdkVersion 15
         targetSdkVersion 21
         versionCode 1
         versionName "1.0"
@@ -18,11 +18,16 @@ android {
         }
     }
 }
-
+repositories {
+    maven {
+        url "https://jitpack.io"
+    }
+}
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:24.0.0-alpha2'
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.github.hanks-zyh:SmallBang:2630e8113b'
     compile files('libs/volley.jar')
     compile files('libs/gcm.jar')
 }

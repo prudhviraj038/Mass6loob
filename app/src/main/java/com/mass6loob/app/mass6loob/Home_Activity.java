@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import xyz.hanks.library.SmallBang;
+
 /**
  * Created by sriven on 6/21/2016.
  */
@@ -27,6 +29,7 @@ public class Home_Activity extends Activity {
     ArrayList<Float> positions;
     int pos=0;
     TextView heading,sub_heading;
+    SmallBang smallBang;
 
     private void set_heading(){
         if(pos==0) {
@@ -42,11 +45,17 @@ public class Home_Activity extends Activity {
 
         }
     }
+    int distance;
+    float scale;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Settings.forceRTLIfSupported(this);
         setContentView(R.layout.home_page);
+        smallBang = SmallBang.attach2Window(this);
+         distance = 300;
+         scale = getResources().getDisplayMetrics().density;
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         Log.d("ApplicationTagName", "Display width in px is " + metrics.widthPixels);
         slidingpanel = (RelativeLayout) findViewById(R.id.sliding_layer);
@@ -108,7 +117,7 @@ public class Home_Activity extends Activity {
 
         setonTounch(slidingpanel);
             jobX=jobs_view.getX();
-            jobY=jobs_view.getY();
+        jobY = jobs_view.getY();
         Log.e("jobx",String.valueOf(jobs_view.getX()));
         Log.e("joby", String.valueOf(jobs_view.getY()));
 
@@ -127,6 +136,7 @@ public class Home_Activity extends Activity {
                 .scaleY(0.5f)
                 .setDuration(500)
                 .start();
+
         vol_view.animate()
                 .x(metrics.xdpi + 100)
                 .y(vol_view.getY())
@@ -198,7 +208,10 @@ public class Home_Activity extends Activity {
                                             .scaleY(1f)
                                             .setDuration(500)
                                             .start();
+                                  //  smallBang.bang(vol_view);
+
                                     vol_view.bringToFront();
+
                                     pos = -1;
                                     set_heading();
 
