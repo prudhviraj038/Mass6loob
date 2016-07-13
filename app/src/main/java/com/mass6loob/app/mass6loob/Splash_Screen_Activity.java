@@ -10,7 +10,7 @@ import android.widget.ImageView;
 /**
  * Created by sriven on 6/23/2016.
  */
-public class Splash_Screen_Activity extends Activity {
+public class Splash_Screen_Activity extends  RootActivity {
     ImageView english,arabic;
 
     protected void onCreate(Bundle savedInstanceState) {

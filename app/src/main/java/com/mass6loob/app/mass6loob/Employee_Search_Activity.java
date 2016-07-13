@@ -11,7 +11,7 @@ import android.widget.Toast;
 /**
  * Created by sriven on 6/21/2016.
  */
-public class Employee_Search_Activity extends Activity {
+public class Employee_Search_Activity extends  RootActivity {
     EditText jobtitle,experience,nationality,education;
     LinearLayout search;
     String title_str,expe_str,nation_str,edu_str;

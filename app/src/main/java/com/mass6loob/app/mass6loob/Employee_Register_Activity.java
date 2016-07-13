@@ -24,7 +24,7 @@ import java.net.URI;
 /**
  * Created by sriven on 6/21/2016.
  */
-public class Employee_Register_Activity extends Activity {
+public class Employee_Register_Activity extends  RootActivity{
     EditText username,jobtitle,experience,nationality,educatuionmasters,educationbachelors,location,gender,uploadcv,uploadimage;
     TextView reviewcv;
     LinearLayout submit;

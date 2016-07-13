@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * Created by sriven on 6/22/2016.
  */
-public class Volunteer_List_Activity extends Activity {
+public class Volunteer_List_Activity extends  RootActivity {
     ArrayList<User> users;
     VolunteerAdapter employees;
     ListView volunteerlist;

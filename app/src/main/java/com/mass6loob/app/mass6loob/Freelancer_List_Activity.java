@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * Created by sriven on 6/22/2016.
  */
-public class Freelancer_List_Activity extends Activity {
+public class Freelancer_List_Activity extends  RootActivity {
     ArrayList<Freelancer> freelancers;
     FreelancerAdapter employees;
     ListView users_list;

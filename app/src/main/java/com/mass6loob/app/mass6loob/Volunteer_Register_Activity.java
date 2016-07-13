@@ -11,7 +11,7 @@ import android.widget.Toast;
 /**
  * Created by sriven on 6/21/2016.
  */
-public class Volunteer_Register_Activity extends Activity {
+public class Volunteer_Register_Activity extends  RootActivity {
     EditText name,age,email,gender;
     LinearLayout signup;
     String name_str,age_str,email_str,gender_str;

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 /**
  * Created by sriven on 6/22/2016.
  */
-public class Users_List_Activity extends Activity {
+public class Users_List_Activity extends  RootActivity {
     ArrayList<User> users;
     UserAdapter employees;
     ListView userslist;

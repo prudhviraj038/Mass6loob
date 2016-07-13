@@ -17,7 +17,7 @@ import android.widget.Toast;
 /**
  * Created by sriven on 6/21/2016.
  */
-public class Volunteer_Company_Register_Activity extends Activity {
+public class Volunteer_Company_Register_Activity extends RootActivity {
     EditText companyname,password,intrestedin,establisheddate,area,companylogo,catagory;
     LinearLayout companysingup;
     String company_str,password_str,intrested_str,establish_str,area_str,logo_str;

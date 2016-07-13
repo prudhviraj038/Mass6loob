@@ -16,7 +16,7 @@ import android.widget.Toast;
 /**
  * Created by sriven on 6/22/2016.
  */
-public class Company_Register_Activity extends Activity {
+public class Company_Register_Activity extends  RootActivity {
     EditText uname,password,companyname,country,area,companylogo,aboutcompany;
     LinearLayout submit,signup;
     String uname_str,pwd_str,cname_str,country_str,area_str,companylogo_str,about_str;

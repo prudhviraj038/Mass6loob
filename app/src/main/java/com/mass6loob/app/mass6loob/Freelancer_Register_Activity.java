@@ -17,7 +17,7 @@ import android.widget.Toast;
 /**
  * Created by sriven on 6/21/2016.
  */
-public class Freelancer_Register_Activity extends Activity {
+public class Freelancer_Register_Activity extends RootActivity {
     EditText name,email,gender,age,nationality,fields,uploadlogo;
     ImageView wimage1,wimage2,wimage3,wimage4,wimage5,wimage6,wimage7,wimage8,wimage9,wimage10;
     ImageView temp;

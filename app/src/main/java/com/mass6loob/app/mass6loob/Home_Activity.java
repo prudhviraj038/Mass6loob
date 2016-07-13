@@ -13,23 +13,21 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import xyz.hanks.library.SmallBang;
+
 
 /**
  * Created by sriven on 6/21/2016.
  */
-public class Home_Activity extends Activity {
+public class Home_Activity extends RootActivity {
     LinearLayout recruit, postmycv;
     LinearLayout register, postmycv1;
     LinearLayout volunterregister, volunteercompanyregister;
     RelativeLayout slidingpanel;
     LinearLayout jobs_view,free_view,vol_view;
     DisplayMetrics metrics = new DisplayMetrics();
-    ArrayList<LinearLayout> views;
-    ArrayList<Float> positions;
+
     int pos=0;
     TextView heading,sub_heading;
-    SmallBang smallBang;
 
     private void set_heading(){
         if(pos==0) {
@@ -53,7 +51,7 @@ public class Home_Activity extends Activity {
         super.onCreate(savedInstanceState);
         Settings.forceRTLIfSupported(this);
         setContentView(R.layout.home_page);
-        smallBang = SmallBang.attach2Window(this);
+
          distance = 300;
          scale = getResources().getDisplayMetrics().density;
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
