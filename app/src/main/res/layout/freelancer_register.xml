@@ -125,7 +125,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/rounded_corners"
-                                android:gravity="center_vertical" >
+                                android:gravity="center_vertical"
+                                android:id="@+id/free_gender_ll">
 
                                 <ImageView
                                     android:layout_width="18dp"
@@ -140,7 +141,7 @@
                                     android:layout_width="15dp"
                                     android:layout_height="match_parent" />
 
-                                <EditText
+                                <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:id="@+id/free_gender"
@@ -148,7 +149,15 @@
                                     android:hint="Gender"
                                     android:textColorHint="@color/edit_text_hint_color"
                                     android:textSize="16sp"
-                                    android:textColor="@color/edit_text_text_color" />
+                                    android:textColor="@color/edit_text_text_color"
+                                    android:layout_weight="1" />
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/imageView23"
+                                    android:src="@drawable/ic_arrow"
+                                    android:adjustViewBounds="true" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -188,7 +197,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/rounded_corners"
-                                android:gravity="center_vertical" >
+                                android:gravity="center_vertical"
+                                android:id="@+id/free_nationality_ll">
 
                                 <ImageView
                                     android:layout_width="18dp"
@@ -203,7 +213,7 @@
                                     android:layout_width="15dp"
                                     android:layout_height="match_parent" />
 
-                                <EditText
+                                <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:id="@+id/free_nationality"
@@ -211,7 +221,15 @@
                                     android:hint="Nationality"
                                     android:textColorHint="@color/edit_text_hint_color"
                                     android:textSize="16sp"
-                                    android:textColor="@color/edit_text_text_color" />
+                                    android:textColor="@color/edit_text_text_color"
+                                    android:layout_weight="1" />
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/imageView24"
+                                    android:src="@drawable/ic_arrow"
+                                    android:adjustViewBounds="true" />
                             </LinearLayout>
 
                             <LinearLayout

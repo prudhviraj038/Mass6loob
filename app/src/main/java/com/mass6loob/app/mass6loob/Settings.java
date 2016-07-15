@@ -17,6 +17,7 @@ import java.util.Locale;
  */
 public class Settings {
     static String lan_key = "mass6loob_lan";
+    public static final String SERVERURL = "http://www.clients.yellowsoft.in/education/api/";
 
     public static void set_user_language(Context context,String user_id){
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);

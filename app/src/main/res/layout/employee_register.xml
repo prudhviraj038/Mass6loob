@@ -124,7 +124,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/rounded_corners"
-                                android:gravity="center_vertical" >
+                                android:gravity="center_vertical"
+                                android:id="@+id/emp_experience_ll">
 
                                 <ImageView
                                     android:layout_width="18dp"
@@ -139,8 +140,8 @@
                                     android:layout_width="15dp"
                                     android:layout_height="match_parent" />
 
-                                <EditText
-                                    android:layout_width="match_parent"
+                                <TextView
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:id="@+id/emp_experience"
                                     android:background="#00000000"
@@ -148,7 +149,15 @@
                                     android:textColorHint="@color/edit_text_hint_color"
                                     android:textSize="16sp"
                                     android:textColor="@color/edit_text_text_color"
-                                    android:inputType="number" />
+                                    android:inputType="number"
+                                    android:layout_weight="1" />
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/imageView13"
+                                    android:src="@drawable/ic_arrow"
+                                    android:adjustViewBounds="true" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -172,15 +181,23 @@
                                     android:layout_width="15dp"
                                     android:layout_height="match_parent" />
 
-                                <EditText
-                                    android:layout_width="match_parent"
+                                <TextView
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:id="@+id/emp_nationality"
                                     android:background="#00000000"
                                     android:hint="Nationality"
                                     android:textColorHint="@color/edit_text_hint_color"
                                     android:textSize="16sp"
-                                    android:textColor="@color/edit_text_text_color" />
+                                    android:textColor="@color/edit_text_text_color"
+                                    android:layout_weight="1" />
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/imageView14"
+                                    android:src="@drawable/ic_arrow"
+                                    android:adjustViewBounds="true" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -205,14 +222,22 @@
                                     android:layout_height="match_parent" />
 
                                 <EditText
-                                    android:layout_width="match_parent"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:id="@+id/emp_edu_bachelors"
                                     android:background="#00000000"
                                     android:hint="Education (Bachelors)"
                                     android:textColorHint="@color/edit_text_hint_color"
                                     android:textSize="16sp"
-                                    android:textColor="@color/edit_text_text_color" />
+                                    android:textColor="@color/edit_text_text_color"
+                                    android:layout_weight="1" />
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/imageView16"
+                                    android:src="@drawable/ic_arrow"
+                                    android:adjustViewBounds="true" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -237,14 +262,22 @@
                                     android:layout_height="match_parent" />
 
                                 <EditText
-                                    android:layout_width="match_parent"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:id="@+id/emp_edu_masters"
                                     android:background="#00000000"
                                     android:hint="Education (Masters)"
                                     android:textColorHint="@color/edit_text_hint_color"
                                     android:textSize="16sp"
-                                    android:textColor="@color/edit_text_text_color" />
+                                    android:textColor="@color/edit_text_text_color"
+                                    android:layout_weight="1" />
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/imageView17"
+                                    android:src="@drawable/ic_arrow"
+                                    android:adjustViewBounds="true" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -268,15 +301,23 @@
                                     android:layout_width="15dp"
                                     android:layout_height="match_parent" />
 
-                                <EditText
-                                    android:layout_width="match_parent"
+                                <TextView
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:id="@+id/emp_gender"
                                     android:background="#00000000"
                                     android:hint="Gender"
                                     android:textColorHint="@color/edit_text_hint_color"
                                     android:textSize="16sp"
-                                    android:textColor="@color/edit_text_text_color" />
+                                    android:textColor="@color/edit_text_text_color"
+                                    android:layout_weight="1" />
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/imageView18"
+                                    android:src="@drawable/ic_arrow"
+                                    android:adjustViewBounds="true" />
                             </LinearLayout>
 
                             <LinearLayout

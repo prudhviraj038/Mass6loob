@@ -2,6 +2,7 @@ package com.mass6loob.app.mass6loob;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,16 +67,16 @@ public class UserAdapter extends BaseAdapter{
         holder.gender=(TextView) rowView.findViewById(R.id.gender_ll);
         holder.location=(TextView) rowView.findViewById(R.id.location_ll);
         holder.description=(TextView) rowView.findViewById(R.id.description_ll);
-
-         Picasso.with(context).load(users.get(position).userimage).into(holder.userimage);
-         holder.userid.setText(users.get(position).userid);
-         holder.jobtitle.setText(users.get(position).jobtitle);
-         holder.experience.setText(users.get(position).experience);
-         holder.education.setText(users.get(position).education);
-         holder.nationality.setText(users.get(position).nationality);
-         holder.gender.setText(users.get(position).gender);
-         holder.location.setText(users.get(position).location);
-         holder.description.setText(users.get(position).description);
+//Log.e("image",users.get(position).userimage);
+    //     Picasso.with(context).load(users.get(position).userimage).into(holder.userimage);
+//         holder.userid.setText(users.get(position).userid);
+  //       holder.jobtitle.setText(users.get(position).jobtitle);
+    //     holder.experience.setText(users.get(position).experience);
+      //   holder.education.setText(users.get(position).education);
+        // holder.nationality.setText(users.get(position).nationality);
+        // holder.gender.setText(users.get(position).gender);
+         //holder.location.setText(users.get(position).location);
+         //holder.description.setText(users.get(position).description);
 
 
         return rowView;
