@@ -38,17 +38,23 @@ import java.util.ArrayList;
  * Created by sriven on 6/21/2016.
  */
 public class Employee_Register_Activity extends  RootActivity{
-    EditText username,jobtitle,educatuionmasters,educationbachelors,location,uploadcv,uploadimage;
-    TextView reviewcv,nationality,experience,gender;
+    EditText username,jobtitle,location,uploadcv,uploadimage;
+    TextView reviewcv,nationality,experience,gender,educationmasters,educationbachelors;
     LinearLayout submit;
     String user_str,job_str,exp_str,nationality_str,edumasters_str,edubachelors_str,location_str,gender_str,uploadcv_str,uploadimage_str;
     String exp_id = "0";
     String nation_id = "0";
+    String edub_id = "0";
+    String edum_id = "0";
     ArrayList<String>gen_title;
     ArrayList<String>exps_id;
     ArrayList<String>exps_title;
     ArrayList<String>nations_id;
     ArrayList<String>nations_title;
+    ArrayList<String>edubs_id;
+    ArrayList<String>edubs_title;
+    ArrayList<String>edums_id;
+    ArrayList<String>edums_title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,14 +65,16 @@ public class Employee_Register_Activity extends  RootActivity{
         gen_title = new   ArrayList<String>();
         exps_title = new ArrayList<String>();
         nations_title = new ArrayList<String>();
+        edubs_title = new ArrayList<String>();
+        edums_title = new ArrayList<String>();
         gen_title.add("Male");
         gen_title.add("Female");
         username = (EditText)findViewById(R.id.user_name);
         jobtitle = (EditText)findViewById(R.id.job_title);
         experience = (TextView)findViewById(R.id.emp_experience);
         nationality = (TextView)findViewById(R.id.emp_nationality);
-        educationbachelors = (EditText)findViewById(R.id.emp_edu_bachelors);
-        educatuionmasters = (EditText)findViewById(R.id.emp_edu_masters);
+        educationbachelors = (TextView)findViewById(R.id.emp_edu_bachelors);
+        educationmasters = (TextView)findViewById(R.id.emp_edu_masters);
         location = (EditText)findViewById(R.id.emp_location);
         gender = (TextView)findViewById(R.id.emp_gender);
         uploadcv = (EditText)findViewById(R.id.emp_cv_l);
@@ -118,6 +126,55 @@ public class Employee_Register_Activity extends  RootActivity{
         });
         get_experience();
 
+        LinearLayout emp_education_bach = (LinearLayout)findViewById(R.id.emp_bachelors_ll);
+        emp_education_bach.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Employee_Register_Activity.this);
+                builder.setTitle("CHOOSE EDUCATION");
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(Employee_Register_Activity.this, android.R.layout.select_dialog_item, edubs_title);
+                builder.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Toast.makeText(ChooseSubjectActivity.this, sub_title.get(which), Toast.LENGTH_SHORT).show();
+                        edub_id = edubs_id.get(which);
+                        educationbachelors.setText(edubs_title.get(which));
+
+                    }
+                });
+
+                final AlertDialog dialog = builder.create();
+                dialog.getWindow().getAttributes().windowAnimations = R.style.PauseDialogAnimation;
+                dialog.show();
+            }
+        });
+        get_edu_bachelors();
+
+        LinearLayout emp_education_masters = (LinearLayout)findViewById(R.id.emp_masters_ll);
+        emp_education_masters.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Employee_Register_Activity.this);
+                builder.setTitle("CHOOSE EDUCATION");
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(Employee_Register_Activity.this, android.R.layout.select_dialog_item, edums_title);
+                builder.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Toast.makeText(ChooseSubjectActivity.this, sub_title.get(which), Toast.LENGTH_SHORT).show();
+                        edum_id = edums_id.get(which);
+                        educationmasters.setText(edums_title.get(which));
+
+                    }
+                });
+
+                final AlertDialog dialog = builder.create();
+                dialog.getWindow().getAttributes().windowAnimations = R.style.PauseDialogAnimation;
+                dialog.show();
+            }
+        });
+        get_edu_masters();
+
+
         LinearLayout emp_gender = (LinearLayout)findViewById(R.id.emp_gender_ll);
         emp_gender.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,7 +222,7 @@ public class Employee_Register_Activity extends  RootActivity{
                 job_str = jobtitle.getText().toString();
                 exp_str = experience.getText().toString();
                 nationality_str = nationality.getText().toString();
-                edumasters_str = educatuionmasters.getText().toString();
+                edumasters_str = educationmasters.getText().toString();
                 edubachelors_str = educationbachelors.getText().toString();
                 location_str = location.getText().toString();
                 gender_str = gender.getText().toString();
@@ -323,5 +380,78 @@ public class Employee_Register_Activity extends  RootActivity{
 
         });
     }
+    private void get_edu_bachelors() {
+        String url = Settings.SERVERURL + "levels.php";
+        Log.e("url--->", url);
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Please wait....");
+        progressDialog.setCancelable(false);
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
+            @Override
+            public void onResponse(JSONObject jsonObject) {
+                progressDialog.dismiss();
+                Log.e("response is: ", jsonObject.toString());
+                try {
+                    JSONArray jsonArray = jsonObject.getJSONArray("levels");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject sub = jsonArray.getJSONObject(i);
+                        String edub_title = sub.getString("title");
+                        String edub_id = sub.getString("id");
+                        edubs_id.add(edub_id);
+                        edubs_title.add(edub_title);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // TODO Auto-generated method stub
+                Log.e("response is:", error.toString());
+                Toast.makeText(Employee_Register_Activity.this, "Server not connected", Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+            }
+
+        });
+    }
+    private void get_edu_masters() {
+        String url = Settings.SERVERURL + "levels.php";
+        Log.e("url--->", url);
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Please wait....");
+        progressDialog.setCancelable(false);
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject jsonObject) {
+                progressDialog.dismiss();
+                Log.e("response is: ", jsonObject.toString());
+                try {
+                    JSONArray jsonArray = jsonObject.getJSONArray("levels");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject sub = jsonArray.getJSONObject(i);
+                        String edum_title = sub.getString("title");
+                        String edum_id = sub.getString("id");
+                        edums_id.add(edum_id);
+                        edums_title.add(edum_title);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // TODO Auto-generated method stub
+                Log.e("response is:", error.toString());
+                Toast.makeText(Employee_Register_Activity.this, "Server not connected", Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+            }
+
+        });
+    }
 }

@@ -221,7 +221,7 @@
                                     android:layout_width="15dp"
                                     android:layout_height="match_parent" />
 
-                                <EditText
+                                <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:id="@+id/emp_edu_bachelors"
@@ -261,7 +261,7 @@
                                     android:layout_width="15dp"
                                     android:layout_height="match_parent" />
 
-                                <EditText
+                                <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:id="@+id/emp_edu_masters"
