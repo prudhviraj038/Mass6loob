@@ -343,13 +343,14 @@
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:id="@+id/com_login_ll">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Login Here"
-                            android:id="@+id/textView3"
+                            android:id="@+id/com_login_here"
                             android:textColor="#FFFFFF" />
 
                         <LinearLayout

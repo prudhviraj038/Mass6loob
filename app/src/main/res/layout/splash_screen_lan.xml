@@ -4,8 +4,8 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <ImageView
             android:layout_width="match_parent"
@@ -13,17 +13,6 @@
             android:id="@+id/imageView44"
             android:src="@drawable/app_bg_blue"
             android:scaleType="centerCrop" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Skip"
-            android:id="@+id/skip"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="25dp"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -46,6 +35,28 @@
                 android:adjustViewBounds="true" />
         </LinearLayout>
 
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/image_english"
+                android:src="@drawable/ic_english"
+                android:adjustViewBounds="true"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/image_arabic"
+                android:src="@drawable/ic_others"
+                android:adjustViewBounds="true"
+                android:layout_weight="1" />
+        </LinearLayout>
     </RelativeLayout>
 
 </LinearLayout>

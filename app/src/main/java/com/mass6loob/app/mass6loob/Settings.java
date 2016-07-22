@@ -17,7 +17,11 @@ import java.util.Locale;
  */
 public class Settings {
     static String lan_key = "mass6loob_lan";
-    public static final String SERVERURL = "http://www.clients.yellowsoft.in/education/api/";
+    public static final String SERVERURL = "http://clients.yellowsoft.in/ma6loob/api/";
+
+    public static final String USERID = "massloob_id";
+    public static final String NAME = "employee_name";
+    static String Deli_charges="delivery_charge";
 
     public static void set_user_language(Context context,String user_id){
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -78,5 +82,27 @@ public class Settings {
 
     static SharedPreferences sharedPreferences;
 
+    public static void set_Is_first_time(Context context, String deli_charges) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(Deli_charges, deli_charges);
+        editor.commit();
+    }
+    public static String get_Is_first_time(Context context) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return sharedPreferences.getString(Deli_charges, "-1");
+    }
+    public static void setUserid(Context context, String member_id, String name) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(USERID, member_id);
+        editor.putString(NAME, name);
+        editor.commit();
+    }
 
+    public static String getUserid(Context context) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return sharedPreferences.getString(USERID, "-1");
+
+    }
 }

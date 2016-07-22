@@ -36,7 +36,7 @@ import java.util.ArrayList;
 public class Company_Register_Activity extends  RootActivity {
     EditText uname,password,companyname,area,companylogo,aboutcompany;
     TextView country;
-    LinearLayout submit,signup;
+    LinearLayout submit,signup,loginhere;
     LinearLayout country_ll;
     String uname_str,pwd_str,cname_str,country_str,area_str,companylogo_str,about_str;
     String country_id="0";
@@ -55,6 +55,27 @@ public class Company_Register_Activity extends  RootActivity {
         country = (TextView)findViewById(R.id.company_country);
         country_ll =(LinearLayout)findViewById(R.id.company_country_ll);
         area= (EditText)findViewById(R.id.company_area);
+        loginhere = (LinearLayout)findViewById(R.id.com_login_ll);
+        loginhere.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Company_Register_Activity.this,Login_Activity.class);
+                startActivity(intent);
+
+            }
+        });
+        signup= (LinearLayout)findViewById(R.id.c_singup_ll);
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Company_Register_Activity.this,Signup_Screen_Activity.class);
+                startActivity(intent);
+
+            }
+        });
+
+
+
         coun_title=new ArrayList<String>();
         companylogo= (EditText)findViewById(R.id.upload_logo);
         companylogo.setOnClickListener(new View.OnClickListener() {
@@ -64,6 +85,7 @@ public class Company_Register_Activity extends  RootActivity {
                 startActivityForResult(i, RESULT_LOAD_IMAGE);
             }
         });
+
         country_ll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,15 +146,6 @@ public class Company_Register_Activity extends  RootActivity {
                     Toast.makeText(Company_Register_Activity.this, "Registered Succesfully", Toast.LENGTH_SHORT).show();
                 }
 
-                signup= (LinearLayout)findViewById(R.id.c_singup_ll);
-                signup.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(Company_Register_Activity.this,Employee_Search_Activity.class);
-                        startActivity(intent);
-
-                    }
-                });
 
             }
         });
