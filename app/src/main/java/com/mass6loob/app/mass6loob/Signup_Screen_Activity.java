@@ -13,8 +13,10 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -48,8 +50,8 @@ public class Signup_Screen_Activity extends Activity {
     private void register() {
         String name_str = name.getText().toString();
         String pwdss_str = password.getText().toString();
-        String email_str = name.getText().toString();
-        String phn_str = name.getText().toString();
+        String email_str = email.getText().toString();
+        String phn_str = phone.getText().toString();
 
         if (name_str.equals(""))
             Toast.makeText(Signup_Screen_Activity.this, "Pls_ent_username", Toast.LENGTH_SHORT).show();
@@ -73,20 +75,21 @@ public class Signup_Screen_Activity extends Activity {
             final ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setMessage("Please wait....");
             progressDialog.setCancelable(false);
-            JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            progressDialog.show();
+            JsonArrayRequest jsonArrayRequest = new JsonArrayRequest( url, new Response.Listener<JSONArray>() {
 
                 @Override
-                public void onResponse(JSONObject jsonObject) {
+                public void onResponse(JSONArray jsonArray) {
                     progressDialog.dismiss();
-                    Log.e("response is: ", jsonObject.toString());
+                    Log.e("response is: ", jsonArray.toString());
                     try {
-                        String reply = jsonObject.getJSONArray("response").getJSONObject(0).getString("status");
-                        if (reply.equals("Failure")) {
-                            String msg = jsonObject.getJSONArray("response").getJSONObject(0).getString("message");
+                        String reply = jsonArray.getJSONObject(0).getString("status");
+                        if (reply.equals("Failed")) {
+                            String msg = jsonArray.getJSONObject(0).getString("message");
                             Toast.makeText(Signup_Screen_Activity.this, msg, Toast.LENGTH_SHORT).show();
                         } else {
-                            String mem_id = jsonObject.getJSONArray("response").getJSONObject(0).getString("member_id");
-                            String name = jsonObject.getJSONArray("response").getJSONObject(0).getString("name");
+                            String mem_id = jsonArray.getJSONObject(0).getString("member_id");
+                            String name = jsonArray.getJSONObject(0).getString("member_id");
                             Settings.setUserid(Signup_Screen_Activity.this, mem_id, name);
                             Intent mainIntent = new Intent(getApplicationContext(), Employee_Search_Activity.class);
                             mainIntent.putExtra("uid", mem_id);
@@ -112,7 +115,7 @@ public class Signup_Screen_Activity extends Activity {
             });
 
 // Access the RequestQueue through your singleton class.
-            AppController.getInstance().addToRequestQueue(jsObjRequest);
+            AppController.getInstance().addToRequestQueue(jsonArrayRequest);
 
         }
      }
