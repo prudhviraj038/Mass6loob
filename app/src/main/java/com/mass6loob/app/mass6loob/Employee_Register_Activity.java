@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONArray;
@@ -60,12 +61,14 @@ public class Employee_Register_Activity extends  RootActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Settings.forceRTLIfSupported(this);
-
         setContentView(R.layout.employee_register);
         gen_title = new   ArrayList<String>();
+        exps_id = new ArrayList<String>();
         exps_title = new ArrayList<String>();
         nations_title = new ArrayList<String>();
+        edubs_id = new ArrayList<String>();
         edubs_title = new ArrayList<String>();
+        edums_id = new ArrayList<String>();
         edums_title = new ArrayList<String>();
         gen_title.add("Male");
         gen_title.add("Female");
@@ -307,25 +310,24 @@ public class Employee_Register_Activity extends  RootActivity{
 
     }
     private void get_experience() {
-        String url = Settings.SERVERURL + "levels.php";
+        String url = Settings.SERVERURL + "experiences.php";
         Log.e("url--->", url);
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please wait....");
         progressDialog.setCancelable(false);
-        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-
+        JsonArrayRequest jsObjRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
             @Override
-            public void onResponse(JSONObject jsonObject) {
+            public void onResponse(JSONArray jsonObject) {
                 progressDialog.dismiss();
                 Log.e("response is: ", jsonObject.toString());
                 try {
-                    JSONArray jsonArray = jsonObject.getJSONArray("levels");
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject sub = jsonArray.getJSONObject(i);
-                        String exp_num = sub.getString("title");
+
+                    for (int i = 0; i < jsonObject.length(); i++) {
+                        JSONObject sub = jsonObject.getJSONObject(i);
+                        String exp_name = sub.getString("title"+Settings.get_lan(Employee_Register_Activity.this));
                         String exp_id = sub.getString("id");
                         exps_id.add(exp_id);
-                        exps_title.add(exp_num);
+                        exps_title.add(exp_name);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -342,64 +344,54 @@ public class Employee_Register_Activity extends  RootActivity{
             }
 
         });
+        AppController.getInstance().addToRequestQueue(jsObjRequest);
+
     }
     private void get_nationality() {
-        String url = Settings.SERVERURL + "levels.php";
-        Log.e("url--->", url);
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Please wait....");
-        progressDialog.setCancelable(false);
-        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-
+        String url = "https://restcountries.eu/rest/v1/all";
+        JsonArrayRequest jsObjRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
             @Override
-            public void onResponse(JSONObject jsonObject) {
-                progressDialog.dismiss();
-                Log.e("response is: ", jsonObject.toString());
-                try {
-                    JSONArray jsonArray = jsonObject.getJSONArray("levels");
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject sub = jsonArray.getJSONObject(i);
-                        String nation_name = sub.getString("title");
-                        String nation_id = sub.getString("id");
-                        nations_id.add(nation_id);
-                        nations_title.add(nation_name);
+            public void onResponse(JSONArray jsonObject) {
+                for (int i=0;i<jsonObject.length();i++){
+                    try {
+                        nations_title.add(jsonObject.getJSONObject(i).getString("demonym"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
+
+
             }
         }, new Response.ErrorListener() {
-
             @Override
             public void onErrorResponse(VolleyError error) {
                 // TODO Auto-generated method stub
                 Log.e("response is:", error.toString());
-                Toast.makeText(Employee_Register_Activity.this, "Server not connected", Toast.LENGTH_SHORT).show();
-                progressDialog.dismiss();
+                Toast.makeText(Employee_Register_Activity.this, "cant_rech_server",Toast.LENGTH_SHORT).show();
             }
-
         });
+        AppController.getInstance().addToRequestQueue(jsObjRequest);
     }
+
     private void get_edu_bachelors() {
-        String url = Settings.SERVERURL + "levels.php";
+        String url = Settings.SERVERURL + "degrees.php";
         Log.e("url--->", url);
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please wait....");
         progressDialog.setCancelable(false);
-        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-
+        JsonArrayRequest jsObjRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
             @Override
-            public void onResponse(JSONObject jsonObject) {
+            public void onResponse(JSONArray jsonObject) {
                 progressDialog.dismiss();
                 Log.e("response is: ", jsonObject.toString());
                 try {
-                    JSONArray jsonArray = jsonObject.getJSONArray("levels");
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject sub = jsonArray.getJSONObject(i);
-                        String edub_title = sub.getString("title");
-                        String edub_id = sub.getString("id");
-                        edubs_id.add(edub_id);
-                        edubs_title.add(edub_title);
+
+                    for (int i = 0; i < jsonObject.length(); i++) {
+                        JSONObject sub = jsonObject.getJSONObject(i);
+                        String exp_title = sub.getString("title"+Settings.get_lan(Employee_Register_Activity.this));
+                        String exp_id = sub.getString("id");
+                        edubs_id.add(exp_id);
+                        edubs_title.add(exp_title);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -416,27 +408,28 @@ public class Employee_Register_Activity extends  RootActivity{
             }
 
         });
+        AppController.getInstance().addToRequestQueue(jsObjRequest);
+
     }
     private void get_edu_masters() {
-        String url = Settings.SERVERURL + "levels.php";
+        String url = Settings.SERVERURL + "degrees.php";
         Log.e("url--->", url);
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please wait....");
         progressDialog.setCancelable(false);
-        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-
+        JsonArrayRequest jsObjRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
             @Override
-            public void onResponse(JSONObject jsonObject) {
+            public void onResponse(JSONArray jsonObject) {
                 progressDialog.dismiss();
                 Log.e("response is: ", jsonObject.toString());
                 try {
-                    JSONArray jsonArray = jsonObject.getJSONArray("levels");
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject sub = jsonArray.getJSONObject(i);
-                        String edum_title = sub.getString("title");
-                        String edum_id = sub.getString("id");
-                        edums_id.add(edum_id);
-                        edums_title.add(edum_title);
+
+                    for (int i = 0; i < jsonObject.length(); i++) {
+                        JSONObject sub = jsonObject.getJSONObject(i);
+                        String exp_title = sub.getString("title"+Settings.get_lan(Employee_Register_Activity.this));
+                        String exp_id = sub.getString("id");
+                        edums_id.add(exp_id);
+                        edums_title.add(exp_title);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -453,5 +446,7 @@ public class Employee_Register_Activity extends  RootActivity{
             }
 
         });
+        AppController.getInstance().addToRequestQueue(jsObjRequest);
+
     }
 }

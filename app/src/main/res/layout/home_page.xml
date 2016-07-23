@@ -212,7 +212,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="POST MY CV"
+                        android:text="Upload As a Freelancer"
                         android:id="@+id/textView23"
                         android:textColor="#FFFFFF" />
                 </LinearLayout>
@@ -312,9 +312,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="POST YOUR CV"
+                        android:text="Enroll As a Volunteer"
                         android:id="@+id/textView17"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="#FFFFFF"
+                        android:linksClickable="false" />
                 </LinearLayout>
             </LinearLayout>
 

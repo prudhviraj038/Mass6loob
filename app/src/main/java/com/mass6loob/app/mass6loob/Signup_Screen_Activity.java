@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -15,6 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,12 +24,15 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by sriven on 7/22/2016.
  */
 public class Signup_Screen_Activity extends Activity {
     EditText name, password,email,phone;
+    TextView login_tv;
     LinearLayout register;
     String name_str,pwdss_str,email_str,phn_str;
 
@@ -37,9 +42,17 @@ public class Signup_Screen_Activity extends Activity {
         name = (EditText) findViewById(R.id.sign_name);
         password = (EditText) findViewById(R.id.sign_pwd);
         email = (EditText) findViewById(R.id.sign_email);
+        login_tv = (TextView) findViewById(R.id.login_tv);
        phone = (EditText) findViewById(R.id.sign_phn);
 
        register = (LinearLayout) findViewById(R.id.register_ll);
+        login_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Signup_Screen_Activity.this,Login_Activity.class);
+                startActivity(intent);
+            }
+        });
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -119,4 +132,6 @@ public class Signup_Screen_Activity extends Activity {
 
         }
      }
-    }
+
+}
+

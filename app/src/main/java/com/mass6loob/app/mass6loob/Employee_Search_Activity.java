@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONArray;
@@ -35,6 +36,7 @@ public class Employee_Search_Activity extends  RootActivity {
     String title_str,expe_str,nation_str,edu_str;
     String exp_id ="0";
     String edu_id ="0";
+    String nation_id = "0";
     ArrayList<String> exps_id;
     ArrayList<String>exps_title;
     ArrayList<String>nations_id;
@@ -47,8 +49,10 @@ public class Employee_Search_Activity extends  RootActivity {
         Settings.forceRTLIfSupported(this);
         setContentView(R.layout.employee_search);
         exps_title = new ArrayList<String>();
+        exps_id = new ArrayList<String>();
         nations_title = new ArrayList<String>();
         edus_title = new ArrayList<String>();
+        edus_id = new ArrayList<String>();
 
         jobtitle = (EditText)findViewById(R.id.emp_search_title);
         experience = (TextView)findViewById(R.id.emp_search_exp);
@@ -84,14 +88,13 @@ public class Employee_Search_Activity extends  RootActivity {
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(Employee_Search_Activity.this);
                 builder.setTitle("CHOOSE NATIONALITY");
-                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(Employee_Search_Activity.this, android.R.layout.select_dialog_item, exps_title);
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(Employee_Search_Activity.this, android.R.layout.select_dialog_item, nations_title);
                 builder.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //Toast.makeText(ChooseSubjectActivity.this, sub_title.get(which), Toast.LENGTH_SHORT).show();
-                        exp_id = exps_id.get(which);
-                        experience.setText(exps_title.get(which));
-
+                        nation_id = nations_id.get(which);
+                        nationality.setText(nations_title.get(which));
                     }
                 });
 
@@ -154,99 +157,89 @@ public class Employee_Search_Activity extends  RootActivity {
     }
 
     private void get_experience() {
-        String url = Settings.SERVERURL + "levels.php";
-        Log.e("url--->", url);
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Please wait....");
-        progressDialog.setCancelable(false);
-        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
-            @Override
-            public void onResponse(JSONObject jsonObject) {
-                progressDialog.dismiss();
-                Log.e("response is: ", jsonObject.toString());
-                try {
-                    JSONArray jsonArray = jsonObject.getJSONArray("levels");
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject sub = jsonArray.getJSONObject(i);
-                        String exp_num = sub.getString("title");
-                        String exp_id = sub.getString("id");
-                        exps_id.add(exp_id);
-                        exps_title.add(exp_num);
+            String url = Settings.SERVERURL + "experiences.php";
+            Log.e("url--->", url);
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setMessage("Please wait....");
+            progressDialog.setCancelable(false);
+            JsonArrayRequest jsObjRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray jsonObject) {
+                    progressDialog.dismiss();
+                    Log.e("response is: ", jsonObject.toString());
+                    try {
+
+                        for (int i = 0; i < jsonObject.length(); i++) {
+                            JSONObject sub = jsonObject.getJSONObject(i);
+                            String exp_name = sub.getString("title"+Settings.get_lan(Employee_Search_Activity.this));
+                            String exp_id = sub.getString("id");
+                            exps_id.add(exp_id);
+                            exps_title.add(exp_name);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
-            }
-        }, new Response.ErrorListener() {
+            }, new Response.ErrorListener() {
 
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                // TODO Auto-generated method stub
-                Log.e("response is:", error.toString());
-                Toast.makeText(Employee_Search_Activity.this, "Server not connected", Toast.LENGTH_SHORT).show();
-                progressDialog.dismiss();
-            }
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    // TODO Auto-generated method stub
+                    Log.e("response is:", error.toString());
+                    Toast.makeText(Employee_Search_Activity.this, "Server not connected", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
+                }
 
-        });
-    }
+            });
+            AppController.getInstance().addToRequestQueue(jsObjRequest);
+
+        }
     private void get_nationality() {
-        String url = Settings.SERVERURL + "levels.php";
-        Log.e("url--->", url);
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Please wait....");
-        progressDialog.setCancelable(false);
-        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-
+        String url = "https://restcountries.eu/rest/v1/all";
+        JsonArrayRequest jsObjRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
             @Override
-            public void onResponse(JSONObject jsonObject) {
-                progressDialog.dismiss();
-                Log.e("response is: ", jsonObject.toString());
-                try {
-                    JSONArray jsonArray = jsonObject.getJSONArray("levels");
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject sub = jsonArray.getJSONObject(i);
-                        String nation_name = sub.getString("title");
-                        String nation_id = sub.getString("id");
-                        nations_id.add(nation_id);
-                        nations_title.add(nation_name);
+            public void onResponse(JSONArray jsonObject) {
+                for (int i=0;i<jsonObject.length();i++){
+                    try {
+                        nations_title.add(jsonObject.getJSONObject(i).getString("demonym"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
+
+
             }
         }, new Response.ErrorListener() {
-
             @Override
             public void onErrorResponse(VolleyError error) {
                 // TODO Auto-generated method stub
                 Log.e("response is:", error.toString());
-                Toast.makeText(Employee_Search_Activity.this, "Server not connected", Toast.LENGTH_SHORT).show();
-                progressDialog.dismiss();
+                Toast.makeText(Employee_Search_Activity.this, "cant_rech_server",Toast.LENGTH_SHORT).show();
             }
-
         });
+        AppController.getInstance().addToRequestQueue(jsObjRequest);
     }
+
     private void get_education() {
-        String url = Settings.SERVERURL + "levels.php";
+        String url = Settings.SERVERURL + "degrees.php";
         Log.e("url--->", url);
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please wait....");
         progressDialog.setCancelable(false);
-        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-
+        JsonArrayRequest jsObjRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
             @Override
-            public void onResponse(JSONObject jsonObject) {
+            public void onResponse(JSONArray jsonObject) {
                 progressDialog.dismiss();
                 Log.e("response is: ", jsonObject.toString());
                 try {
-                    JSONArray jsonArray = jsonObject.getJSONArray("levels");
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject sub = jsonArray.getJSONObject(i);
-                        String edu_title = sub.getString("title");
-                        String edu_id = sub.getString("id");
-                        edus_id.add(edu_id);
-                        edus_title.add(edu_title);
+
+                    for (int i = 0; i < jsonObject.length(); i++) {
+                        JSONObject sub = jsonObject.getJSONObject(i);
+                        String exp_title = sub.getString("title"+Settings.get_lan(Employee_Search_Activity.this));
+                        String exp_id = sub.getString("id");
+                        edus_id.add(exp_id);
+                        edus_title.add(exp_title);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -263,6 +256,9 @@ public class Employee_Search_Activity extends  RootActivity {
             }
 
         });
+        AppController.getInstance().addToRequestQueue(jsObjRequest);
+
+
     }
 }
 

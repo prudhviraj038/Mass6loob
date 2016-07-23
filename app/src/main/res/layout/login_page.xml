@@ -91,7 +91,7 @@
                                         android:layout_height="wrap_content"
                                         android:id="@+id/usr_name"
                                         android:background="#00000000"
-                                        android:hint="Username"
+                                        android:hint="Email"
                                         android:textColorHint="@color/edit_text_hint_color"
                                         android:textSize="16sp"
                                         android:textColor="@color/edit_text_text_color" />
@@ -150,7 +150,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Forgot Your Password?"
-                            android:id="@+id/textView2"
+                            android:id="@+id/forget_pwd"
                             android:textColor="#FFFFFF" />
 
                         <LinearLayout
@@ -169,13 +169,13 @@
                         android:orientation="vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/client_loginhere_ll">
+                        android:id="@+id/linearLayout2" >
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Login Here"
-                            android:id="@+id/textView3"
+                            android:text="SignUP"
+                            android:id="@+id/signup_tv"
                             android:textColor="#FFFFFF" />
 
                         <LinearLayout

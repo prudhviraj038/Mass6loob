@@ -66,8 +66,17 @@ public class Home_Activity extends RootActivity {
         recruit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Home_Activity.this, Company_Register_Activity.class);
-                startActivity(intent);
+
+                if(Settings.getUserid(Home_Activity.this).equals("-1"))
+                {
+                    Intent intent = new Intent(Home_Activity.this, Login_Activity.class);
+                    startActivity(intent);
+                }else {
+                    Intent mainIntent = new Intent(getApplicationContext(),Company_Register_Activity.class);
+                    mainIntent.putExtra("uid",Settings.getUserid(Home_Activity.this));
+                    startActivity(mainIntent);
+                    
+                }
 
             }
         });

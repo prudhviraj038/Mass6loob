@@ -29,7 +29,14 @@ public class Settings {
         editor.putString(lan_key,user_id);
         editor.commit();
     }
-
+    public static String get_lan(Context context){
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        if(sharedPreferences.getString(lan_key,"en").equals("ar"))
+        {
+            return "_ar";
+        }
+        return "";
+    }
     public static String get_user_language(Context context){
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 
