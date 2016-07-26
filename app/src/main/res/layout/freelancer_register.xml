@@ -268,7 +268,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/rounded_corners"
-                                android:gravity="center_vertical" >
+                                android:gravity="center_vertical"
+                                android:id="@+id/free_upload_ll">
 
                                 <ImageView
                                     android:layout_width="18dp"

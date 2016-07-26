@@ -373,7 +373,7 @@
                                     android:layout_width="15dp"
                                     android:layout_height="match_parent" />
 
-                                <EditText
+                                <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:id="@+id/emp_cv_l"
@@ -405,7 +405,7 @@
                                     android:layout_width="15dp"
                                     android:layout_height="match_parent" />
 
-                                <EditText
+                                <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:id="@+id/emp_img_l"

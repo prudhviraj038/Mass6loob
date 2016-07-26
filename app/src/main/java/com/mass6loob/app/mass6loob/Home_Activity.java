@@ -75,7 +75,7 @@ public class Home_Activity extends RootActivity {
                     Intent mainIntent = new Intent(getApplicationContext(),Company_Register_Activity.class);
                     mainIntent.putExtra("uid",Settings.getUserid(Home_Activity.this));
                     startActivity(mainIntent);
-                    
+
                 }
 
             }
@@ -93,15 +93,23 @@ public class Home_Activity extends RootActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Home_Activity.this, Freelancer_Register_Activity.class);
-                startActivity(intent);
+                if(Settings.getUserid(Home_Activity.this).equals("-1"))
+                {
+                    Intent intent = new Intent(Home_Activity.this, Login_Activity.class);
+                    startActivity(intent);
+                }else {
+                    Intent mainIntent = new Intent(getApplicationContext(),Freelancer_Client_Register_Activity.class);
+                    mainIntent.putExtra("uid",Settings.getUserid(Home_Activity.this));
+                    startActivity(mainIntent);
+
+                }
             }
         });
         postmycv1 = (LinearLayout) findViewById(R.id.post_my_cv);
         postmycv1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Home_Activity.this, Freelancer_Client_Register_Activity.class);
+                Intent intent = new Intent(Home_Activity.this, Freelancer_Register_Activity.class);
                 startActivity(intent);
             }
         });
@@ -109,8 +117,16 @@ public class Home_Activity extends RootActivity {
         volunterregister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Home_Activity.this, Volunteer_Register_Activity.class);
-                startActivity(intent);
+                if(Settings.getUserid(Home_Activity.this).equals("-1"))
+                {
+                    Intent intent = new Intent(Home_Activity.this, Login_Activity.class);
+                    startActivity(intent);
+                }else {
+                    Intent mainIntent = new Intent(getApplicationContext(),Volunteer_Register_Activity.class);
+                    mainIntent.putExtra("uid",Settings.getUserid(Home_Activity.this));
+                    startActivity(mainIntent);
+
+                }
             }
         });
         volunteercompanyregister = (LinearLayout) findViewById(R.id.volunteer_postcv);

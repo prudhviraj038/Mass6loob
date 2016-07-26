@@ -50,6 +50,7 @@ public class Employee_Search_Activity extends  RootActivity {
         setContentView(R.layout.employee_search);
         exps_title = new ArrayList<String>();
         exps_id = new ArrayList<String>();
+        nations_id = new ArrayList<String>();
         nations_title = new ArrayList<String>();
         edus_title = new ArrayList<String>();
         edus_id = new ArrayList<String>();
@@ -93,7 +94,7 @@ public class Employee_Search_Activity extends  RootActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //Toast.makeText(ChooseSubjectActivity.this, sub_title.get(which), Toast.LENGTH_SHORT).show();
-                        nation_id = nations_id.get(which);
+                      //  nation_id = nations_id.get(which);
                         nationality.setText(nations_title.get(which));
                     }
                 });

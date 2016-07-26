@@ -26,6 +26,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,19 +35,22 @@ import org.json.JSONObject;
 import java.io.File;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by sriven on 6/21/2016.
  */
 public class Employee_Register_Activity extends  RootActivity{
-    EditText username,jobtitle,location,uploadcv,uploadimage;
-    TextView reviewcv,nationality,experience,gender,educationmasters,educationbachelors;
+    EditText username,jobtitle,location;
+    TextView reviewcv,nationality,experience,gender,educationmasters,educationbachelors,uploadimage,uploadcv;
     LinearLayout submit;
     String user_str,job_str,exp_str,nationality_str,edumasters_str,edubachelors_str,location_str,gender_str,uploadcv_str,uploadimage_str;
     String exp_id = "0";
     String nation_id = "0";
     String edub_id = "0";
     String edum_id = "0";
+    String emp_id;
     ArrayList<String>gen_title;
     ArrayList<String>exps_id;
     ArrayList<String>exps_title;
@@ -62,9 +66,10 @@ public class Employee_Register_Activity extends  RootActivity{
         super.onCreate(savedInstanceState);
         Settings.forceRTLIfSupported(this);
         setContentView(R.layout.employee_register);
-        gen_title = new   ArrayList<String>();
+        gen_title = new ArrayList<String>();
         exps_id = new ArrayList<String>();
         exps_title = new ArrayList<String>();
+        nations_id = new ArrayList<String>();
         nations_title = new ArrayList<String>();
         edubs_id = new ArrayList<String>();
         edubs_title = new ArrayList<String>();
@@ -72,16 +77,16 @@ public class Employee_Register_Activity extends  RootActivity{
         edums_title = new ArrayList<String>();
         gen_title.add("Male");
         gen_title.add("Female");
-        username = (EditText)findViewById(R.id.user_name);
-        jobtitle = (EditText)findViewById(R.id.job_title);
-        experience = (TextView)findViewById(R.id.emp_experience);
-        nationality = (TextView)findViewById(R.id.emp_nationality);
-        educationbachelors = (TextView)findViewById(R.id.emp_edu_bachelors);
-        educationmasters = (TextView)findViewById(R.id.emp_edu_masters);
-        location = (EditText)findViewById(R.id.emp_location);
-        gender = (TextView)findViewById(R.id.emp_gender);
-        uploadcv = (EditText)findViewById(R.id.emp_cv_l);
-        LinearLayout emp_nationality = (LinearLayout)findViewById(R.id.emp_nationality_ll);
+        username = (EditText) findViewById(R.id.user_name);
+        jobtitle = (EditText) findViewById(R.id.job_title);
+        experience = (TextView) findViewById(R.id.emp_experience);
+        nationality = (TextView) findViewById(R.id.emp_nationality);
+        educationbachelors = (TextView) findViewById(R.id.emp_edu_bachelors);
+        educationmasters = (TextView) findViewById(R.id.emp_edu_masters);
+        location = (EditText) findViewById(R.id.emp_location);
+        gender = (TextView) findViewById(R.id.emp_gender);
+        uploadcv = (TextView) findViewById(R.id.emp_cv_l);
+        LinearLayout emp_nationality = (LinearLayout) findViewById(R.id.emp_nationality_ll);
         emp_nationality.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,7 +97,7 @@ public class Employee_Register_Activity extends  RootActivity{
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //Toast.makeText(ChooseSubjectActivity.this, sub_title.get(which), Toast.LENGTH_SHORT).show();
-                        nation_id = nations_id.get(which);
+                        //nation_id = nations_id.get(which);
                         nationality.setText(nations_title.get(which));
 
                     }
@@ -105,7 +110,7 @@ public class Employee_Register_Activity extends  RootActivity{
         });
         get_nationality();
 
-        LinearLayout emp_experience = (LinearLayout)findViewById(R.id.emp_experience_ll);
+        LinearLayout emp_experience = (LinearLayout) findViewById(R.id.emp_experience_ll);
         emp_experience.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -129,7 +134,7 @@ public class Employee_Register_Activity extends  RootActivity{
         });
         get_experience();
 
-        LinearLayout emp_education_bach = (LinearLayout)findViewById(R.id.emp_bachelors_ll);
+        LinearLayout emp_education_bach = (LinearLayout) findViewById(R.id.emp_bachelors_ll);
         emp_education_bach.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -153,7 +158,7 @@ public class Employee_Register_Activity extends  RootActivity{
         });
         get_edu_bachelors();
 
-        LinearLayout emp_education_masters = (LinearLayout)findViewById(R.id.emp_masters_ll);
+        LinearLayout emp_education_masters = (LinearLayout) findViewById(R.id.emp_masters_ll);
         emp_education_masters.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -178,7 +183,7 @@ public class Employee_Register_Activity extends  RootActivity{
         get_edu_masters();
 
 
-        LinearLayout emp_gender = (LinearLayout)findViewById(R.id.emp_gender_ll);
+        LinearLayout emp_gender = (LinearLayout) findViewById(R.id.emp_gender_ll);
         emp_gender.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -199,7 +204,7 @@ public class Employee_Register_Activity extends  RootActivity{
                 dialog.show();
             }
         });
-
+        LinearLayout  uploadcv = (LinearLayout)findViewById(R.id.emp_uploadcv_ll);
         uploadcv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -207,8 +212,9 @@ public class Employee_Register_Activity extends  RootActivity{
 
             }
         });
-        reviewcv = (TextView)findViewById(R.id.emp_review_cv);
-        uploadimage = (EditText)findViewById(R.id.emp_img_l);
+        reviewcv = (TextView) findViewById(R.id.emp_review_cv);
+     //   uploadimage = (TextView) findViewById(R.id.emp_img_l);
+        LinearLayout uploadimage = (LinearLayout)findViewById(R.id.emp_uploadimg_ll);
         uploadimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -217,7 +223,7 @@ public class Employee_Register_Activity extends  RootActivity{
             }
         });
 
-        submit = (LinearLayout)findViewById(R.id.emp_submit_ll);
+        submit = (LinearLayout) findViewById(R.id.emp_submit_ll);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -229,47 +235,40 @@ public class Employee_Register_Activity extends  RootActivity{
                 edubachelors_str = educationbachelors.getText().toString();
                 location_str = location.getText().toString();
                 gender_str = gender.getText().toString();
-                uploadcv_str = uploadcv.getText().toString();
-                uploadimage_str = uploadimage.getText().toString();
-                if(user_str.equals("")){
+            //    uploadcv_str = uploadcv.getText().toString();
+          //      uploadimage_str = uploadimage.getText().toString();
+                if (user_str.equals("")) {
                     Toast.makeText(Employee_Register_Activity.this, "please enter username", Toast.LENGTH_SHORT).show();
-                }
-                else if(job_str.equals("")){
+                } else if (job_str.equals("")) {
                     Toast.makeText(Employee_Register_Activity.this, "please enter jobtitle", Toast.LENGTH_SHORT).show();
-                }
-                else if(exp_str.equals("")){
+                } else if (exp_str.equals("")) {
                     Toast.makeText(Employee_Register_Activity.this, "please enter experience", Toast.LENGTH_SHORT).show();
-                }
-                else if(nationality_str.equals("")){
+                } else if (nationality_str.equals("")) {
                     Toast.makeText(Employee_Register_Activity.this, "please select ur nationality", Toast.LENGTH_SHORT).show();
-                }
-                else if(edubachelors_str.equals("")){
+                } else if (edubachelors_str.equals("")) {
                     Toast.makeText(Employee_Register_Activity.this, "please select ur bachelors degree", Toast.LENGTH_SHORT).show();
-                }
-                else if(edumasters_str.equals("")){
+                } else if (edumasters_str.equals("")) {
                     Toast.makeText(Employee_Register_Activity.this, "please select ur masters degree", Toast.LENGTH_SHORT).show();
-                }
-                else if(location_str.equals("")){
+                } else if (location_str.equals("")) {
                     Toast.makeText(Employee_Register_Activity.this, "please select ur location", Toast.LENGTH_SHORT).show();
-                }
-                else if(gender_str.equals("")){
+                } else if (gender_str.equals("")) {
                     Toast.makeText(Employee_Register_Activity.this, "please select ur gender", Toast.LENGTH_SHORT).show();
-                }
-                else if(uploadcv_str.equals("")){
-                    Toast.makeText(Employee_Register_Activity.this, "please upload your cv", Toast.LENGTH_SHORT).show();
-                }
-                else if(uploadimage_str.equals("")){
-                    Toast.makeText(Employee_Register_Activity.this, "please upload ur image", Toast.LENGTH_SHORT).show();
+             //   } else if (uploadcv_str.equals("")) {
+               //     Toast.makeText(Employee_Register_Activity.this, "please upload your cv", Toast.LENGTH_SHORT).show();
+              //  } else if (uploadimage_str.equals("")) {
+                //    Toast.makeText(Employee_Register_Activity.this, "please upload ur image", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Toast.makeText(Employee_Register_Activity.this, "Registered succesfully", Toast.LENGTH_SHORT).show();
+                    employee_register();
+                    // Toast.makeText(Company_Register_Activity.this, "Registered Succesfully", Toast.LENGTH_SHORT).show();
                 }
+
 
             }
         });
     }
 
-    final int RESULT_LOAD_IMAGE = 1;
+        final int RESULT_LOAD_IMAGE = 1;
     String imgDecodableString;
 
     @Override
@@ -388,7 +387,7 @@ public class Employee_Register_Activity extends  RootActivity{
 
                     for (int i = 0; i < jsonObject.length(); i++) {
                         JSONObject sub = jsonObject.getJSONObject(i);
-                        String exp_title = sub.getString("title"+Settings.get_lan(Employee_Register_Activity.this));
+                        String exp_title = sub.getString("title" + Settings.get_lan(Employee_Register_Activity.this));
                         String exp_id = sub.getString("id");
                         edubs_id.add(exp_id);
                         edubs_title.add(exp_title);
@@ -449,4 +448,173 @@ public class Employee_Register_Activity extends  RootActivity{
         AppController.getInstance().addToRequestQueue(jsObjRequest);
 
     }
+    public  void employee_register(){
+        final ProgressDialog progressDialog = new ProgressDialog(Employee_Register_Activity.this);
+        progressDialog.setMessage("please wait.. we are processing");
+        progressDialog.show();
+        progressDialog.setCancelable(false);
+        String url = Settings.SERVERURL+"add-employee.php?";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if(progressDialog!=null)
+                    progressDialog.dismiss();
+                try {
+                    JSONArray jsonObject=new JSONArray(response);
+                    Log.e("response",jsonObject.toString());
+                    JSONObject jsonObject1=jsonObject.getJSONObject(0);
+                    String reply=jsonObject1.getString("status");
+                    if(reply.equals("Success")) {
+                        String msg = jsonObject1.getString("message");
+                        emp_id=jsonObject1.getString("employee_id");
+                        Toast.makeText(Employee_Register_Activity.this, msg, Toast.LENGTH_SHORT).show();
+                        Intent intent= new Intent(Employee_Register_Activity.this,Employee_Search_Activity.class);
+                        startActivity(intent);
+                      emp_image();
+                        emp_cv();
+//                        finish();
+
+                    }
+                    else {
+                        String msg=jsonObject1.getString("message");
+                        Toast.makeText(Employee_Register_Activity.this, msg, Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        if(progressDialog!=null)
+                            progressDialog.dismiss();
+                        Toast.makeText(Employee_Register_Activity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("member_id",Settings. getUserid(Employee_Register_Activity.this));
+                params.put("title",job_str);
+                params.put("experience",exp_id);
+                params.put("nationality",nationality_str);
+                params.put("bachelors",edub_id);
+                params.put("masters",edum_id);
+                params.put("gender",gender_str);
+                params.put("location",location_str);
+                return params;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(stringRequest);
+    }
+    public  void emp_image(){
+        final ProgressDialog progressDialog = new ProgressDialog(Employee_Register_Activity.this);
+        progressDialog.setMessage("please wait.. we are processing");
+        progressDialog.show();
+        progressDialog.setCancelable(false);
+        String url = Settings.SERVERURL+"add-employee-image.php";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if(progressDialog!=null)
+                    progressDialog.dismiss();
+                try {
+                    JSONObject jsonObject=new JSONObject(response);
+                    Log.e("response",jsonObject.toString());
+                    String reply=jsonObject.getString("status");
+                    if(reply.equals("Success")) {
+                        String msg = jsonObject.getString("message");
+                        Toast.makeText(Employee_Register_Activity.this, msg, Toast.LENGTH_SHORT).show();
+//                        finish();
+
+                    }
+                    else {
+                        String msg=jsonObject.getString("message");
+                        Toast.makeText(Employee_Register_Activity.this, msg, Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        if(progressDialog!=null)
+                            progressDialog.dismiss();
+                        Toast.makeText(Employee_Register_Activity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("member_id",Settings. getUserid(Employee_Register_Activity.this));
+                params.put("file",imgDecodableString);
+                params.put("employee_id",emp_id);
+
+
+                return params;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(stringRequest);
+    }
+    public  void emp_cv(){
+        final ProgressDialog progressDialog = new ProgressDialog(Employee_Register_Activity.this);
+        progressDialog.setMessage("please wait.. we are processing");
+        progressDialog.show();
+        progressDialog.setCancelable(false);
+        String url = Settings.SERVERURL+"add-employee-cv.php";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if(progressDialog!=null)
+                    progressDialog.dismiss();
+                try {
+                    JSONObject jsonObject=new JSONObject(response);
+                    Log.e("response",jsonObject.toString());
+                    String reply=jsonObject.getString("status");
+                    if(reply.equals("Success")) {
+                        String msg = jsonObject.getString("message");
+                        Toast.makeText(Employee_Register_Activity.this, msg, Toast.LENGTH_SHORT).show();
+//                        finish();
+
+                    }
+                    else {
+                        String msg=jsonObject.getString("message");
+                        Toast.makeText(Employee_Register_Activity.this, msg, Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        if(progressDialog!=null)
+                            progressDialog.dismiss();
+                        Toast.makeText(Employee_Register_Activity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("member_id",Settings. getUserid(Employee_Register_Activity.this));
+                params.put("resume",uploadcv_str);
+                params.put("employee_id",emp_id);
+
+
+                return params;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(stringRequest);
+    }
+
 }

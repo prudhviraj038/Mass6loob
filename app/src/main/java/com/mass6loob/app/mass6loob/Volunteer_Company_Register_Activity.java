@@ -18,7 +18,8 @@ import android.widget.Toast;
  * Created by sriven on 6/21/2016.
  */
 public class Volunteer_Company_Register_Activity extends RootActivity {
-    EditText companyname,password,intrestedin,establisheddate,area,companylogo,catagory;
+    EditText companyname,password,intrestedin,establisheddate,area,catagory;
+    TextView company_logo;
     LinearLayout companysingup;
     String company_str,password_str,intrested_str,establish_str,area_str,logo_str;
     ImageView agriculture;
@@ -34,6 +35,7 @@ public class Volunteer_Company_Register_Activity extends RootActivity {
         intrestedin = (EditText)findViewById(R.id.intrested_in);
         establisheddate= (EditText)findViewById(R.id.established_date);
         area= (EditText)findViewById(R.id.company_area);
+        company_logo = (TextView)findViewById(R.id.company_logo);
         agriculture = (ImageView)findViewById(R.id.ic_tick1);
         agriculture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,14 +44,13 @@ public class Volunteer_Company_Register_Activity extends RootActivity {
             }
         });
 
-        companylogo= (EditText)findViewById(R.id.company_logo);
-        companylogo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(i, RESULT_LOAD_IMAGE);
-            }
-        });
+      //  companylogo= (EditText)findViewById(R.id.company_logo);
+       // companylogo.setOnClickListener(new View.OnClickListener() {
+        //    @Override
+         //   public void onClick(View v) {
+
+      //      }
+        //});
 
         companysingup= (LinearLayout)findViewById(R.id.company_signup_ll);
         companysingup.setOnClickListener(new View.OnClickListener() {
@@ -60,7 +61,15 @@ public class Volunteer_Company_Register_Activity extends RootActivity {
                 intrested_str = intrestedin.getText().toString();
                 establish_str = establisheddate.getText().toString();
                 area_str = area.getText().toString();
-                logo_str = companylogo.getText().toString();
+            //    logo_str = companylogo.getText().toString();
+                LinearLayout companylogo = (LinearLayout)findViewById(R.id.vol_com_logo_ll);
+                companylogo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        startActivityForResult(i, RESULT_LOAD_IMAGE);
+                    }
+                });
                 if(company_str.equals("")){
                     Toast.makeText(Volunteer_Company_Register_Activity.this, "please enter company name", Toast.LENGTH_SHORT).show();
                 }

@@ -60,6 +60,7 @@ public class Company_Register_Activity extends  RootActivity {
         country = (TextView)findViewById(R.id.company_country);
         country_ll =(LinearLayout)findViewById(R.id.company_country_ll);
         area= (EditText)findViewById(R.id.company_area);
+
         loginhere = (LinearLayout)findViewById(R.id.com_login_ll);
         loginhere.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,7 +83,8 @@ public class Company_Register_Activity extends  RootActivity {
 
 
         coun_title=new ArrayList<String>();
-        companylogo= (EditText)findViewById(R.id.upload_logo);
+       // companylogo= (EditText)findViewById(R.id.upload_logo);
+        LinearLayout companylogo = (LinearLayout)findViewById(R.id.com_uploadlogo_ll);
         companylogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,7 +125,7 @@ public class Company_Register_Activity extends  RootActivity {
                 cname_str = companyname.getText().toString();
                 country_str = country.getText().toString();
                 area_str = area.getText().toString();
-                companylogo_str = companylogo.getText().toString();
+           //     companylogo_str = companylogo.getText().toString();
                 about_str = aboutcompany.getText().toString();
 
           //      if(uname_str.equals("")){
@@ -328,7 +330,7 @@ public class Company_Register_Activity extends  RootActivity {
             protected Map<String,String> getParams(){
                 Map<String,String> params = new HashMap<String, String>();
                 params.put("member_id",Settings. getUserid(Company_Register_Activity.this));
-                params.put("file",companylogo_str);
+                params.put("file",imgDecodableString);
                 params.put("company_id",com_id);
 
 

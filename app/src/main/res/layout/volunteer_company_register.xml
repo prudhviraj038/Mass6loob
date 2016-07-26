@@ -221,7 +221,7 @@
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/rounded_corners"
                                 android:gravity="center_vertical"
-                                android:id="@+id/xdsdg">
+                                android:id="@+id/vol_com_logo_ll">
 
                                 <ImageView
                                     android:layout_width="18dp"
@@ -236,7 +236,7 @@
                                     android:layout_width="15dp"
                                     android:layout_height="match_parent" />
 
-                                <EditText
+                                <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:id="@+id/company_logo"
@@ -464,7 +464,8 @@
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:visibility="gone">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -495,7 +496,8 @@
                             android:layout_height="wrap_content"
                             android:text="Login Here"
                             android:id="@+id/textView3"
-                            android:textColor="#FFFFFF" />
+                            android:textColor="#FFFFFF"
+                            android:visibility="gone" />
 
                         <LinearLayout
                             android:orientation="horizontal"

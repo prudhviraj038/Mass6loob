@@ -22,13 +22,17 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by sriven on 6/21/2016.
@@ -41,6 +45,7 @@ public class Freelancer_Register_Activity extends RootActivity {
     LinearLayout signup;
     String name_str,email_str,gender_str,age_str,nationalitty_str,fields_str,uploadlogo_str;
     String nation_id="0";
+    String free_id;
     ArrayList<String> gen_title;
     ArrayList<String>nations_id;
     ArrayList<String>nations_title;
@@ -51,6 +56,7 @@ public class Freelancer_Register_Activity extends RootActivity {
         setContentView(R.layout.freelancer_register);
         gen_title = new   ArrayList<String>();
         nations_title = new ArrayList<String>();
+        nations_id = new ArrayList<String>();
         gen_title.add("Male");
         gen_title.add("Female");
         name = (EditText)findViewById(R.id.free_name);
@@ -105,7 +111,7 @@ public class Freelancer_Register_Activity extends RootActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //Toast.makeText(ChooseSubjectActivity.this, sub_title.get(which), Toast.LENGTH_SHORT).show();
-                        nation_id = nations_id.get(which);
+//                        nation_id = nations_id.get(which);
                         nationality.setText(nations_title.get(which));
 
                     }
@@ -243,8 +249,12 @@ public class Freelancer_Register_Activity extends RootActivity {
                 // }
 
                 else {
-                    Toast.makeText(Freelancer_Register_Activity.this, "Registered successfully", Toast.LENGTH_SHORT).show();
+                    free_register();
+                  //  Toast.makeText(Freelancer_Register_Activity.this, "Registered successfully", Toast.LENGTH_SHORT).show();
+                    Intent intent= new Intent(Freelancer_Register_Activity.this,Freelancer_List_Activity.class);
+                    startActivity(intent);
                 }
+
 
             }
         });
@@ -296,40 +306,143 @@ public class Freelancer_Register_Activity extends RootActivity {
 
     }
     private void get_nationality() {
-        String url = Settings.SERVERURL + "levels.php";
-        Log.e("url--->", url);
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Please wait....");
-        progressDialog.setCancelable(false);
-        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-
+        String url = "https://restcountries.eu/rest/v1/all";
+        JsonArrayRequest jsObjRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
             @Override
-            public void onResponse(JSONObject jsonObject) {
-                progressDialog.dismiss();
-                Log.e("response is: ", jsonObject.toString());
-                try {
-                    JSONArray jsonArray = jsonObject.getJSONArray("levels");
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject sub = jsonArray.getJSONObject(i);
-                        String nation_name = sub.getString("title");
-                        String nation_id = sub.getString("id");
-                        nations_id.add(nation_id);
-                        nations_title.add(nation_name);
+            public void onResponse(JSONArray jsonObject) {
+                for (int i=0;i<jsonObject.length();i++){
+                    try {
+                        nations_title.add(jsonObject.getJSONObject(i).getString("demonym"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
+
+
             }
         }, new Response.ErrorListener() {
-
             @Override
             public void onErrorResponse(VolleyError error) {
                 // TODO Auto-generated method stub
                 Log.e("response is:", error.toString());
-                Toast.makeText(Freelancer_Register_Activity.this, "Server not connected", Toast.LENGTH_SHORT).show();
-                progressDialog.dismiss();
+                Toast.makeText(Freelancer_Register_Activity.this, "cant_rech_server",Toast.LENGTH_SHORT).show();
             }
-
         });
+        AppController.getInstance().addToRequestQueue(jsObjRequest);
+
+    }
+    public  void free_register(){
+        final ProgressDialog progressDialog = new ProgressDialog(Freelancer_Register_Activity.this);
+        progressDialog.setMessage("please wait.. we are processing");
+        progressDialog.show();
+        progressDialog.setCancelable(false);
+        String url = Settings.SERVERURL+"add-freelancer.php?";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if(progressDialog!=null)
+                    progressDialog.dismiss();
+                try {
+                    JSONArray jsonObject=new JSONArray(response);
+                    Log.e("response",jsonObject.toString());
+                    JSONObject jsonObject1=jsonObject.getJSONObject(0);
+                    String reply=jsonObject1.getString("status");
+                    if(reply.equals("Success")) {
+                        String msg = jsonObject1.getString("message");
+                       free_id=jsonObject1.getString("freelancer_id");
+                        Toast.makeText(Freelancer_Register_Activity.this, msg, Toast.LENGTH_SHORT).show();
+                        Intent intent= new Intent(Freelancer_Register_Activity.this,Employee_Search_Activity.class);
+                        startActivity(intent);
+                        emp_image();
+
+//                        finish();
+
+                    }
+                    else {
+                        String msg=jsonObject1.getString("message");
+                        Toast.makeText(Freelancer_Register_Activity.this, msg, Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        if(progressDialog!=null)
+                            progressDialog.dismiss();
+                        Toast.makeText(Freelancer_Register_Activity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("member_id",Settings. getUserid(Freelancer_Register_Activity.this));
+                params.put("name",name_str);
+                params.put("email",email_str);
+                params.put("age",age_str);
+                params.put("gender",gender_str);
+                params.put("fields",fields_str);
+                params.put("nationality",nationalitty_str);
+                return params;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(stringRequest);
+    }
+    public  void emp_image(){
+        final ProgressDialog progressDialog = new ProgressDialog(Freelancer_Register_Activity.this);
+        progressDialog.setMessage("please wait.. we are processing");
+        progressDialog.show();
+        progressDialog.setCancelable(false);
+        String url = Settings.SERVERURL+"add-freelancer-image.php";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if(progressDialog!=null)
+                    progressDialog.dismiss();
+                try {
+                    JSONObject jsonObject=new JSONObject(response);
+                    Log.e("response",jsonObject.toString());
+                    String reply=jsonObject.getString("status");
+                    if(reply.equals("Success")) {
+                        String msg = jsonObject.getString("message");
+                        Toast.makeText(Freelancer_Register_Activity.this, msg, Toast.LENGTH_SHORT).show();
+//                        finish();
+
+                    }
+                    else {
+                        String msg=jsonObject.getString("message");
+                        Toast.makeText(Freelancer_Register_Activity.this, msg, Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        if(progressDialog!=null)
+                            progressDialog.dismiss();
+                        Toast.makeText(Freelancer_Register_Activity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("member_id",Settings. getUserid(Freelancer_Register_Activity.this));
+                params.put("file",imgDecodableString);
+                params.put("freelancer_id",free_id);
+
+
+                return params;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(stringRequest);
     }
 }

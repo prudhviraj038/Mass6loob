@@ -215,7 +215,8 @@
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:visibility="gone">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -239,14 +240,16 @@
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:visibility="gone">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Login Here"
                             android:id="@+id/textView3"
-                            android:textColor="#FFFFFF" />
+                            android:textColor="#FFFFFF"
+                            android:visibility="visible" />
 
                         <LinearLayout
                             android:orientation="horizontal"
