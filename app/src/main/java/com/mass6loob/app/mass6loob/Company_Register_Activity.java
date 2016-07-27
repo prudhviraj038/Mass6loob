@@ -143,10 +143,9 @@ public class Company_Register_Activity extends  RootActivity {
                 else if(area_str.equals("")){
                     Toast.makeText(Company_Register_Activity.this, "please select your area", Toast.LENGTH_SHORT).show();
                 }
-                else if(companylogo_str.equals("")){
-
-                    Toast.makeText(Company_Register_Activity.this, "please upload your company logo", Toast.LENGTH_SHORT).show();
-                }
+            //    else if(companylogo_str.equals("")){
+             //        Toast.makeText(Company_Register_Activity.this, "please upload your company logo", Toast.LENGTH_SHORT).show();
+             //   }
                 else if(about_str.equals("")){
                     Toast.makeText(Company_Register_Activity.this, "please describe about your company", Toast.LENGTH_SHORT).show();
                 }
@@ -245,7 +244,7 @@ public class Company_Register_Activity extends  RootActivity {
                     String reply=jsonObject1.getString("status");
                     if(reply.equals("Success")) {
                         String msg = jsonObject1.getString("message");
-                        com_id=jsonObject1.getString("company_id");
+                        com_id=jsonObject1.getString("member_id");
                         Toast.makeText(Company_Register_Activity.this, msg, Toast.LENGTH_SHORT).show();
                         Intent intent= new Intent(Company_Register_Activity.this,Employee_Search_Activity.class);
                         startActivity(intent);

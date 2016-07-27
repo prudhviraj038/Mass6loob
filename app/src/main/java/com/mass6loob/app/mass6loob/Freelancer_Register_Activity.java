@@ -350,7 +350,7 @@ public class Freelancer_Register_Activity extends RootActivity {
                     String reply=jsonObject1.getString("status");
                     if(reply.equals("Success")) {
                         String msg = jsonObject1.getString("message");
-                       free_id=jsonObject1.getString("freelancer_id");
+                       free_id=jsonObject1.getString("member_id");
                         Toast.makeText(Freelancer_Register_Activity.this, msg, Toast.LENGTH_SHORT).show();
                         Intent intent= new Intent(Freelancer_Register_Activity.this,Employee_Search_Activity.class);
                         startActivity(intent);
@@ -397,7 +397,7 @@ public class Freelancer_Register_Activity extends RootActivity {
         progressDialog.setMessage("please wait.. we are processing");
         progressDialog.show();
         progressDialog.setCancelable(false);
-        String url = Settings.SERVERURL+"add-freelancer-image.php";
+        String url = Settings.SERVERURL+"add-freelancer-multi.php";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {
             @Override
@@ -437,7 +437,7 @@ public class Freelancer_Register_Activity extends RootActivity {
                 Map<String,String> params = new HashMap<String, String>();
                 params.put("member_id",Settings. getUserid(Freelancer_Register_Activity.this));
                 params.put("file",imgDecodableString);
-                params.put("freelancer_id",free_id);
+              //  params.put("image_id",free_id);
 
 
                 return params;
