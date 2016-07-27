@@ -6,10 +6,13 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -30,6 +33,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -161,7 +165,8 @@ public class Company_Register_Activity extends  RootActivity {
     }
     final int RESULT_LOAD_IMAGE = 1;
     String imgDecodableString;
-
+    String encodedString;
+    Bitmap bitmap;
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -244,12 +249,14 @@ public class Company_Register_Activity extends  RootActivity {
                     String reply=jsonObject1.getString("status");
                     if(reply.equals("Success")) {
                         String msg = jsonObject1.getString("message");
-                        com_id=jsonObject1.getString("member_id");
-                        Toast.makeText(Company_Register_Activity.this, msg, Toast.LENGTH_SHORT).show();
-                        Intent intent= new Intent(Company_Register_Activity.this,Employee_Search_Activity.class);
-                        startActivity(intent);
-                        company_logo();
+                        com_id=jsonObject1.getString("company_id");
+
+                       // Toast.makeText(Company_Register_Activity.this, msg, Toast.LENGTH_SHORT).show();
+                        //Intent intent= new Intent(Company_Register_Activity.this,Employee_Search_Activity.class);
+                        //startActivity(intent);
+                        //company_logo();
 //                        finish();
+                        encodeImagetoString();
 
                     }
                     else {
@@ -274,7 +281,6 @@ public class Company_Register_Activity extends  RootActivity {
             protected Map<String,String> getParams(){
                 Map<String,String> params = new HashMap<String, String>();
                 params.put("member_id",Settings. getUserid(Company_Register_Activity.this));
-
                 params.put("name",cname_str);
                 params.put("country",country_str);
                 params.put("area",area_str);
@@ -287,7 +293,7 @@ public class Company_Register_Activity extends  RootActivity {
     }
     public  void company_logo(){
         final ProgressDialog progressDialog = new ProgressDialog(Company_Register_Activity.this);
-        progressDialog.setMessage("please wait.. we are processing");
+        progressDialog.setMessage("please wait.. uploading image");
         progressDialog.show();
         progressDialog.setCancelable(false);
         String url = Settings.SERVERURL+"add-company-image.php";
@@ -304,7 +310,10 @@ public class Company_Register_Activity extends  RootActivity {
                     if(reply.equals("Success")) {
                         String msg = jsonObject.getString("message");
                         Toast.makeText(Company_Register_Activity.this, msg, Toast.LENGTH_SHORT).show();
-//                        finish();
+                        Intent intent= new Intent(Company_Register_Activity.this,Employee_Search_Activity.class);
+                        startActivity(intent);
+
+                        finish();
 
                     }
                     else {
@@ -329,14 +338,56 @@ public class Company_Register_Activity extends  RootActivity {
             protected Map<String,String> getParams(){
                 Map<String,String> params = new HashMap<String, String>();
                 params.put("member_id",Settings. getUserid(Company_Register_Activity.this));
-                params.put("file",imgDecodableString);
+                params.put("file",encodedString);
                 params.put("company_id",com_id);
-
-
+                params.put("ext_str", "jpg");
                 return params;
             }
         };
         AppController.getInstance().addToRequestQueue(stringRequest);
     }
+    public void encodeImagetoString() {
+        new AsyncTask<Void, Void, String>() {
+            final ProgressDialog progressDialog = new ProgressDialog(Company_Register_Activity.this);
+
+            protected void onPreExecute() {
+                progressDialog.setMessage("please wait.. encoding image");
+                progressDialog.show();
+                progressDialog.setCancelable(false);
+
+            };
+
+            @Override
+            protected String doInBackground(Void... params) {
+                BitmapFactory.Options options = null;
+                options = new BitmapFactory.Options();
+                options.inSampleSize = 3;
+                encodedString = "";
+                bitmap = BitmapFactory.decodeFile(imgDecodableString, options);
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                // Must compress the Image to reduce image size to make upload easy
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream);
+                byte[] byte_arr = stream.toByteArray();
+                // Encode Image to String
+                encodedString = Base64.encodeToString(byte_arr, Base64.NO_WRAP);
+
+
+                return "";
+            }
+
+            @Override
+            protected void onPostExecute(String msg) {
+
+                // Put converted Image string into Async Http Post param
+                // Trigger Image upload
+                if(progressDialog!=null)
+                    progressDialog.dismiss();
+                company_logo();
+
+            }
+        }.execute(null, null, null);
+    }
+
+
 
 }
