@@ -6,10 +6,13 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -30,6 +33,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -251,8 +255,7 @@ public class Freelancer_Register_Activity extends RootActivity {
                 else {
                     free_register();
                   //  Toast.makeText(Freelancer_Register_Activity.this, "Registered successfully", Toast.LENGTH_SHORT).show();
-                    Intent intent= new Intent(Freelancer_Register_Activity.this,Freelancer_List_Activity.class);
-                    startActivity(intent);
+
                 }
 
 
@@ -262,8 +265,9 @@ public class Freelancer_Register_Activity extends RootActivity {
 
     }
     final int RESULT_LOAD_IMAGE = 1;
-
     String imgDecodableString;
+    String encodedString;
+    Bitmap bitmap;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -344,23 +348,22 @@ public class Freelancer_Register_Activity extends RootActivity {
                 if(progressDialog!=null)
                     progressDialog.dismiss();
                 try {
-                    JSONArray jsonObject=new JSONArray(response);
+                    JSONObject jsonObject=new JSONObject(response);
                     Log.e("response",jsonObject.toString());
-                    JSONObject jsonObject1=jsonObject.getJSONObject(0);
-                    String reply=jsonObject1.getString("status");
+                    String reply=jsonObject.getString("status");
                     if(reply.equals("Success")) {
-                        String msg = jsonObject1.getString("message");
-                       free_id=jsonObject1.getString("member_id");
+                        String msg = jsonObject.getString("message");
+                        free_id=jsonObject.getString("freelancer_id");
                         Toast.makeText(Freelancer_Register_Activity.this, msg, Toast.LENGTH_SHORT).show();
-                        Intent intent= new Intent(Freelancer_Register_Activity.this,Employee_Search_Activity.class);
-                        startActivity(intent);
-                        emp_image();
+
+                    //    emp_image();
+                        encodeImagetoString();
 
 //                        finish();
 
                     }
                     else {
-                        String msg=jsonObject1.getString("message");
+                        String msg=jsonObject.getString("message");
                         Toast.makeText(Freelancer_Register_Activity.this, msg, Toast.LENGTH_SHORT).show();
                     }
 
@@ -397,7 +400,7 @@ public class Freelancer_Register_Activity extends RootActivity {
         progressDialog.setMessage("please wait.. we are processing");
         progressDialog.show();
         progressDialog.setCancelable(false);
-        String url = Settings.SERVERURL+"add-freelancer-multi.php";
+        String url = Settings.SERVERURL+"add-freelancer-image.php?";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {
             @Override
@@ -411,6 +414,8 @@ public class Freelancer_Register_Activity extends RootActivity {
                     if(reply.equals("Success")) {
                         String msg = jsonObject.getString("message");
                         Toast.makeText(Freelancer_Register_Activity.this, msg, Toast.LENGTH_SHORT).show();
+                        Intent intent= new Intent(Freelancer_Register_Activity.this,Employee_Search_Activity.class);
+                        startActivity(intent);
 //                        finish();
 
                     }
@@ -437,7 +442,10 @@ public class Freelancer_Register_Activity extends RootActivity {
                 Map<String,String> params = new HashMap<String, String>();
                 params.put("member_id",Settings. getUserid(Freelancer_Register_Activity.this));
                 params.put("file",imgDecodableString);
-              //  params.put("image_id",free_id);
+                params.put("ext_str", "jpg");
+                params.put("freelancer_id",free_id);
+
+                //  params.put("image_id",free_id);
 
 
                 return params;
@@ -445,4 +453,48 @@ public class Freelancer_Register_Activity extends RootActivity {
         };
         AppController.getInstance().addToRequestQueue(stringRequest);
     }
+    public void encodeImagetoString() {
+        new AsyncTask<Void, Void, String>() {
+            final ProgressDialog progressDialog = new ProgressDialog(Freelancer_Register_Activity.this);
+
+            protected void onPreExecute() {
+                progressDialog.setMessage("please wait.. encoding image");
+                progressDialog.show();
+                progressDialog.setCancelable(false);
+
+            };
+
+            @Override
+            protected String doInBackground(Void... params) {
+                BitmapFactory.Options options = null;
+                options = new BitmapFactory.Options();
+                options.inSampleSize = 3;
+                encodedString = "";
+                bitmap = BitmapFactory.decodeFile(imgDecodableString, options);
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                // Must compress the Image to reduce image size to make upload easy
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream);
+                byte[] byte_arr = stream.toByteArray();
+                // Encode Image to String
+                encodedString = Base64.encodeToString(byte_arr, Base64.NO_WRAP);
+
+
+                return "";
+            }
+
+            @Override
+            protected void onPostExecute(String msg) {
+
+                // Put converted Image string into Async Http Post param
+                // Trigger Image upload
+                if(progressDialog!=null)
+                    progressDialog.dismiss();
+                emp_image();
+
+            }
+        }.execute(null, null, null);
+    }
+
+
+
 }

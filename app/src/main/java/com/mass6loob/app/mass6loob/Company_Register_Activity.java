@@ -387,7 +387,4 @@ public class Company_Register_Activity extends  RootActivity {
             }
         }.execute(null, null, null);
     }
-
-
-
 }

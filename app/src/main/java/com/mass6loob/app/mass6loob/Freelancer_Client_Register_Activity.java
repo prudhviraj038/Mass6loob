@@ -64,6 +64,7 @@ public class Freelancer_Client_Register_Activity extends  RootActivity {
                 } else if (phn_str.equals("")) {
                     Toast.makeText(Freelancer_Client_Register_Activity.this, "please enter your phone number", Toast.LENGTH_SHORT).show();
                 }
+                client_register();
                 Intent intent = new Intent(Freelancer_Client_Register_Activity.this, Freelancer_List_Activity.class);
                 startActivity(intent);
             }
