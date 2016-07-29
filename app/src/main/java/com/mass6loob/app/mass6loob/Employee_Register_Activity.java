@@ -3,6 +3,7 @@ package com.mass6loob.app.mass6loob;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -12,6 +13,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.RecoverySystem;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
@@ -20,6 +22,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +32,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.ipaulpro.afilechooser.utils.FileUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,6 +40,7 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,8 +50,11 @@ import java.util.Map;
  * Created by sriven on 6/21/2016.
  */
 public class Employee_Register_Activity extends  RootActivity{
+    String path_final = "";
+    String file_name = "";
+    private ProgressBar progressBar;
     EditText username,jobtitle,location;
-    TextView reviewcv,nationality,experience,gender,educationmasters,educationbachelors,uploadimage,uploadcv;
+    TextView reviewcv,nationality,experience,gender,educationmasters,educationbachelors,uploadimage,upload_cv;
     LinearLayout submit;
     String user_str,job_str,exp_str,nationality_str,edumasters_str,edubachelors_str,location_str,gender_str,uploadcv_str,uploadimage_str;
     String exp_id = "0";
@@ -88,7 +96,7 @@ public class Employee_Register_Activity extends  RootActivity{
         educationmasters = (TextView) findViewById(R.id.emp_edu_masters);
         location = (EditText) findViewById(R.id.emp_location);
         gender = (TextView) findViewById(R.id.emp_gender);
-        uploadcv = (TextView) findViewById(R.id.emp_cv_l);
+        upload_cv = (TextView) findViewById(R.id.emp_cv_l);
         LinearLayout emp_nationality = (LinearLayout) findViewById(R.id.emp_nationality_ll);
         emp_nationality.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -211,7 +219,7 @@ public class Employee_Register_Activity extends  RootActivity{
         uploadcv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                showChooser();
 
             }
         });
@@ -238,7 +246,7 @@ public class Employee_Register_Activity extends  RootActivity{
                 edubachelors_str = educationbachelors.getText().toString();
                 location_str = location.getText().toString();
                 gender_str = gender.getText().toString();
-            //    uploadcv_str = uploadcv.getText().toString();
+               uploadcv_str = upload_cv.getText().toString();
           //      uploadimage_str = uploadimage.getText().toString();
                 if (user_str.equals("")) {
                     Toast.makeText(Employee_Register_Activity.this, "please enter username", Toast.LENGTH_SHORT).show();
@@ -270,8 +278,21 @@ public class Employee_Register_Activity extends  RootActivity{
             }
         });
     }
-
-        final int RESULT_LOAD_IMAGE = 1;
+    private static final int FILE_SELECT_CODE = 2;
+    private void showChooser() {
+        // Use the GET_CONTENT intent from the utility class
+        Intent target = FileUtils.createGetContentIntent();
+        // Create the chooser Intent
+        Intent intent = Intent.createChooser(
+                target, "select a file");
+        try {
+            startActivityForResult(intent, FILE_SELECT_CODE);
+        } catch (ActivityNotFoundException e) {
+            // The reason for the existence of aFileChooser
+        }
+    }
+    boolean isfilechoosen = false;
+    final int RESULT_LOAD_IMAGE = 1;
     String imgDecodableString;
     String encodedString;
     Bitmap bitmap;
@@ -296,13 +317,29 @@ public class Employee_Register_Activity extends  RootActivity{
 
                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                 imgDecodableString = cursor.getString(columnIndex);
+                Log.e("image",imgDecodableString);
                 cursor.close();
                 ImageView imgView = (ImageView) findViewById(R.id.emp_img);
                 // Set the Image in ImageView after decoding the String
                 imgView.setImageBitmap(BitmapFactory
                         .decodeFile(imgDecodableString));
 
-            } else {
+            }else if (requestCode == FILE_SELECT_CODE &&resultCode == RESULT_OK) {
+                // Get the Uri of the selected file
+                Uri uri = data.getData();
+                Log.d("ask24", "File Uri: " + uri.toString());
+                // Get the path
+                String path = FileUtils.getPath(this, uri);
+                Log.d("ask24", "File Path: " + path);
+                // Get the file instance
+                // File file = new File(path);
+                // Initiate the upload
+                path_final = path;
+                File file = new File(path);
+                file_name = file.getName();
+                upload_cv.setText(file_name);
+                isfilechoosen = true;
+            }else {
                 Toast.makeText(this, "You haven't picked Image",
                         Toast.LENGTH_LONG).show();
             }
@@ -473,10 +510,13 @@ public class Employee_Register_Activity extends  RootActivity{
                     if(reply.equals("Success")) {
                         String msg = jsonObject.getString("message");
                         emp_id=jsonObject.getString("employee_id");
-                        Toast.makeText(Employee_Register_Activity.this, msg, Toast.LENGTH_SHORT).show();
+
+                        //Toast.makeText(Employee_Register_Activity.this, msg, Toast.LENGTH_SHORT).show();
                         encodeImagetoString();
 
-                  //    emp_image();
+
+
+                        //    emp_image();
                       //  emp_cv();
 //                        finish();
 
@@ -533,8 +573,15 @@ public class Employee_Register_Activity extends  RootActivity{
                     String reply=jsonObject.getString("status");
                     if(reply.equals("Success")) {
                         String msg = jsonObject.getString("message");
-                        Intent intent= new Intent(Employee_Register_Activity.this,Employee_Search_Activity.class);
-                        startActivity(intent);
+                        Intent upload_intent = new Intent(Employee_Register_Activity.this,UploadActivity.class);
+                        upload_intent.putExtra("file_path",path_final);
+                        upload_intent.putExtra("emp_id", emp_id);
+                        if(isfilechoosen)
+                            startActivity(upload_intent);
+                        else{
+                            Toast.makeText(Employee_Register_Activity.this, "Please upload cv", Toast.LENGTH_SHORT).show();
+                        }
+//
                   //      Toast.makeText(Employee_Register_Activity.this, msg, Toast.LENGTH_SHORT).show();
 //                        finish();
                        // encodeImagetoString();
@@ -561,7 +608,8 @@ public class Employee_Register_Activity extends  RootActivity{
             protected Map<String,String> getParams(){
                 Map<String,String> params = new HashMap<String, String>();
                 params.put("member_id",Settings. getUserid(Employee_Register_Activity.this));
-                params.put("file",imgDecodableString);
+                params.put("file",encodedString);
+                Log.e("encoded",encodedString);
                 params.put("employee_id",emp_id);
                 params.put("ext_str", "jpg");
 
@@ -571,59 +619,7 @@ public class Employee_Register_Activity extends  RootActivity{
         };
         AppController.getInstance().addToRequestQueue(stringRequest);
     }
-    public  void emp_cv(){
-        final ProgressDialog progressDialog = new ProgressDialog(Employee_Register_Activity.this);
-        progressDialog.setMessage("please wait.. we are processing");
-        progressDialog.show();
-        progressDialog.setCancelable(false);
-        String url = Settings.SERVERURL+"add-employee-cv.php";
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                if(progressDialog!=null)
-                    progressDialog.dismiss();
-                try {
-                    JSONObject jsonObject=new JSONObject(response);
-                    Log.e("response",jsonObject.toString());
-                    String reply=jsonObject.getString("status");
-                    if(reply.equals("Success")) {
-                        String msg = jsonObject.getString("message");
-                        Toast.makeText(Employee_Register_Activity.this, msg, Toast.LENGTH_SHORT).show();
-//                        finish();
-
-                    }
-                    else {
-                        String msg=jsonObject.getString("message");
-                        Toast.makeText(Employee_Register_Activity.this, msg, Toast.LENGTH_SHORT).show();
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        if(progressDialog!=null)
-                            progressDialog.dismiss();
-                        Toast.makeText(Employee_Register_Activity.this, error.toString(), Toast.LENGTH_SHORT).show();
-                    }
-                }){
-            @Override
-            protected Map<String,String> getParams(){
-                Map<String,String> params = new HashMap<String, String>();
-                params.put("member_id",Settings. getUserid(Employee_Register_Activity.this));
-                params.put("resume",uploadcv_str);
-                params.put("employee_id",emp_id);
-
-
-                return params;
-            }
-        };
-        AppController.getInstance().addToRequestQueue(stringRequest);
-    }
     public void encodeImagetoString() {
         new AsyncTask<Void, Void, String>() {
             final ProgressDialog progressDialog = new ProgressDialog(Employee_Register_Activity.this);

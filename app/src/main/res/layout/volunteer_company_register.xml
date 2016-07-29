@@ -289,7 +289,8 @@
                                     android:orientation="horizontal"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_margin="10dp">
+                                    android:layout_margin="10dp"
+                                    android:baselineAligned="false">
 
                                     <LinearLayout
                                         android:orientation="vertical"
