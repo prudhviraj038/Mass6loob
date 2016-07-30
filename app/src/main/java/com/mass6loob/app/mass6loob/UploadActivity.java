@@ -144,8 +144,8 @@ public class UploadActivity extends ActionBarActivity {
             String responseString = null;
 
             HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost(Settings.SERVERURL+ "add-employee-cv.php");
-            Log.e("cv ",Settings.SERVERURL+ "add-employee-cv.php");
+            HttpPost httppost = new HttpPost(Settings.SERVERURL+ "login.php");
+            Log.e("cv ",Settings.SERVERURL+ "login.php");
 
             try {
                 AndroidMultiPartEntity entity = new AndroidMultiPartEntity(
@@ -159,10 +159,13 @@ public class UploadActivity extends ActionBarActivity {
 
                 File sourceFile = new File(file_path);
                 // Adding file data to http body
-                entity.addPart("resume", new FileBody(sourceFile));
-                entity.addPart("employee_id", new StringBody(emp_id));
-                Log.e("emp_id",emp_id);
-                entity.addPart("member_id", new StringBody(Settings.getUserid(UploadActivity.this)));
+              //  entity.addPart("resume", new FileBody(sourceFile));
+             //   entity.addPart("employee_id", new StringBody(emp_id));
+
+                entity.addPart("email", new StringBody("hii"));
+                entity.addPart("password", new StringBody("hii"));
+                Log.e("email", emp_id);
+               // entity.addPart("member_id", new StringBody(Settings.getUserid(UploadActivity.this)));
              //   entity.addPart("file_count", new StringBody(String.valueOf(current)));
                 totalSize = entity.getContentLength();
                 Log.e("totalsize",String.valueOf(totalSize));
