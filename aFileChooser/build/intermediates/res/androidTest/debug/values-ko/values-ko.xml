@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/I:/app_designs/Mass6loob/aFileChooser/build/intermediates/bundles/debug/res/values-ko/values-ko.xml -->
+    <!-- From: file:/D:/Android%20Apps/Mass6loob/aFileChooser/build/intermediates/bundles/debug/res/values-ko/values-ko.xml -->
     <eat-comment/>
     <string name="choose_file">파일 선택</string>
     <string name="empty_directory">빈 디렉토리</string>

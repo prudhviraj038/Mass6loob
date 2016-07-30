@@ -2,6 +2,7 @@ package com.mass6loob.app.mass6loob;
 
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -35,6 +36,8 @@ import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
 import com.mass6loob.app.mass6loob.AndroidMultiPartEntity.ProgressListener;
 
 import org.apache.http.entity.mime.content.FileBody;
@@ -77,8 +80,8 @@ public class UploadActivity extends ActionBarActivity {
 
 
        // total = file_map.size();
-        new UploadFileToServer().execute();
-
+       // new UploadFileToServer().execute();
+      //  upload_with_ion();
 
     }
 
@@ -241,6 +244,7 @@ public class UploadActivity extends ActionBarActivity {
         //startActivity(intent);
         finish();
     }
+
 
 
 }

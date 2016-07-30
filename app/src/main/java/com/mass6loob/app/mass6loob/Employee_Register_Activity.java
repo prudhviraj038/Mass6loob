@@ -33,6 +33,8 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.ipaulpro.afilechooser.utils.FileUtils;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,6 +47,8 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.xml.datatype.Duration;
 
 /**
  * Created by sriven on 6/21/2016.
@@ -572,12 +576,8 @@ public class Employee_Register_Activity extends  RootActivity{
                     Log.e("response",jsonObject.toString());
                     String reply=jsonObject.getString("status");
                     if(reply.equals("Success")) {
-                        String msg = jsonObject.getString("message");
-                        Intent upload_intent = new Intent(Employee_Register_Activity.this,UploadActivity.class);
-                        upload_intent.putExtra("file_path",path_final);
-                        upload_intent.putExtra("emp_id", emp_id);
-                        if(isfilechoosen)
-                            startActivity(upload_intent);
+                         if(isfilechoosen)
+                             upload_with_ion();
                         else{
                             Toast.makeText(Employee_Register_Activity.this, "Please upload cv", Toast.LENGTH_SHORT).show();
                         }
@@ -609,7 +609,7 @@ public class Employee_Register_Activity extends  RootActivity{
                 Map<String,String> params = new HashMap<String, String>();
                 params.put("member_id",Settings. getUserid(Employee_Register_Activity.this));
                 params.put("file",encodedString);
-                Log.e("encoded",encodedString);
+                Log.e("encoded", encodedString);
                 params.put("employee_id",emp_id);
                 params.put("ext_str", "jpg");
 
@@ -662,5 +662,38 @@ public class Employee_Register_Activity extends  RootActivity{
         }.execute(null, null, null);
     }
 
+    private void upload_with_ion(){
+
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("please_wait_loadin");
+        progressDialog.show();
+        progressDialog.setCancelable(false);
+        Ion.with(this)
+                .load(Settings.SERVERURL+"add-employee-cv.php")
+                .setMultipartParameter("employee_id", emp_id)
+                .setMultipartParameter("member_id", Settings.getUserid(this))
+                .setMultipartFile("resume", "application/pdf", new File(path_final)).asString()
+                .setCallback(new FutureCallback<String>() {
+                    @Override
+                    public void onCompleted(Exception e, String s) {
+                        Log.e("res_ion", s);
+                        if (progressDialog!=null)
+                            progressDialog.dismiss();
+
+                        try {
+                            JSONObject jsonObject = new JSONObject(s);
+                            if(jsonObject.getString("status").equals("Success")){
+                                Toast.makeText(Employee_Register_Activity.this,jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
+                            else{
+                                Toast.makeText(Employee_Register_Activity.this,jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
+                });
+    }
 
 }
