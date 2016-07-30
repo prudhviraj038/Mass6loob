@@ -84,9 +84,16 @@ public class Home_Activity extends RootActivity {
         postmycv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Home_Activity.this, Employee_Register_Activity.class);
-                startActivity(intent);
+                if(Settings.getUserid(Home_Activity.this).equals("-1"))
+                {
+                    Intent intent = new Intent(Home_Activity.this, Login_Activity.class);
+                    startActivity(intent);
+                }else {
+                    Intent mainIntent = new Intent(getApplicationContext(),Employee_Register_Activity.class);
+                    mainIntent.putExtra("uid",Settings.getUserid(Home_Activity.this));
+                    startActivity(mainIntent);
 
+                }
             }
         });
         register = (LinearLayout) findViewById(R.id.lancer_register);
@@ -109,8 +116,16 @@ public class Home_Activity extends RootActivity {
         postmycv1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Home_Activity.this, Freelancer_Register_Activity.class);
-                startActivity(intent);
+                if(Settings.getUserid(Home_Activity.this).equals("-1"))
+                {
+                    Intent intent = new Intent(Home_Activity.this, Login_Activity.class);
+                    startActivity(intent);
+                }else {
+                    Intent mainIntent = new Intent(getApplicationContext(),Freelancer_Register_Activity.class);
+                    mainIntent.putExtra("uid",Settings.getUserid(Home_Activity.this));
+                    startActivity(mainIntent);
+
+                }
             }
         });
         volunterregister = (LinearLayout) findViewById(R.id.volunteer_register);
@@ -133,8 +148,16 @@ public class Home_Activity extends RootActivity {
         volunteercompanyregister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Home_Activity.this, Volunteer_Company_Register_Activity.class);
-                startActivity(intent);
+                if(Settings.getUserid(Home_Activity.this).equals("-1"))
+                {
+                    Intent intent = new Intent(Home_Activity.this, Login_Activity.class);
+                    startActivity(intent);
+                }else {
+                    Intent mainIntent = new Intent(getApplicationContext(),Volunteer_Company_Register_Activity.class);
+                    mainIntent.putExtra("uid",Settings.getUserid(Home_Activity.this));
+                    startActivity(mainIntent);
+
+                }
             }
         });
 
