@@ -665,7 +665,7 @@ public class Employee_Register_Activity extends  RootActivity{
     private void upload_with_ion(){
 
         final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("please_wait_loadin");
+        progressDialog.setMessage("please_wait_loading");
         progressDialog.show();
         progressDialog.setCancelable(false);
         Ion.with(this)

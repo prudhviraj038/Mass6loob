@@ -13,6 +13,7 @@ import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -41,7 +42,7 @@ public class Volunteer_Company_Register_Activity extends RootActivity {
     LinearLayout companysingup;
     String company_str,password_str,intrested_str,establish_str,area_str,logo_str;
     String vol_id;
-    ImageView agriculture;
+    ImageView agriculture,islamic,tourisam;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,15 +65,13 @@ public class Volunteer_Company_Register_Activity extends RootActivity {
             }
         });
         agriculture = (ImageView)findViewById(R.id.ic_tick1);
-        agriculture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
+        islamic = (ImageView)findViewById(R.id.ic_tick2);
+        tourisam = (ImageView)findViewById(R.id.ic_tick3);
 
 
-      //  companylogo= (EditText)findViewById(R.id.company_logo);
+
+
+        //  companylogo= (EditText)findViewById(R.id.company_logo);
        // companylogo.setOnClickListener(new View.OnClickListener() {
         //    @Override
          //   public void onClick(View v) {
@@ -163,6 +162,8 @@ public class Volunteer_Company_Register_Activity extends RootActivity {
         }
 
     }
+
+
     public  void volunteer_register(){
         final ProgressDialog progressDialog = new ProgressDialog(Volunteer_Company_Register_Activity.this);
         progressDialog.setMessage("please wait.. we are processing");
@@ -304,8 +305,6 @@ public class Volunteer_Company_Register_Activity extends RootActivity {
                 byte[] byte_arr = stream.toByteArray();
                 // Encode Image to String
                 encodedString = Base64.encodeToString(byte_arr, Base64.NO_WRAP);
-
-
                 return "";
             }
 

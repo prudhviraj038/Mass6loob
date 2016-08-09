@@ -400,7 +400,7 @@ public class Freelancer_Register_Activity extends RootActivity {
         progressDialog.setMessage("please wait.. we are processing");
         progressDialog.show();
         progressDialog.setCancelable(false);
-        String url = Settings.SERVERURL+"add-freelancer-image.php?";
+        String url = Settings.SERVERURL+"add-freelancer-multi.php?";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {
             @Override
