@@ -290,7 +290,14 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="10dp"
-                                    android:baselineAligned="false">
+                                    android:baselineAligned="false"
+                                    android:visibility="visible">
+
+                                    <GridView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:id="@+id/gridView"
+                                        android:numColumns="2" />
 
                                     <LinearLayout
                                         android:orientation="vertical"
@@ -298,7 +305,8 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:divider="@drawable/whitedivider"
-                                        android:showDividers="middle">
+                                        android:showDividers="middle"
+                                        android:visibility="gone">
 
                                         <LinearLayout
                                             android:orientation="horizontal"
@@ -375,7 +383,8 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:divider="@drawable/whitedivider"
-                                        android:showDividers="middle" >
+                                        android:showDividers="middle"
+                                        android:visibility="gone">
 
                                         <LinearLayout
                                             android:orientation="horizontal"

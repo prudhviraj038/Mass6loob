@@ -1,6 +1,5 @@
 package com.mass6loob.app.mass6loob;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
@@ -13,8 +12,8 @@ import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -23,6 +22,7 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONArray;
@@ -30,6 +30,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,9 +41,12 @@ public class Volunteer_Company_Register_Activity extends RootActivity {
     EditText companyname,password,intrestedin,establisheddate,area,catagory;
     TextView company_logo;
     LinearLayout companysingup;
-    String company_str,password_str,intrested_str,establish_str,area_str,logo_str;
+    String company_str,password_str,intrested_str,establish_str,area_str,cate;
     String vol_id;
     ImageView agriculture,islamic,tourisam;
+    GridView gridView;
+    VolunteerCatgoryAdapter volunteerCatgoryAdapter;
+    ArrayList<Categories> categories;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +54,11 @@ public class Volunteer_Company_Register_Activity extends RootActivity {
 
         setContentView(R.layout.volunteer_company_register);
         final int RESULT_LOAD_IMAGE = 1;
+        categories=new ArrayList<>();
+        get_cat();
+        gridView=(GridView)findViewById(R.id.gridView);
+        volunteerCatgoryAdapter=new VolunteerCatgoryAdapter(this,categories);
+        gridView.setAdapter(volunteerCatgoryAdapter);
         companyname = (EditText)findViewById(R.id.company_name);
       //  password = (EditText)findViewById(R.id.company_pwd);
         intrestedin = (EditText)findViewById(R.id.intrested_in);
@@ -88,6 +97,7 @@ public class Volunteer_Company_Register_Activity extends RootActivity {
                 intrested_str = intrestedin.getText().toString();
                 establish_str = establisheddate.getText().toString();
                 area_str = area.getText().toString();
+                cate=volunteerCatgoryAdapter.get_cate();
             //    logo_str = companylogo.getText().toString();
 
                 if(company_str.equals("")){
@@ -110,6 +120,9 @@ public class Volunteer_Company_Register_Activity extends RootActivity {
                //    }
                 else if(company_str.equals("")){
                     Toast.makeText(Volunteer_Company_Register_Activity.this, "please enter company name", Toast.LENGTH_SHORT).show();
+                }
+                else if(cate.equals("-1")){
+                    Toast.makeText(Volunteer_Company_Register_Activity.this, "please Select categories", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     volunteer_register();
@@ -217,7 +230,8 @@ public class Volunteer_Company_Register_Activity extends RootActivity {
                 params.put("intrested",intrested_str);
                 params.put("established",establish_str);
                 params.put("area",area_str);
-                params.put("category","1");
+                params.put("category",cate);
+
 
 
                 return params;
@@ -320,6 +334,41 @@ public class Volunteer_Company_Register_Activity extends RootActivity {
             }
         }.execute(null, null, null);
     }
+    private void get_cat() {
 
+        String url = Settings.SERVERURL + "category.php";
+        Log.e("url--->", url);
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Please wait....");
+        progressDialog.setCancelable(false);
+        JsonArrayRequest jsObjRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray jsonObject) {
+                progressDialog.dismiss();
+                Log.e("response is: ", jsonObject.toString());
+                try {
+
+                    for (int i = 0; i < jsonObject.length(); i++) {
+                        Categories categories1=new Categories(jsonObject.getJSONObject(i));
+                        categories.add(categories1);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // TODO Auto-generated method stub
+                Log.e("response is:", error.toString());
+                Toast.makeText(Volunteer_Company_Register_Activity.this, "Server not connected", Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+            }
+
+        });
+        AppController.getInstance().addToRequestQueue(jsObjRequest);
+
+    }
 
     }
