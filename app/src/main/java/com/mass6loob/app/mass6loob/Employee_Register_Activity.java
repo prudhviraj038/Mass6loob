@@ -35,6 +35,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.ipaulpro.afilechooser.utils.FileUtils;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -75,7 +76,7 @@ public class Employee_Register_Activity extends  RootActivity{
     ArrayList<String>edubs_title;
     ArrayList<String>edums_id;
     ArrayList<String>edums_title;
-
+    ImageView imgView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,6 +93,7 @@ public class Employee_Register_Activity extends  RootActivity{
         edums_title = new ArrayList<String>();
         gen_title.add("Male");
         gen_title.add("Female");
+        imgView = (ImageView) findViewById(R.id.emp_img);
         username = (EditText) findViewById(R.id.user_name);
         jobtitle = (EditText) findViewById(R.id.job_title);
         experience = (TextView) findViewById(R.id.emp_experience);
@@ -101,6 +103,24 @@ public class Employee_Register_Activity extends  RootActivity{
         location = (EditText) findViewById(R.id.emp_location);
         gender = (TextView) findViewById(R.id.emp_gender);
         upload_cv = (TextView) findViewById(R.id.emp_cv_l);
+        try {
+            JSONObject jsonObject= new JSONObject(Settings.getSettings_json(Employee_Register_Activity.this));
+            Log.e("lenth",String.valueOf(jsonObject.getJSONArray("employees").length()));
+            if(jsonObject.getJSONArray("employees").length()!=0){
+                username.setText(jsonObject.getString("fname")+" "+jsonObject.getString("lname"));
+                jobtitle.setText(jsonObject.getJSONArray("employees").getJSONObject(0).getString("title "));
+                experience.setText(jsonObject.getJSONArray("employees").getJSONObject(0).getJSONObject("experience").getString("title"+Settings.get_lan(Employee_Register_Activity.this)));
+                nationality.setText(jsonObject.getJSONArray("employees").getJSONObject(0).getString("nationality"));
+                educationbachelors.setText(jsonObject.getJSONArray("employees").getJSONObject(0).getJSONObject("bachelors").getString("title" + Settings.get_lan(Employee_Register_Activity.this)));
+                educationmasters.setText(jsonObject.getJSONArray("employees").getJSONObject(0).getJSONObject("masters").getString("title" + Settings.get_lan(Employee_Register_Activity.this)));
+                gender.setText(jsonObject.getJSONArray("employees").getJSONObject(0).getString("gender"));
+                location.setText(jsonObject.getJSONArray("employees").getJSONObject(0).getString("location"));
+                Picasso.with(this).load(jsonObject.getJSONArray("employees").getJSONObject(0).getString("image")).into(imgView);
+            }
+        } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
         LinearLayout emp_nationality = (LinearLayout) findViewById(R.id.emp_nationality_ll);
         emp_nationality.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -195,7 +215,7 @@ public class Employee_Register_Activity extends  RootActivity{
                 dialog.show();
             }
         });
-        get_edu_masters();
+//        get_edu_masters();
 
 
         LinearLayout emp_gender = (LinearLayout) findViewById(R.id.emp_gender_ll);
@@ -251,7 +271,7 @@ public class Employee_Register_Activity extends  RootActivity{
                 location_str = location.getText().toString();
                 gender_str = gender.getText().toString();
                uploadcv_str = upload_cv.getText().toString();
-          //      uploadimage_str = uploadimage.getText().toString();
+                uploadimage_str = imgDecodableString;
                 if (user_str.equals("")) {
                     Toast.makeText(Employee_Register_Activity.this, "please enter username", Toast.LENGTH_SHORT).show();
                 } else if (job_str.equals("")) {
@@ -268,10 +288,10 @@ public class Employee_Register_Activity extends  RootActivity{
                     Toast.makeText(Employee_Register_Activity.this, "please select ur location", Toast.LENGTH_SHORT).show();
                 } else if (gender_str.equals("")) {
                     Toast.makeText(Employee_Register_Activity.this, "please select ur gender", Toast.LENGTH_SHORT).show();
-             //   } else if (uploadcv_str.equals("")) {
-               //     Toast.makeText(Employee_Register_Activity.this, "please upload your cv", Toast.LENGTH_SHORT).show();
-              //  } else if (uploadimage_str.equals("")) {
-                //    Toast.makeText(Employee_Register_Activity.this, "please upload ur image", Toast.LENGTH_SHORT).show();
+                } else if (uploadcv_str.equals("")) {
+                    Toast.makeText(Employee_Register_Activity.this, "please upload your cv", Toast.LENGTH_SHORT).show();
+                } else if (uploadimage_str.equals("")) {
+                    Toast.makeText(Employee_Register_Activity.this, "please upload ur image", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     employee_register();
@@ -287,8 +307,10 @@ public class Employee_Register_Activity extends  RootActivity{
         // Use the GET_CONTENT intent from the utility class
         Intent target = FileUtils.createGetContentIntent();
         // Create the chooser Intent
+
         Intent intent = Intent.createChooser(
                 target, "select a file");
+        intent.setType("application/msword,application/pdf");
         try {
             startActivityForResult(intent, FILE_SELECT_CODE);
         } catch (ActivityNotFoundException e) {
@@ -323,7 +345,7 @@ public class Employee_Register_Activity extends  RootActivity{
                 imgDecodableString = cursor.getString(columnIndex);
                 Log.e("image",imgDecodableString);
                 cursor.close();
-                ImageView imgView = (ImageView) findViewById(R.id.emp_img);
+
                 // Set the Image in ImageView after decoding the String
                 imgView.setImageBitmap(BitmapFactory
                         .decodeFile(imgDecodableString));
@@ -432,10 +454,16 @@ public class Employee_Register_Activity extends  RootActivity{
 
                     for (int i = 0; i < jsonObject.length(); i++) {
                         JSONObject sub = jsonObject.getJSONObject(i);
+                        String type=sub.getString("type");
                         String exp_title = sub.getString("title" + Settings.get_lan(Employee_Register_Activity.this));
                         String exp_id = sub.getString("id");
-                        edubs_id.add(exp_id);
-                        edubs_title.add(exp_title);
+                        if(type.equals("Masters")){
+                            edums_id.add(exp_id);
+                            edums_title.add(exp_title);
+                        }else {
+                            edubs_id.add(exp_id);
+                            edubs_title.add(exp_title);
+                        }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -612,8 +640,6 @@ public class Employee_Register_Activity extends  RootActivity{
                 Log.e("encoded", encodedString);
                 params.put("employee_id",emp_id);
                 params.put("ext_str", "jpg");
-
-
                 return params;
             }
         };

@@ -11,6 +11,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 
@@ -72,9 +75,21 @@ public class Home_Activity extends RootActivity {
                     Intent intent = new Intent(Home_Activity.this, Login_Activity.class);
                     startActivity(intent);
                 }else {
-                    Intent mainIntent = new Intent(getApplicationContext(),Company_Register_Activity.class);
-                    mainIntent.putExtra("uid",Settings.getUserid(Home_Activity.this));
-                    startActivity(mainIntent);
+                    try {
+                        JSONObject jsonObject= new JSONObject(Settings.getSettings_json(Home_Activity.this));
+                        if(jsonObject.getJSONArray("companies").length()==0){
+                            Intent mainIntent = new Intent(getApplicationContext(),Company_Register_Activity.class);
+                            mainIntent.putExtra("uid",Settings.getUserid(Home_Activity.this));
+                            startActivity(mainIntent);
+                        }else{
+                            Intent intent= new Intent(Home_Activity.this,Employee_Search_Activity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
 
                 }
 
@@ -105,9 +120,20 @@ public class Home_Activity extends RootActivity {
                     Intent intent = new Intent(Home_Activity.this, Login_Activity.class);
                     startActivity(intent);
                 }else {
-                    Intent mainIntent = new Intent(getApplicationContext(),Freelancer_Client_Register_Activity.class);
-                    mainIntent.putExtra("uid",Settings.getUserid(Home_Activity.this));
-                    startActivity(mainIntent);
+                    try {
+                        JSONObject jsonObject= new JSONObject(Settings.getSettings_json(Home_Activity.this));
+                        Log.e("lenth1",String.valueOf(jsonObject.getJSONArray("freelancers_company").length()));
+                        if(jsonObject.getJSONArray("freelancers_company").length()==0) {
+                            Intent mainIntent = new Intent(getApplicationContext(), Freelancer_Client_Register_Activity.class);
+                            mainIntent.putExtra("uid", Settings.getUserid(Home_Activity.this));
+                            startActivity(mainIntent);
+                        }else{
+                            Intent intent = new Intent(Home_Activity.this, Freelancer_List_Activity.class);
+                            startActivity(intent);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
 
                 }
             }
@@ -128,23 +154,7 @@ public class Home_Activity extends RootActivity {
                 }
             }
         });
-        volunterregister = (LinearLayout) findViewById(R.id.volunteer_register);
-        volunterregister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(Settings.getUserid(Home_Activity.this).equals("-1"))
-                {
-                    Intent intent = new Intent(Home_Activity.this, Login_Activity.class);
-                    startActivity(intent);
-                }else {
-                    Intent mainIntent = new Intent(getApplicationContext(),Volunteer_Register_Activity.class);
-                    mainIntent.putExtra("uid",Settings.getUserid(Home_Activity.this));
-                    startActivity(mainIntent);
-
-                }
-            }
-        });
-        volunteercompanyregister = (LinearLayout) findViewById(R.id.volunteer_postcv);
+        volunteercompanyregister = (LinearLayout) findViewById(R.id.volunteer_register);
         volunteercompanyregister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -153,10 +163,39 @@ public class Home_Activity extends RootActivity {
                     Intent intent = new Intent(Home_Activity.this, Login_Activity.class);
                     startActivity(intent);
                 }else {
-                    Intent mainIntent = new Intent(getApplicationContext(),Volunteer_Company_Register_Activity.class);
-                    mainIntent.putExtra("uid",Settings.getUserid(Home_Activity.this));
+
+                    Intent mainIntent = new Intent(getApplicationContext(), Volunteer_Company_Register_Activity.class);
+                    mainIntent.putExtra("uid", Settings.getUserid(Home_Activity.this));
                     startActivity(mainIntent);
 
+                }
+
+
+
+            }
+        });
+        volunterregister = (LinearLayout) findViewById(R.id.volunteer_postcv);
+        volunterregister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(Settings.getUserid(Home_Activity.this).equals("-1"))
+                {
+                    Intent intent = new Intent(Home_Activity.this, Login_Activity.class);
+                    startActivity(intent);
+                }else {
+                    try {
+                        JSONObject jsonObject= new JSONObject(Settings.getSettings_json(Home_Activity.this));
+                        if(jsonObject.getJSONArray("volunteers").length()==0) {
+                            Intent mainIntent = new Intent(getApplicationContext(), Volunteer_Register_Activity.class);
+                            mainIntent.putExtra("uid", Settings.getUserid(Home_Activity.this));
+                            startActivity(mainIntent);
+                        }else{
+                            Intent intent = new Intent(Home_Activity.this,Volunteer_List_Activity.class);
+                            startActivity(intent);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });

@@ -10,6 +10,9 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Locale;
 
 /**
@@ -111,5 +114,37 @@ public class Settings {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         return sharedPreferences.getString(USERID, "-1");
 
+    }
+    public static void setSettings(Context context, String about_us) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("settings",about_us);
+        editor.commit();
+    }
+
+    public static String getSettings(Context context,String word) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        JSONObject jsonObject;
+        String temp;
+        try {
+            jsonObject=new JSONObject( sharedPreferences.getString("settings","-1"));
+            temp=jsonObject.getString(word);
+        } catch (JSONException e) {
+            temp=word;
+            e.printStackTrace();
+        }
+
+        return temp;
+    }
+    public static String getSettings_json(Context context) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        JSONObject jsonObject = null;
+        String temp;
+        try {
+            jsonObject=new JSONObject( sharedPreferences.getString("settings","-1"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject.toString();
     }
 }

@@ -65,6 +65,17 @@ public class Volunteer_Company_Register_Activity extends RootActivity {
         establisheddate= (EditText)findViewById(R.id.established_date);
         area= (EditText)findViewById(R.id.company_area);
         company_logo = (TextView)findViewById(R.id.company_logo);
+        try {
+            JSONObject jsonObject= new JSONObject(Settings.getSettings_json(Volunteer_Company_Register_Activity.this));
+            if(jsonObject.getJSONArray("volunteers_company").length()!=0) {
+                companyname.setText(jsonObject.getJSONArray("volunteers_company").getJSONObject(0).getString("name"));
+                intrestedin.setText(jsonObject.getJSONArray("volunteers_company").getJSONObject(0).getString("intrested"));
+                establisheddate.setText(jsonObject.getJSONArray("volunteers_company").getJSONObject(0).getString("established"));
+                area.setText(jsonObject.getJSONArray("volunteers_company").getJSONObject(0).getString("area"));
+            }
+            }catch (JSONException e) {
+            e.printStackTrace();
+        }
         LinearLayout companylogo = (LinearLayout)findViewById(R.id.vol_com_logo_ll);
         companylogo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -199,7 +210,7 @@ public class Volunteer_Company_Register_Activity extends RootActivity {
                         Toast.makeText(Volunteer_Company_Register_Activity.this, msg, Toast.LENGTH_SHORT).show();
 
                     //    emp_image();
-                        encodeImagetoString();
+//                        encodeImagetoString();
 
 //                        finish();
 

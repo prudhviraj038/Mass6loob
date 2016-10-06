@@ -104,9 +104,9 @@ public class Signup_Screen_Activity extends Activity {
                             String mem_id = jsonArray.getJSONObject(0).getString("member_id");
                             String name = jsonArray.getJSONObject(0).getString("member_id");
                             Settings.setUserid(Signup_Screen_Activity.this, mem_id, name);
-                            Intent mainIntent = new Intent(getApplicationContext(), Employee_Search_Activity.class);
-                            mainIntent.putExtra("uid", mem_id);
-                            startActivity(mainIntent);
+                            //Intent mainIntent = new Intent(getApplicationContext(), Employee_Search_Activity.class);
+                           // mainIntent.putExtra("uid", mem_id);
+                          //  startActivity(mainIntent);
                             finish();
                         }
 

@@ -28,6 +28,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -243,9 +244,9 @@ public class Company_Register_Activity extends  RootActivity {
                 if(progressDialog!=null)
                     progressDialog.dismiss();
                 try {
-                    JSONArray jsonObject=new JSONArray(response);
+                    JSONObject jsonObject=new JSONObject(response);
                     Log.e("response",jsonObject.toString());
-                    JSONObject jsonObject1=jsonObject.getJSONObject(0);
+                    JSONObject jsonObject1=jsonObject;
                     String reply=jsonObject1.getString("status");
                     if(reply.equals("Success")) {
                         String msg = jsonObject1.getString("message");
@@ -256,7 +257,10 @@ public class Company_Register_Activity extends  RootActivity {
                         //startActivity(intent);
                         //company_logo();
 //                        finish();
-                        encodeImagetoString();
+                     //   encodeImagetoString();
+                        Intent intent= new Intent(Company_Register_Activity.this,Employee_Search_Activity.class);
+                        startActivity(intent);
+                        finish();
 
                     }
                     else {

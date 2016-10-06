@@ -63,10 +63,11 @@ public class Freelancer_Client_Register_Activity extends  RootActivity {
                     Toast.makeText(Freelancer_Client_Register_Activity.this, "please enter valid email", Toast.LENGTH_SHORT).show();
                 } else if (phn_str.equals("")) {
                     Toast.makeText(Freelancer_Client_Register_Activity.this, "please enter your phone number", Toast.LENGTH_SHORT).show();
+                }else {
+                    client_register();
+                    Intent intent = new Intent(Freelancer_Client_Register_Activity.this, Freelancer_List_Activity.class);
+                    startActivity(intent);
                 }
-                client_register();
-                Intent intent = new Intent(Freelancer_Client_Register_Activity.this, Freelancer_List_Activity.class);
-                startActivity(intent);
             }
         });
 
@@ -76,7 +77,7 @@ public class Freelancer_Client_Register_Activity extends  RootActivity {
         progressDialog.setMessage("please wait.. we are processing");
         progressDialog.show();
         progressDialog.setCancelable(false);
-        String url = Settings.SERVERURL+"add-freelancer.php?";
+        String url = Settings.SERVERURL+"add-freelancer-company.php?";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {
             @Override
@@ -84,9 +85,9 @@ public class Freelancer_Client_Register_Activity extends  RootActivity {
                 if(progressDialog!=null)
                     progressDialog.dismiss();
                 try {
-                    JSONArray jsonObject=new JSONArray(response);
+                    JSONObject jsonObject=new JSONObject(response);
                     Log.e("response", jsonObject.toString());
-                    JSONObject jsonObject1=jsonObject.getJSONObject(0);
+                    JSONObject jsonObject1=jsonObject;
                     String reply=jsonObject1.getString("status");
                     if(reply.equals("Success")) {
                         String msg = jsonObject1.getString("message");

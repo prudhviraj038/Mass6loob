@@ -28,6 +28,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -81,6 +82,22 @@ public class Freelancer_Register_Activity extends RootActivity {
         wimage8= (ImageView)findViewById(R.id.image8_ll);
         wimage9= (ImageView)findViewById(R.id.image9_ll);
         wimage10= (ImageView)findViewById(R.id.image10_ll);
+        try {
+            JSONObject jsonObject= new JSONObject(Settings.getSettings_json(Freelancer_Register_Activity.this));
+            if(jsonObject.getJSONArray("freelancers").length()!=0){
+                name.setText(jsonObject.getJSONArray("freelancers").getJSONObject(0).getString("name"));
+                email.setText(jsonObject.getJSONArray("freelancers").getJSONObject(0).getString("email"));
+                gender.setText(jsonObject.getJSONArray("freelancers").getJSONObject(0).getString("gender"));
+                age.setText(jsonObject.getJSONArray("freelancers").getJSONObject(0).getString("age"));
+                nationality.setText(jsonObject.getJSONArray("freelancers").getJSONObject(0).getString("nationality"));
+                fields.setText(jsonObject.getJSONArray("freelancers").getJSONObject(0).getString("field"));
+//                if(!jsonObject.getJSONArray("freelancers").getJSONObject(0).getString("image").equals("")) {
+//                    Picasso.with(this).load(jsonObject.getJSONArray("freelancers").getJSONObject(0).getString("image")).into(temp);
+//                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         LinearLayout free_gender = (LinearLayout)findViewById(R.id.free_gender_ll);
         free_gender.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -357,8 +374,9 @@ public class Freelancer_Register_Activity extends RootActivity {
                         Toast.makeText(Freelancer_Register_Activity.this, msg, Toast.LENGTH_SHORT).show();
 
                     //    emp_image();
-                        encodeImagetoString();
-
+//                        encodeImagetoString();
+                        Intent intent= new Intent(Freelancer_Register_Activity.this,Employee_Search_Activity.class);
+                        startActivity(intent);
 //                        finish();
 
                     }

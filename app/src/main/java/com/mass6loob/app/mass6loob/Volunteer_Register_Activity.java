@@ -101,8 +101,7 @@ public class Volunteer_Register_Activity extends  RootActivity {
                     volunteer_register();
                     // Toast.makeText(Company_Register_Activity.this, "Registered Succesfully", Toast.LENGTH_SHORT).show();
                 }
-                Intent intent = new Intent(Volunteer_Register_Activity.this,Volunteer_List_Activity.class);
-                startActivity(intent);
+
 
             }
         });
@@ -167,7 +166,7 @@ public class Volunteer_Register_Activity extends  RootActivity {
                         String msg = jsonObject1.getString("message");
                         vol_id=jsonObject1.getString("member_id");
                         Toast.makeText(Volunteer_Register_Activity.this, msg, Toast.LENGTH_SHORT).show();
-                        Intent intent= new Intent(Volunteer_Register_Activity.this,Employee_Search_Activity.class);
+                        Intent intent = new Intent(Volunteer_Register_Activity.this,Volunteer_List_Activity.class);
                         startActivity(intent);
                         //emp_image();
 
