@@ -69,7 +69,7 @@ public class Freelancer_List_Activity extends  RootActivity {
             public void onResponse(JSONArray jsonObject) {
                 progressDialog.dismiss();
                 freelancers.clear();
-                Log.e("response is: ", jsonObject.toString());
+                Log.e("reponse is: ", jsonObject.toString());
                 try {
                     if(jsonObject.length()==0){
                         Toast.makeText(Freelancer_List_Activity.this, "there is no freelancers on your search", Toast.LENGTH_SHORT).show();
