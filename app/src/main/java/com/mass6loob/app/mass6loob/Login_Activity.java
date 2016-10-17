@@ -127,9 +127,10 @@ public class Login_Activity extends Activity {
                             String mem_id = jsonArray.getJSONObject(0).getString("member_id");
                             String name = jsonArray.getJSONObject(0).getString("name");
                             Settings.setUserid(Login_Activity.this, mem_id, name);
-                            Intent mainIntent = new Intent(getApplicationContext(), Company_Register_Activity.class);
-                            mainIntent.putExtra("uid", mem_id);
-                            startActivity(mainIntent);
+//                            Intent mainIntent = new Intent(getApplicationContext(), Company_Register_Activity.class);
+//                            mainIntent.putExtra("uid", mem_id);
+//                            startActivity(mainIntent);
+                            member_details();
                             finish();
                         }
 
@@ -154,6 +155,44 @@ public class Login_Activity extends Activity {
             AppController.getInstance().addToRequestQueue(jsonArrayRequest);
 
         }
+    }
+    public  void member_details(){
+        String url = Settings.SERVERURL + "member-details.php?member_id="+Settings.getUserid(Login_Activity.this);
+        Log.e("url--->", url);
+//        final ProgressDialog progressDialog = new ProgressDialog(this);
+//        progressDialog.setMessage("Please wait....");
+//        progressDialog.setCancelable(false);
+//        progressDialog.show();
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest( url, new Response.Listener<JSONArray>() {
+
+            @Override
+            public void onResponse(JSONArray jsonArray) {
+//                progressDialog.dismiss();
+                Log.e("response is: ", jsonArray.toString());
+                try {
+                    JSONObject jsonObject = jsonArray.getJSONObject(0);
+                    Settings.setSettings(Login_Activity.this, jsonObject.toString());
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // TODO Auto-generated method stub
+                Log.e("response is:", error.toString());
+                Toast.makeText(Login_Activity.this, "Server not connected", Toast.LENGTH_SHORT).show();
+//                progressDialog.dismiss();
+            }
+
+        });
+
+// Access the RequestQueue through your singleton class.
+        AppController.getInstance().addToRequestQueue(jsonArrayRequest);
+
     }
     public void forgot_pass(){
         final ProgressDialog progressDialog = new ProgressDialog(this);

@@ -30,14 +30,16 @@
                 android:background="@drawable/accept_rounded_corners"
                 android:gravity="center"
                 android:padding="5dp"
-                android:layout_marginTop="5dp">
+                android:layout_marginTop="5dp"
+                android:id="@+id/accept_free_ll">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="ACCEPT"
-                    android:id="@+id/textView36"
-                    android:textColor="#ffffff" />
+                    android:id="@+id/accept_free_tv"
+                    android:textColor="#ffffff"
+                    android:textSize="10dp" />
             </LinearLayout>
         </LinearLayout>
 

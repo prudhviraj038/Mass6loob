@@ -416,6 +416,38 @@
                                     android:textColor="@color/edit_text_text_color" />
                             </LinearLayout>
 
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/rounded_corners"
+                                android:gravity="top" >
+
+                                <ImageView
+                                    android:layout_width="18dp"
+                                    android:layout_height="18dp"
+                                    android:id="@+id/imageView33"
+                                    android:src="@drawable/ic_about"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginRight="10dp" />
+
+                                <LinearLayout
+                                    android:orientation="vertical"
+                                    android:layout_width="15dp"
+                                    android:layout_height="match_parent" />
+
+                                <EditText
+                                    android:layout_width="match_parent"
+                                    android:layout_height="80dp"
+                                    android:id="@+id/des_emp"
+                                    android:background="#00000000"
+                                    android:textColorHint="@color/edit_text_hint_color"
+                                    android:textSize="16sp"
+                                    android:textColor="@color/edit_text_text_color"
+                                    android:gravity="top"
+                                    android:hint="Description" />
+                            </LinearLayout>
+
                         </LinearLayout>
 
                     </LinearLayout>

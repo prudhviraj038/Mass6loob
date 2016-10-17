@@ -89,7 +89,7 @@
                                     <EditText
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:id="@+id/client_name"
+                                        android:id="@+id/ef_name"
                                         android:background="#00000000"
                                         android:hint="Name"
                                         android:textColorHint="@color/edit_text_hint_color"
@@ -120,12 +120,45 @@
                                     <EditText
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:id="@+id/client_email"
+                                        android:id="@+id/ef_email"
                                         android:background="#00000000"
                                         android:hint="Email"
                                         android:textColorHint="@color/edit_text_hint_color"
                                         android:textSize="16sp"
                                         android:textColor="@color/edit_text_text_color" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/rounded_corners"
+                                    android:gravity="center_vertical"
+                                    android:visibility="gone">
+
+                                    <ImageView
+                                        android:layout_width="18dp"
+                                        android:layout_height="18dp"
+                                        android:id="@+id/imageView25"
+                                        android:src="@drawable/ic_password"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_marginRight="10dp" />
+
+                                    <LinearLayout
+                                        android:orientation="vertical"
+                                        android:layout_width="15dp"
+                                        android:layout_height="match_parent" />
+
+                                    <EditText
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:id="@+id/ef_pwd"
+                                        android:background="#00000000"
+                                        android:hint="Password"
+                                        android:textColorHint="@color/edit_text_hint_color"
+                                        android:textSize="16sp"
+                                        android:textColor="@color/edit_text_text_color"
+                                        android:inputType="textPassword" />
                                 </LinearLayout>
 
                                 <LinearLayout
@@ -151,7 +184,7 @@
                                     <EditText
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:id="@+id/client_phn"
+                                        android:id="@+id/ef_phn"
                                         android:background="#00000000"
                                         android:hint="Phone Number"
                                         android:textColorHint="@color/edit_text_hint_color"
@@ -170,73 +203,42 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center">
-
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/client_forgot_ll">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Forgot Your Password?"
-                            android:id="@+id/textView2"
-                            android:textColor="#FFFFFF"
-                            android:visibility="gone" />
-
-                        <LinearLayout
-                            android:orientation="horizontal"
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="#FFFFFF"></LinearLayout>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="20dp"
-                        android:layout_height="wrap_content"></LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/client_loginhere_ll">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Login Here"
-                            android:id="@+id/log_here"
-                            android:textColor="#FFFFFF"
-                            android:visibility="gone" />
-
-                        <LinearLayout
-                            android:orientation="horizontal"
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="#FFFFFF" />
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:gravity="center"
                     android:background="@drawable/signup_rounded_corners"
                     android:layout_margin="20dp"
-                    android:id="@+id/client_signup_ll">
+                    android:id="@+id/ef_update_ll">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="SIGN UP"
-                        android:id="@+id/sign_up_tv"
+                        android:text="Update"
+                        android:id="@+id/ef_update_tv"
                         android:textColor="#FFFFFF" />
                 </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Already Have an account?"
+                        android:id="@+id/textView13"
+                        android:textColor="#FFFFFF" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Loginhere"
+                        android:id="@+id/login_tv"
+                        android:textColor="#FFFFFF"
+                        android:padding="5dp"
+                        android:gravity="center" />
+                </LinearLayout>
+
             </LinearLayout>
         </ScrollView>
 

@@ -14,10 +14,11 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:gravity="center">
 
             <ImageView
-                android:layout_width="80dp"
+                android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:id="@+id/user_image_ll"
                 android:src="@drawable/image1"
@@ -31,21 +32,41 @@
                 android:background="@drawable/accept_rounded_corners"
                 android:gravity="center"
                 android:padding="10dp"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:id="@+id/accept_res">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="ACCEPT"
-                    android:id="@+id/textView24"
+                    android:id="@+id/accept_tv"
                     android:textColor="#ffffff" />
             </LinearLayout>
 
             <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/accept_green_rounded_corners"
+                android:gravity="center"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/acc_green_ll" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ACCEPTED"
+                    android:id="@+id/acc_green_tv"
+                    android:textColor="#ffffff"
+                    android:textSize="10dp" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:orientation="vertical"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="bottom">
+                android:gravity="bottom|center">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -54,10 +75,12 @@
                     android:id="@+id/textView25" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="10 jan 2016"
-                    android:id="@+id/textView26" />
+                    android:id="@+id/update_last"
+                    android:singleLine="true"
+                    android:gravity="center" />
             </LinearLayout>
 
         </LinearLayout>

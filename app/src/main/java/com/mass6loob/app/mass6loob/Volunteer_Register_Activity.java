@@ -37,11 +37,11 @@ import java.util.Map;
  */
 public class Volunteer_Register_Activity extends  RootActivity {
     EditText name,age,email;
-    TextView gender;
+    TextView gender,submit_tv;
     LinearLayout signup;
     String name_str,age_str,email_str,gender_str;
     String gender_id="0";
-    String vol_id;
+    String vol_id,tt,com_id;
     ArrayList<String> gen_title;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +49,32 @@ public class Volunteer_Register_Activity extends  RootActivity {
         Settings.forceRTLIfSupported(this);
         setContentView(R.layout.volunteer_register);
         gen_title = new   ArrayList<String>();
+        tt=getIntent().getStringExtra("user");
         gen_title.add("Male");
         gen_title.add("Female");
         name = (EditText)findViewById(R.id.volunteer_name);
         email = (EditText)findViewById(R.id.volunteer_email);
         gender  = (TextView)findViewById(R.id.volunteer_gender);
         age  = (EditText)findViewById(R.id.volunteer_age);
+        submit_tv  = (TextView)findViewById(R.id.sub_v_tv);
+        submit_tv.setText(Settings.getword(this,"submit"));
+        if(tt.equals("1")){
+            try {
+                JSONObject jsonObject= new JSONObject(Settings.getSettings_json(Volunteer_Register_Activity.this));
+                Log.e("lenth",String.valueOf(jsonObject.getJSONArray("companies").length()));
+                if(jsonObject.getJSONArray("volunteers").length()!=0){
+                    submit_tv.setText(Settings.getword(this,"update"));
+                    com_id=jsonObject.getJSONArray("volunteers").getJSONObject(0).getString("id");
+                    name.setText(jsonObject.getJSONArray("volunteers").getJSONObject(0).getString("name"));
+                    email.setText(jsonObject.getJSONArray("volunteers").getJSONObject(0).getString("email"));
+                    gender.setText(jsonObject.getJSONArray("volunteers").getJSONObject(0).getString("gender"));
+                    age.setText(jsonObject.getJSONArray("volunteers").getJSONObject(0).getString("age"));
+//                    Picasso.with(this).load(jsonObject.getJSONArray("companies").getJSONObject(0).getString("image")).into(imgView);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
         LinearLayout volunteer_gender = (LinearLayout)findViewById(R.id.volunteer_gender_ll);
         volunteer_gender.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,13 +178,11 @@ public class Volunteer_Register_Activity extends  RootActivity {
                 if(progressDialog!=null)
                     progressDialog.dismiss();
                 try {
-                    JSONArray jsonObject=new JSONArray(response);
-                    Log.e("response", jsonObject.toString());
-                    JSONObject jsonObject1=jsonObject.getJSONObject(0);
+                    JSONObject jsonObject1=new JSONObject(response);
                     String reply=jsonObject1.getString("status");
                     if(reply.equals("Success")) {
                         String msg = jsonObject1.getString("message");
-                        vol_id=jsonObject1.getString("member_id");
+                        vol_id=jsonObject1.getString("company_id");
                         Toast.makeText(Volunteer_Register_Activity.this, msg, Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(Volunteer_Register_Activity.this,Volunteer_List_Activity.class);
                         startActivity(intent);
@@ -199,7 +217,9 @@ public class Volunteer_Register_Activity extends  RootActivity {
                 params.put("age",age_str);
                 params.put("email",email_str);
                 params.put("gender",gender_str);
-
+                if(tt.equals("1")){
+                    params.put("company_id",com_id);
+                }
                 return params;
             }
         };

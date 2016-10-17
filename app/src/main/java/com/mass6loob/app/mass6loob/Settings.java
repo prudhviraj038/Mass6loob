@@ -21,12 +21,13 @@ import java.util.Locale;
 public class Settings {
     static String lan_key = "mass6loob_lan";
     public static final String SERVERURL = "http://clients.yellowsoft.in/ma6loob/api/";
-
+    static String words_key = "danden_words";
     public static final String USERID = "massloob_id";
     public static final String NAME = "employee_name";
     static String Deli_charges="delivery_charge";
 
     public static void set_user_language(Context context,String user_id){
+
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(lan_key,user_id);
@@ -45,7 +46,35 @@ public class Settings {
 
         return sharedPreferences.getString(lan_key,"en");
     }
+    public static void set_user_language_words(Context context,String user_id){
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(words_key,user_id);
+        editor.commit();
+    }
+    public static JSONObject get_user_language_words(Context context){
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject = new JSONObject(sharedPreferences.getString(words_key,"-1"));
+            jsonObject = jsonObject.getJSONObject(get_user_language(context));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+    public static String getword(Context context,String word)
+    {
 
+        JSONObject words = get_user_language_words(context);
+
+        try {
+            return words.getString(word);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return word;
+        }
+    }
     public static   void forceRTLIfSupported(Activity activity) {
         SharedPreferences sharedPref;
         sharedPref = PreferenceManager.getDefaultSharedPreferences(activity);

@@ -58,7 +58,7 @@ public class Employee_Register_Activity extends  RootActivity{
     String path_final = "";
     String file_name = "";
     private ProgressBar progressBar;
-    EditText username,jobtitle,location;
+    EditText username,jobtitle,location,des;
     TextView reviewcv,nationality,experience,gender,educationmasters,educationbachelors,uploadimage,upload_cv;
     LinearLayout submit;
     String user_str,job_str,exp_str,nationality_str,edumasters_str,edubachelors_str,location_str,gender_str,uploadcv_str,uploadimage_str;
@@ -103,18 +103,20 @@ public class Employee_Register_Activity extends  RootActivity{
         location = (EditText) findViewById(R.id.emp_location);
         gender = (TextView) findViewById(R.id.emp_gender);
         upload_cv = (TextView) findViewById(R.id.emp_cv_l);
+        des = (EditText) findViewById(R.id.des_emp);
         try {
             JSONObject jsonObject= new JSONObject(Settings.getSettings_json(Employee_Register_Activity.this));
             Log.e("lenth",String.valueOf(jsonObject.getJSONArray("employees").length()));
             if(jsonObject.getJSONArray("employees").length()!=0){
-                username.setText(jsonObject.getString("fname")+" "+jsonObject.getString("lname"));
-                jobtitle.setText(jsonObject.getJSONArray("employees").getJSONObject(0).getString("title "));
+                username.setText(jsonObject.getString("name"));
+                jobtitle.setText(jsonObject.getJSONArray("employees").getJSONObject(0).getString("title"));
                 experience.setText(jsonObject.getJSONArray("employees").getJSONObject(0).getJSONObject("experience").getString("title"+Settings.get_lan(Employee_Register_Activity.this)));
                 nationality.setText(jsonObject.getJSONArray("employees").getJSONObject(0).getString("nationality"));
                 educationbachelors.setText(jsonObject.getJSONArray("employees").getJSONObject(0).getJSONObject("bachelors").getString("title" + Settings.get_lan(Employee_Register_Activity.this)));
                 educationmasters.setText(jsonObject.getJSONArray("employees").getJSONObject(0).getJSONObject("masters").getString("title" + Settings.get_lan(Employee_Register_Activity.this)));
                 gender.setText(jsonObject.getJSONArray("employees").getJSONObject(0).getString("gender"));
                 location.setText(jsonObject.getJSONArray("employees").getJSONObject(0).getString("location"));
+                des.setText(jsonObject.getJSONArray("employees").getJSONObject(0).getString("description"));
                 Picasso.with(this).load(jsonObject.getJSONArray("employees").getJSONObject(0).getString("image")).into(imgView);
             }
         } catch (JSONException e) {
@@ -282,18 +284,17 @@ public class Employee_Register_Activity extends  RootActivity{
                     Toast.makeText(Employee_Register_Activity.this, "please select ur nationality", Toast.LENGTH_SHORT).show();
                 } else if (edubachelors_str.equals("")) {
                     Toast.makeText(Employee_Register_Activity.this, "please select ur bachelors degree", Toast.LENGTH_SHORT).show();
-                } else if (edumasters_str.equals("")) {
-                    Toast.makeText(Employee_Register_Activity.this, "please select ur masters degree", Toast.LENGTH_SHORT).show();
+//                } else if (edumasters_str.equals("")) {
+//                    Toast.makeText(Employee_Register_Activity.this, "please select ur masters degree", Toast.LENGTH_SHORT).show();
                 } else if (location_str.equals("")) {
                     Toast.makeText(Employee_Register_Activity.this, "please select ur location", Toast.LENGTH_SHORT).show();
                 } else if (gender_str.equals("")) {
                     Toast.makeText(Employee_Register_Activity.this, "please select ur gender", Toast.LENGTH_SHORT).show();
-                } else if (uploadcv_str.equals("")) {
+                } else if (!isfilechoosen) {
                     Toast.makeText(Employee_Register_Activity.this, "please upload your cv", Toast.LENGTH_SHORT).show();
-                } else if (uploadimage_str.equals("")) {
+                } else if (!isimgchoosen) {
                     Toast.makeText(Employee_Register_Activity.this, "please upload ur image", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     employee_register();
                     // Toast.makeText(Company_Register_Activity.this, "Registered Succesfully", Toast.LENGTH_SHORT).show();
                 }
@@ -308,9 +309,8 @@ public class Employee_Register_Activity extends  RootActivity{
         Intent target = FileUtils.createGetContentIntent();
         // Create the chooser Intent
 
-        Intent intent = Intent.createChooser(
-                target, "select a file");
-        intent.setType("application/msword,application/pdf");
+        Intent intent = Intent.createChooser(target, "select a file");
+//        intent.setType("application/pdf");
         try {
             startActivityForResult(intent, FILE_SELECT_CODE);
         } catch (ActivityNotFoundException e) {
@@ -318,6 +318,7 @@ public class Employee_Register_Activity extends  RootActivity{
         }
     }
     boolean isfilechoosen = false;
+    boolean isimgchoosen = false;
     final int RESULT_LOAD_IMAGE = 1;
     String imgDecodableString;
     String encodedString;
@@ -349,6 +350,7 @@ public class Employee_Register_Activity extends  RootActivity{
                 // Set the Image in ImageView after decoding the String
                 imgView.setImageBitmap(BitmapFactory
                         .decodeFile(imgDecodableString));
+                isimgchoosen=true;
 
             }else if (requestCode == FILE_SELECT_CODE &&resultCode == RESULT_OK) {
                 // Get the Uri of the selected file
@@ -543,12 +545,12 @@ public class Employee_Register_Activity extends  RootActivity{
                         String msg = jsonObject.getString("message");
                         emp_id=jsonObject.getString("employee_id");
 
-                        //Toast.makeText(Employee_Register_Activity.this, msg, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Employee_Register_Activity.this, msg, Toast.LENGTH_SHORT).show();
                         encodeImagetoString();
 
 
 
-                        //    emp_image();
+//                            emp_image();
                       //  emp_cv();
 //                        finish();
 
@@ -582,6 +584,7 @@ public class Employee_Register_Activity extends  RootActivity{
                 params.put("masters",edum_id);
                 params.put("gender",gender_str);
                 params.put("location",location_str);
+                params.put("description",des.getText().toString());
                 return params;
             }
         };

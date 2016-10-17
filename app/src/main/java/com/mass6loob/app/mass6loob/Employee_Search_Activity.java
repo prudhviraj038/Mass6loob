@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +25,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 /**
@@ -32,17 +35,19 @@ import java.util.ArrayList;
 public class Employee_Search_Activity extends  RootActivity {
     EditText jobtitle;
     LinearLayout search;
+    ImageView sett;
     TextView experience,nationality,education;
     String title_str,expe_str,nation_str,edu_str;
     String exp_id ="0";
     String edu_id ="0";
-    String nation_id = "0";
+    String cli_id = "0";
     ArrayList<String> exps_id;
     ArrayList<String>exps_title;
     ArrayList<String>nations_id;
     ArrayList<String>nations_title;
     ArrayList<String>edus_id;
     ArrayList<String>edus_title;
+    ArrayList<User> users;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,12 +59,34 @@ public class Employee_Search_Activity extends  RootActivity {
         nations_title = new ArrayList<String>();
         edus_title = new ArrayList<String>();
         edus_id = new ArrayList<String>();
-
+        users=new ArrayList<>();
+        sett = (ImageView)findViewById(R.id.sett_company);
         jobtitle = (EditText)findViewById(R.id.emp_search_title);
         experience = (TextView)findViewById(R.id.emp_search_exp);
         nationality = (TextView)findViewById(R.id.emp_search_nationality);
         education = (TextView)findViewById(R.id.emp_search_edu);
         LinearLayout emp_search_exp = (LinearLayout)findViewById(R.id.emp_search_exp_ll);
+        sett.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Employee_Search_Activity.this,Company_Register_Activity.class);
+                intent.putExtra("user", "1");
+                startActivity(intent);
+            }
+        });
+        try {
+            JSONObject jsonObject= new JSONObject(Settings.getSettings_json(Employee_Search_Activity.this));
+            if(jsonObject.getJSONArray("freelancers_company").length()!=0){
+                cli_id=jsonObject.getJSONArray("freelancers_company").getJSONObject(0).getString("id");
+                Log.e("idddd",cli_id);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        if(cli_id.equals("0"))
+            sett.setVisibility(View.GONE);
+        else
+            sett.setVisibility(View.VISIBLE);
         emp_search_exp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -110,7 +137,7 @@ public class Employee_Search_Activity extends  RootActivity {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(Employee_Search_Activity.this);
-                builder.setTitle("CHOOSE NATIONALITY");
+                builder.setTitle("CHOOSE EDUCATION");
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(Employee_Search_Activity.this, android.R.layout.select_dialog_item, edus_title);
                 builder.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
                     @Override
@@ -137,65 +164,73 @@ public class Employee_Search_Activity extends  RootActivity {
                 expe_str = experience.getText().toString();
                 nation_str = nationality.getText().toString();
                 edu_str = education.getText().toString();
-                 if(title_str.equals("")){
-                    Toast.makeText(Employee_Search_Activity.this, "please enter jobtitle", Toast.LENGTH_SHORT).show();
-                }
-                else if(expe_str.equals("")){
-                    Toast.makeText(Employee_Search_Activity.this, "please enter experience", Toast.LENGTH_SHORT).show();
-                }
-                else if(nation_str.equals("")){
-                    Toast.makeText(Employee_Search_Activity.this, "please select ur nationality", Toast.LENGTH_SHORT).show();
-                }
-                 else if(edu_str.equals("")){
-                     Toast.makeText(Employee_Search_Activity.this, "please select ur education", Toast.LENGTH_SHORT).show();
-                 }
-                Intent intent = new Intent(Employee_Search_Activity.this,Users_List_Activity.class);
-                startActivity(intent);
+//                 if(title_str.equals("")){
+//                    Toast.makeText(Employee_Search_Activity.this, "please enter jobtitle", Toast.LENGTH_SHORT).show();
+//                }
+//                else if(expe_str.equals("")){
+//                    Toast.makeText(Employee_Search_Activity.this, "please enter experience", Toast.LENGTH_SHORT).show();
+//                }
+//                else if(nation_str.equals("")){
+//                    Toast.makeText(Employee_Search_Activity.this, "please select ur nationality", Toast.LENGTH_SHORT).show();
+//                }
+//                 else if(edu_str.equals("")){
+//                     Toast.makeText(Employee_Search_Activity.this, "please select ur education", Toast.LENGTH_SHORT).show();
+//                 }else{
+//                     get_list();
+                     Intent intent = new Intent(Employee_Search_Activity.this,Users_List_Activity.class);
+                     Log.e(title_str,nation_str+","+exp_id+","+edu_id);
+                     intent.putExtra("title_str", title_str);
+                     intent.putExtra("nation_str",nation_str);
+                     intent.putExtra("exp_id",exp_id);
+                     intent.putExtra("edu_id",edu_id);
+                     startActivity(intent);
 
+//                 }
 
             }
         });
     }
 
+
     private void get_experience() {
 
-            String url = Settings.SERVERURL + "experiences.php";
-            Log.e("url--->", url);
-            final ProgressDialog progressDialog = new ProgressDialog(this);
-            progressDialog.setMessage("Please wait....");
-            progressDialog.setCancelable(false);
-            JsonArrayRequest jsObjRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
-                @Override
-                public void onResponse(JSONArray jsonObject) {
-                    progressDialog.dismiss();
-                    Log.e("response is: ", jsonObject.toString());
-                    try {
+        String url = Settings.SERVERURL + "experiences.php";
+        Log.e("url--->", url);
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Please wait....");
+        progressDialog.setCancelable(false);
+        JsonArrayRequest jsObjRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray jsonObject) {
+                progressDialog.dismiss();
+                Log.e("response is: ", jsonObject.toString());
+                try {
 
-                        for (int i = 0; i < jsonObject.length(); i++) {
-                            JSONObject sub = jsonObject.getJSONObject(i);
-                            String exp_name = sub.getString("title"+Settings.get_lan(Employee_Search_Activity.this));
-                            String exp_id = sub.getString("id");
-                            exps_id.add(exp_id);
-                            exps_title.add(exp_name);
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                    for (int i = 0; i < jsonObject.length(); i++) {
+                        JSONObject sub = jsonObject.getJSONObject(i);
+                        String exp_name = sub.getString("title"+Settings.get_lan(Employee_Search_Activity.this));
+                        String exp_id = sub.getString("id");
+                        exps_id.add(exp_id);
+                        exps_title.add(exp_name);
                     }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-            }, new Response.ErrorListener() {
+            }
+        }, new Response.ErrorListener() {
 
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    // TODO Auto-generated method stub
-                    Log.e("response is:", error.toString());
-                    Toast.makeText(Employee_Search_Activity.this, "Server not connected", Toast.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
-                }
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // TODO Auto-generated method stub
+                Log.e("response is:", error.toString());
+                Toast.makeText(Employee_Search_Activity.this, "Server not connected", Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+            }
 
-            });
-            AppController.getInstance().addToRequestQueue(jsObjRequest);
+        });
+        AppController.getInstance().addToRequestQueue(jsObjRequest);
 
-        }
+    }
     private void get_nationality() {
         String url = "https://restcountries.eu/rest/v1/all";
         JsonArrayRequest jsObjRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {

@@ -57,8 +57,7 @@ public class Volunteer_Company_Register_Activity extends RootActivity {
         categories=new ArrayList<>();
         get_cat();
         gridView=(GridView)findViewById(R.id.gridView);
-        volunteerCatgoryAdapter=new VolunteerCatgoryAdapter(this,categories);
-        gridView.setAdapter(volunteerCatgoryAdapter);
+
         companyname = (EditText)findViewById(R.id.company_name);
       //  password = (EditText)findViewById(R.id.company_pwd);
         intrestedin = (EditText)findViewById(R.id.intrested_in);
@@ -144,6 +143,7 @@ public class Volunteer_Company_Register_Activity extends RootActivity {
         });
 
     }
+    boolean isimgchoosen = false;
     final int RESULT_LOAD_IMAGE = 1;
     String imgDecodableString;
     String encodedString;
@@ -175,7 +175,7 @@ public class Volunteer_Company_Register_Activity extends RootActivity {
                 // Set the Image in ImageView after decoding the String
                 imgView.setImageBitmap(BitmapFactory
                         .decodeFile(imgDecodableString));
-
+                isimgchoosen=true;
             } else {
                 Toast.makeText(this, "You haven't picked Image",
                         Toast.LENGTH_LONG).show();
@@ -210,9 +210,10 @@ public class Volunteer_Company_Register_Activity extends RootActivity {
                         Toast.makeText(Volunteer_Company_Register_Activity.this, msg, Toast.LENGTH_SHORT).show();
 
                     //    emp_image();
-//                        encodeImagetoString();
-
-//                        finish();
+                        if(isimgchoosen)
+                        encodeImagetoString();
+                        else
+                        finish();
 
                     }
                     else {
@@ -355,6 +356,7 @@ public class Volunteer_Company_Register_Activity extends RootActivity {
         JsonArrayRequest jsObjRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray jsonObject) {
+                categories.clear();
                 progressDialog.dismiss();
                 Log.e("response is: ", jsonObject.toString());
                 try {
@@ -363,6 +365,8 @@ public class Volunteer_Company_Register_Activity extends RootActivity {
                         Categories categories1=new Categories(jsonObject.getJSONObject(i));
                         categories.add(categories1);
                     }
+                    volunteerCatgoryAdapter=new VolunteerCatgoryAdapter(Volunteer_Company_Register_Activity.this,categories);
+                    gridView.setAdapter(volunteerCatgoryAdapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

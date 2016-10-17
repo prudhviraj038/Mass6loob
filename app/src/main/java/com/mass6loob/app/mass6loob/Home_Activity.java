@@ -7,6 +7,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -28,7 +29,7 @@ public class Home_Activity extends RootActivity {
     RelativeLayout slidingpanel;
     LinearLayout jobs_view,free_view,vol_view;
     DisplayMetrics metrics = new DisplayMetrics();
-
+    ImageView set;
     int pos=0;
     TextView heading,sub_heading;
 
@@ -65,6 +66,14 @@ public class Home_Activity extends RootActivity {
         vol_view = (LinearLayout) findViewById(R.id.volunteers_view);
         heading = (TextView) findViewById(R.id.heading);
         sub_heading = (TextView) findViewById(R.id.sub_heading);
+        set = (ImageView) findViewById(R.id.set_home);
+        set.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(Home_Activity.this,SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
         recruit = (LinearLayout) findViewById(R.id.recruit_ll);
         recruit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,12 +88,12 @@ public class Home_Activity extends RootActivity {
                         JSONObject jsonObject= new JSONObject(Settings.getSettings_json(Home_Activity.this));
                         if(jsonObject.getJSONArray("companies").length()==0){
                             Intent mainIntent = new Intent(getApplicationContext(),Company_Register_Activity.class);
-                            mainIntent.putExtra("uid",Settings.getUserid(Home_Activity.this));
+                            mainIntent.putExtra("user","0");
                             startActivity(mainIntent);
                         }else{
                             Intent intent= new Intent(Home_Activity.this,Employee_Search_Activity.class);
                             startActivity(intent);
-                            finish();
+
                         }
 
                     } catch (JSONException e) {
@@ -125,10 +134,10 @@ public class Home_Activity extends RootActivity {
                         Log.e("lenth1",String.valueOf(jsonObject.getJSONArray("freelancers_company").length()));
                         if(jsonObject.getJSONArray("freelancers_company").length()==0) {
                             Intent mainIntent = new Intent(getApplicationContext(), Freelancer_Client_Register_Activity.class);
-                            mainIntent.putExtra("uid", Settings.getUserid(Home_Activity.this));
+                            mainIntent.putExtra("user","0");
                             startActivity(mainIntent);
                         }else{
-                            Intent intent = new Intent(Home_Activity.this, Freelancer_List_Activity.class);
+                            Intent intent = new Intent(Home_Activity.this, Freelancer_Search_Activity.class);
                             startActivity(intent);
                         }
                     } catch (JSONException e) {
@@ -187,7 +196,7 @@ public class Home_Activity extends RootActivity {
                         JSONObject jsonObject= new JSONObject(Settings.getSettings_json(Home_Activity.this));
                         if(jsonObject.getJSONArray("volunteers").length()==0) {
                             Intent mainIntent = new Intent(getApplicationContext(), Volunteer_Register_Activity.class);
-                            mainIntent.putExtra("uid", Settings.getUserid(Home_Activity.this));
+                            mainIntent.putExtra("user","0");
                             startActivity(mainIntent);
                         }else{
                             Intent intent = new Intent(Home_Activity.this,Volunteer_List_Activity.class);

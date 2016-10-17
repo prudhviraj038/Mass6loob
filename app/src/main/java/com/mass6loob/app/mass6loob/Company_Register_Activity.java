@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.audiofx.BassBoost;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.google.gson.JsonObject;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,28 +46,30 @@ import java.util.Map;
  */
 public class Company_Register_Activity extends  RootActivity {
     EditText uname,password,companyname,area,companylogo,aboutcompany;
-    TextView country;
+    TextView country,submit_tv;
     LinearLayout submit,signup,loginhere;
     LinearLayout country_ll;
     String uname_str,pwd_str,cname_str,country_str,area_str,companylogo_str,about_str;
     String country_id="0";
     ArrayList<String> coun_id;
     ArrayList<String> coun_title;
-    String com_id;
+    String com_id,tt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Settings.forceRTLIfSupported(this);
 
         setContentView(R.layout.company_register);
-
+        tt=getIntent().getStringExtra("user");
      //   uname = (EditText)findViewById(R.id.company_uname);
        // password = (EditText)findViewById(R.id.company_pwd);
+        submit_tv = (TextView)findViewById(R.id.submit_tv);
+        submit_tv.setText(Settings.getword(this,"submit"));
         companyname= (EditText)findViewById(R.id.company_name);
         country = (TextView)findViewById(R.id.company_country);
         country_ll =(LinearLayout)findViewById(R.id.company_country_ll);
         area= (EditText)findViewById(R.id.company_area);
-
+        aboutcompany= (EditText)findViewById(R.id.about_company);
         loginhere = (LinearLayout)findViewById(R.id.com_login_ll);
         loginhere.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +89,24 @@ public class Company_Register_Activity extends  RootActivity {
             }
         });
 
+        if(tt.equals("1")){
+            try {
+                JSONObject jsonObject= new JSONObject(Settings.getSettings_json(Company_Register_Activity.this));
+                Log.e("lenth",String.valueOf(jsonObject.getJSONArray("companies").length()));
+                if(jsonObject.getJSONArray("companies").length()!=0){
+                    submit_tv.setText(Settings.getword(this,"update"));
+                    com_id=jsonObject.getJSONArray("companies").getJSONObject(0).getString("id");
+                    companyname.setText(jsonObject.getJSONArray("companies").getJSONObject(0).getString("name"));
+                    area.setText(jsonObject.getJSONArray("companies").getJSONObject(0).getString("area"));
+                    aboutcompany.setText(jsonObject.getJSONArray("companies").getJSONObject(0).getString("description"));
+                    Log.e("country", jsonObject.getJSONArray("companies").getJSONObject(0).getString("country"));
+                    country.setText(jsonObject.getJSONArray("companies").getJSONObject(0).getString("country"));
+//                    Picasso.with(this).load(jsonObject.getJSONArray("companies").getJSONObject(0).getString("image")).into(imgView);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
 
 
         coun_title=new ArrayList<String>();
@@ -108,7 +130,7 @@ public class Company_Register_Activity extends  RootActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //Toast.makeText(ChooseSubjectActivity.this, sub_title.get(which), Toast.LENGTH_SHORT).show();
-                       // country_id = coun_id.get(which);
+                        // country_id = coun_id.get(which);
                         country.setText(coun_title.get(which));
 
                     }
@@ -120,7 +142,7 @@ public class Company_Register_Activity extends  RootActivity {
             }
         });
         get_contries();
-        aboutcompany= (EditText)findViewById(R.id.about_company);
+
         submit= (LinearLayout)findViewById(R.id.company_submit_ll);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,9 +170,9 @@ public class Company_Register_Activity extends  RootActivity {
                 else if(area_str.equals("")){
                     Toast.makeText(Company_Register_Activity.this, "please select your area", Toast.LENGTH_SHORT).show();
                 }
-            //    else if(companylogo_str.equals("")){
-             //        Toast.makeText(Company_Register_Activity.this, "please upload your company logo", Toast.LENGTH_SHORT).show();
-             //   }
+//                else if(imgDecodableString.equals("")){
+//                     Toast.makeText(Company_Register_Activity.this, "please upload your company logo", Toast.LENGTH_SHORT).show();
+//                }
                 else if(about_str.equals("")){
                     Toast.makeText(Company_Register_Activity.this, "please describe about your company", Toast.LENGTH_SHORT).show();
                 }
@@ -164,6 +186,7 @@ public class Company_Register_Activity extends  RootActivity {
         });
 
     }
+    boolean isimgchoosen = false;
     final int RESULT_LOAD_IMAGE = 1;
     String imgDecodableString;
     String encodedString;
@@ -195,7 +218,7 @@ public class Company_Register_Activity extends  RootActivity {
                 // Set the Image in ImageView after decoding the String
                 imgView.setImageBitmap(BitmapFactory
                         .decodeFile(imgDecodableString));
-
+                isimgchoosen=true;
             } else {
                 Toast.makeText(this, "You haven't picked Image",
                         Toast.LENGTH_LONG).show();
@@ -246,25 +269,27 @@ public class Company_Register_Activity extends  RootActivity {
                 try {
                     JSONObject jsonObject=new JSONObject(response);
                     Log.e("response",jsonObject.toString());
-                    JSONObject jsonObject1=jsonObject;
-                    String reply=jsonObject1.getString("status");
+                    String reply=jsonObject.getString("status");
                     if(reply.equals("Success")) {
-                        String msg = jsonObject1.getString("message");
-                        com_id=jsonObject1.getString("company_id");
+                        String msg = jsonObject.getString("message");
+                        com_id=jsonObject.getString("company_id");
 
-                       // Toast.makeText(Company_Register_Activity.this, msg, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Company_Register_Activity.this, msg, Toast.LENGTH_SHORT).show();
                         //Intent intent= new Intent(Company_Register_Activity.this,Employee_Search_Activity.class);
                         //startActivity(intent);
                         //company_logo();
 //                        finish();
-                     //   encodeImagetoString();
-                        Intent intent= new Intent(Company_Register_Activity.this,Employee_Search_Activity.class);
-                        startActivity(intent);
-                        finish();
+                        if(isimgchoosen)
+                            encodeImagetoString();
+                        else {
+                            Intent intent = new Intent(Company_Register_Activity.this, Employee_Search_Activity.class);
+                            startActivity(intent);
+//                        finish();
+                        }
 
                     }
                     else {
-                        String msg=jsonObject1.getString("message");
+                        String msg=jsonObject.getString("message");
                         Toast.makeText(Company_Register_Activity.this, msg, Toast.LENGTH_SHORT).show();
                     }
 
@@ -289,6 +314,9 @@ public class Company_Register_Activity extends  RootActivity {
                 params.put("country",country_str);
                 params.put("area",area_str);
                 params.put("description",about_str);
+//                if(tt.equals("1")){
+//                    params.put("company_id",com_id);
+//                }
 
                 return params;
             }

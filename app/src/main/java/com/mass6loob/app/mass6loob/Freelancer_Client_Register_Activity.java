@@ -29,15 +29,18 @@ import java.util.Map;
 public class Freelancer_Client_Register_Activity extends  RootActivity {
     EditText name, email, phone;
     LinearLayout signup;
-    TextView loginn;
+    TextView loginn,submit_tv;
     String name_str, email_str, phn_str;
-    String cli_id;
+    String cli_id,tt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Settings.forceRTLIfSupported(this);
         setContentView(R.layout.freelancer_client_register);
+        tt=getIntent().getStringExtra("user");
+        submit_tv = (TextView)findViewById(R.id.sign_up_tv);
+        submit_tv.setText(Settings.getword(this,"submit"));
         name = (EditText) findViewById(R.id.client_name);
         email = (EditText) findViewById(R.id.client_email);
         phone = (EditText) findViewById(R.id.client_phn);
@@ -49,6 +52,21 @@ public class Freelancer_Client_Register_Activity extends  RootActivity {
                 startActivity(intent);
             }
         });
+        if(tt.equals("1")){
+            try {
+                JSONObject jsonObject= new JSONObject(Settings.getSettings_json(Freelancer_Client_Register_Activity.this));
+                if(jsonObject.getJSONArray("freelancers_company").length()!=0){
+                    submit_tv.setText(Settings.getword(this,"update"));
+                    cli_id=jsonObject.getJSONArray("freelancers_company").getJSONObject(0).getString("id");
+                    name.setText(jsonObject.getJSONArray("freelancers_company").getJSONObject(0).getString("name"));
+                    email.setText(jsonObject.getJSONArray("freelancers_company").getJSONObject(0).getString("email"));
+                    phone.setText(jsonObject.getJSONArray("freelancers_company").getJSONObject(0).getString("phone"));
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
         signup = (LinearLayout) findViewById(R.id.client_signup_ll);
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,8 +83,8 @@ public class Freelancer_Client_Register_Activity extends  RootActivity {
                     Toast.makeText(Freelancer_Client_Register_Activity.this, "please enter your phone number", Toast.LENGTH_SHORT).show();
                 }else {
                     client_register();
-                    Intent intent = new Intent(Freelancer_Client_Register_Activity.this, Freelancer_List_Activity.class);
-                    startActivity(intent);
+//                    Intent intent = new Intent(Freelancer_Client_Register_Activity.this, Freelancer_List_Activity.class);
+//                    startActivity(intent);
                 }
             }
         });
@@ -91,9 +109,9 @@ public class Freelancer_Client_Register_Activity extends  RootActivity {
                     String reply=jsonObject1.getString("status");
                     if(reply.equals("Success")) {
                         String msg = jsonObject1.getString("message");
-                        cli_id=jsonObject1.getString("member_id");
+                        cli_id=jsonObject1.getString("freelancer_company_id");
                         Toast.makeText(Freelancer_Client_Register_Activity.this, msg, Toast.LENGTH_SHORT).show();
-                        Intent intent= new Intent(Freelancer_Client_Register_Activity.this,Freelancer_List_Activity.class);
+                        Intent intent= new Intent(Freelancer_Client_Register_Activity.this,Freelancer_Search_Activity.class);
                         startActivity(intent);
 
 //                        finish();
@@ -125,7 +143,9 @@ public class Freelancer_Client_Register_Activity extends  RootActivity {
                 params.put("name",name_str);
                 params.put("email",email_str);
                 params.put("phone",phn_str);
-
+                if(tt.equals("1")){
+                    params.put("company_id",cli_id);
+                }
                 return params;
             }
         };

@@ -4,9 +4,72 @@
     android:layout_height="match_parent"
     android:background="@drawable/app_bg_blue">
 
-    <ListView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/list_view"
-        android:headerDividersEnabled="false" />
+        android:layout_height="match_parent">
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/list_view"
+            android:headerDividersEnabled="false" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="#99000000"
+            android:id="@+id/pack_pop"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/pack_white_rounded_corners">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/pack_rounded_corners">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:id="@+id/imageView29"
+                        android:src="@drawable/close"
+                        android:layout_margin="5dp"
+                        android:visibility="invisible" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="CHOOSE CREDITS"
+                        android:id="@+id/choose_credits"
+                        android:gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:textColor="#ffffff"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:id="@+id/close_pack"
+                        android:src="@drawable/close"
+                        android:layout_margin="5dp" />
+                </LinearLayout>
+
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/pack_list"
+                    android:layout_margin="10dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
 </LinearLayout>
