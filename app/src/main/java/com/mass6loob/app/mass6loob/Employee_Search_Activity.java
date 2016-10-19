@@ -164,9 +164,9 @@ public class Employee_Search_Activity extends  RootActivity {
                 expe_str = experience.getText().toString();
                 nation_str = nationality.getText().toString();
                 edu_str = education.getText().toString();
-//                 if(title_str.equals("")){
-//                    Toast.makeText(Employee_Search_Activity.this, "please enter jobtitle", Toast.LENGTH_SHORT).show();
-//                }
+                 if(title_str.equals("")){
+                    Toast.makeText(Employee_Search_Activity.this, "please enter jobtitle", Toast.LENGTH_SHORT).show();
+                }
 //                else if(expe_str.equals("")){
 //                    Toast.makeText(Employee_Search_Activity.this, "please enter experience", Toast.LENGTH_SHORT).show();
 //                }

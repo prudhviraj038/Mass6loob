@@ -64,8 +64,6 @@ public class Splash_Screen_Activity extends  RootActivity {
     }
     public  void newone(){
         get_language_words();
-        member_details();
-        get_language_words();
         String abc= Settings.get_Is_first_time(Splash_Screen_Activity.this);
         Log.e("lng", abc);
         if(abc.equals("-1")) {
@@ -80,6 +78,7 @@ public class Splash_Screen_Activity extends  RootActivity {
         }
 
     }
+
     public  void member_details(){
         String url = Settings.SERVERURL + "member-details.php?member_id="+Settings.getUserid(Splash_Screen_Activity.this);
         Log.e("url--->", url);

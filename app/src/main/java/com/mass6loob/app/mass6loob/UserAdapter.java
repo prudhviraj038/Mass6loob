@@ -92,7 +92,7 @@ public class UserAdapter extends BaseAdapter{
         accept=(LinearLayout) rowView.findViewById(R.id.accept_res);
         accept_g_tv=(TextView) rowView.findViewById(R.id.acc_green_tv);
         accept_g=(LinearLayout) rowView.findViewById(R.id.acc_green_ll);
-        Log.e("image", users.get(position).userid);
+//        Log.e("image", users.get(position).userid);
          Picasso.with(context).load(users.get(position).userimage).into(holder.userimage);
          holder.userid.setText(users.get(position).userid);
          holder.jobtitle.setText(users.get(position).jobtitle);
@@ -120,6 +120,7 @@ public class UserAdapter extends BaseAdapter{
         }
         return rowView;
     }
+
     public  void  get_credit(){
         String url = Settings.SERVERURL + "balance-credits.php?member_id="+Settings.getUserid(context);
         Log.e("url--->", url);

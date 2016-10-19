@@ -49,7 +49,13 @@ public class Home_Activity extends RootActivity {
     }
     int distance;
     float scale;
+    @Override
+    public void onResume() {
+        super.onResume();  // Always call the superclass method first
 
+        // Get the Camera instance as the activity achieves full user focus
+        Settings.member_details(this);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,8 +76,15 @@ public class Home_Activity extends RootActivity {
         set.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(Home_Activity.this,SettingsActivity.class);
-                startActivity(intent);
+                if(Settings.getUserid(Home_Activity.this).equals("-1"))
+                {
+                    Intent intent = new Intent(Home_Activity.this, Login_Activity.class);
+                    startActivity(intent);
+                }
+                else {
+                    Intent intent = new Intent(Home_Activity.this, SettingsActivity.class);
+                    startActivity(intent);
+                }
             }
         });
         recruit = (LinearLayout) findViewById(R.id.recruit_ll);
@@ -220,7 +233,7 @@ public class Home_Activity extends RootActivity {
                 .y(jobs_view.getY())
                 .scaleX(1f)
                 .scaleY(1f)
-                .setDuration(500)
+                .setDuration(300)
                 .start();
         jobs_view.bringToFront();
         free_view.animate()
@@ -228,7 +241,7 @@ public class Home_Activity extends RootActivity {
                 .y(free_view.getY())
                 .scaleX(0.5f)
                 .scaleY(0.5f)
-                .setDuration(500)
+                .setDuration(300)
                 .start();
 
         vol_view.animate()
@@ -236,7 +249,7 @@ public class Home_Activity extends RootActivity {
                 .y(vol_view.getY())
                 .scaleX(0.5f)
                 .scaleY(0.5f)
-                .setDuration(500)
+                .setDuration(300)
                 .start();
 
 
@@ -286,21 +299,21 @@ public class Home_Activity extends RootActivity {
                                             .y(jobs_view.getY())
                                             .scaleX(0.5f)
                                             .scaleY(0.5f)
-                                            .setDuration(500)
+                                            .setDuration(300)
                                             .start();
                                     free_view.animate()
                                             .x(metrics.xdpi + 100)
                                             .y(free_view.getY())
                                             .scaleX(0.5f)
                                             .scaleY(0.5f)
-                                            .setDuration(500)
+                                            .setDuration(300)
                                             .start();
                                     vol_view.animate()
                                             .x(metrics.xdpi / 2)
                                             .y(vol_view.getY())
                                             .scaleX(1f)
                                             .scaleY(1f)
-                                            .setDuration(500)
+                                            .setDuration(300)
                                             .start();
                                   //  smallBang.bang(vol_view);
 
@@ -315,7 +328,7 @@ public class Home_Activity extends RootActivity {
                                             .y(jobs_view.getY())
                                             .scaleX(1f)
                                             .scaleY(1f)
-                                            .setDuration(500)
+                                            .setDuration(300)
                                             .start();
                                     jobs_view.bringToFront();
                                     free_view.animate()
@@ -323,14 +336,14 @@ public class Home_Activity extends RootActivity {
                                             .y(free_view.getY())
                                             .scaleX(0.5f)
                                             .scaleY(0.5f)
-                                            .setDuration(500)
+                                            .setDuration(300)
                                             .start();
                                     vol_view.animate()
                                             .x(metrics.xdpi + 100)
                                             .y(vol_view.getY())
                                             .scaleX(0.5f)
                                             .scaleY(0.5f)
-                                            .setDuration(500)
+                                            .setDuration(300)
                                             .start();
 
 
@@ -343,21 +356,21 @@ public class Home_Activity extends RootActivity {
                                             .y(vol_view.getY())
                                             .scaleX(0.5f)
                                             .scaleY(0.5f)
-                                            .setDuration(500)
+                                            .setDuration(300)
                                             .start();
                                     jobs_view.animate()
                                             .x(metrics.xdpi + 100)
                                             .y(jobs_view.getY())
                                             .scaleX(0.5f)
                                             .scaleY(0.5f)
-                                            .setDuration(500)
+                                            .setDuration(300)
                                             .start();
                                     free_view.animate()
                                             .x(metrics.xdpi / 2)
                                             .y(free_view.getY())
                                             .scaleX(1f)
                                             .scaleY(1f)
-                                            .setDuration(500)
+                                            .setDuration(300)
                                             .start();
                                     free_view.bringToFront();
                                             pos=1;
@@ -372,21 +385,21 @@ public class Home_Activity extends RootActivity {
                                             .y(jobs_view.getY())
                                             .scaleX(0.5f)
                                             .scaleY(0.5f)
-                                            .setDuration(500)
+                                            .setDuration(300)
                                             .start();
                                     jobs_view.animate()
                                             .x(metrics.xdpi + 100)
                                             .y(free_view.getY())
                                             .scaleX(0.5f)
                                             .scaleY(0.5f)
-                                            .setDuration(500)
+                                            .setDuration(300)
                                             .start();
                                     free_view.animate()
                                             .x(metrics.xdpi / 2)
                                             .y(vol_view.getY())
                                             .scaleX(1f)
                                             .scaleY(1f)
-                                            .setDuration(500)
+                                            .setDuration(300)
                                             .start();
                                     free_view.bringToFront();
                                     pos = 1;
@@ -398,7 +411,7 @@ public class Home_Activity extends RootActivity {
                                             .y(jobs_view.getY())
                                             .scaleX(1f)
                                             .scaleY(1f)
-                                            .setDuration(500)
+                                            .setDuration(300)
                                             .start();
                                     vol_view.bringToFront();
                                     jobs_view.animate()
@@ -406,14 +419,14 @@ public class Home_Activity extends RootActivity {
                                             .y(free_view.getY())
                                             .scaleX(0.5f)
                                             .scaleY(0.5f)
-                                            .setDuration(500)
+                                            .setDuration(300)
                                             .start();
                                     free_view.animate()
                                             .x(metrics.xdpi + 100)
                                             .y(vol_view.getY())
                                             .scaleX(0.5f)
                                             .scaleY(0.5f)
-                                            .setDuration(500)
+                                            .setDuration(300)
                                             .start();
 
 
@@ -426,21 +439,21 @@ public class Home_Activity extends RootActivity {
                                             .y(vol_view.getY())
                                             .scaleX(0.5f)
                                             .scaleY(0.5f)
-                                            .setDuration(500)
+                                            .setDuration(300)
                                             .start();
                                     vol_view.animate()
                                             .x(metrics.xdpi + 100)
                                             .y(jobs_view.getY())
                                             .scaleX(0.5f)
                                             .scaleY(0.5f)
-                                            .setDuration(500)
+                                            .setDuration(300)
                                             .start();
                                     jobs_view.animate()
                                             .x(metrics.xdpi / 2)
                                             .y(free_view.getY())
                                             .scaleX(1f)
                                             .scaleY(1f)
-                                            .setDuration(500)
+                                            .setDuration(300)
                                             .start();
                                     jobs_view.bringToFront();
                                     pos=0;

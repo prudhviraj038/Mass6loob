@@ -284,7 +284,7 @@ public class Company_Register_Activity extends  RootActivity {
                         else {
                             Intent intent = new Intent(Company_Register_Activity.this, Employee_Search_Activity.class);
                             startActivity(intent);
-//                        finish();
+                         finish();
                         }
 
                     }

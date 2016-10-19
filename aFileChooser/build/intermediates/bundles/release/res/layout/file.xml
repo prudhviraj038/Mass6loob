@@ -18,4 +18,4 @@
     style="@style/fileChooserName"
     android:layout_width="fill_parent"
     android:layout_height="?android:attr/listPreferredItemHeight" />
-<!-- From: file:/D:/Android%20Apps/Mass6loob/aFileChooser/src/main/res/layout/file.xml -->
+<!-- From: file:/Users/mac/Documents/Mass6loob/aFileChooser/src/main/res/layout/file.xml -->

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -544,7 +545,6 @@ public class Employee_Register_Activity extends  RootActivity{
                     if(reply.equals("Success")) {
                         String msg = jsonObject.getString("message");
                         emp_id=jsonObject.getString("employee_id");
-
                         Toast.makeText(Employee_Register_Activity.this, msg, Toast.LENGTH_SHORT).show();
                         encodeImagetoString();
 
@@ -724,5 +724,9 @@ public class Employee_Register_Activity extends  RootActivity{
                     }
                 });
     }
+
+
+
+
 
 }

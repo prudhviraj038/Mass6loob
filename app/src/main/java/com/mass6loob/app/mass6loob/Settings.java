@@ -1,6 +1,7 @@
 package com.mass6loob.app.mass6loob;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -9,7 +10,13 @@ import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -175,5 +182,48 @@ public class Settings {
             e.printStackTrace();
         }
         return jsonObject.toString();
+    }
+
+    public static void member_details(final Context context){
+        String url = Settings.SERVERURL + "member-details.php?member_id="+Settings.getUserid(context);
+        Log.e("url--->", url);
+        final ProgressDialog progressDialog = new ProgressDialog(context);
+        progressDialog.setMessage("Please wait....");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest( url, new Response.Listener<JSONArray>() {
+
+            @Override
+            public void onResponse(JSONArray jsonArray) {
+                if(progressDialog!=null)
+                    progressDialog.dismiss();
+                Log.e("response is: ", jsonArray.toString());
+                try {
+                    if(jsonArray.length()!=0) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(0);
+                        Settings.setSettings(context, jsonObject.toString());
+                    }else{}
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // TODO Auto-generated method stub
+                Log.e("response is:", error.toString());
+                Toast.makeText(context, "Server not connected", Toast.LENGTH_SHORT).show();
+                if(progressDialog!=null)
+                    progressDialog.dismiss();
+
+            }
+
+        });
+
+// Access the RequestQueue through your singleton class.
+        AppController.getInstance().addToRequestQueue(jsonArrayRequest);
+
     }
 }
